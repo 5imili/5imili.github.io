@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on My New Hugo Site</title>
+    <title>Tags on Mili&#39;s Storys</title>
     <link>https://5imili.github.io/tags/</link>
-    <description>Recent content in Tags on My New Hugo Site</description>
+    <description>Recent content in Tags on Mili&#39;s Storys</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
+    <managingEditor>frank@linux.com (555iMili)</managingEditor>
+    <webMaster>frank@linux.com (555iMili)</webMaster>
+    <lastBuildDate>Sat, 18 Mar 2017 20:53:54 +0800</lastBuildDate>
     
 	<atom:link href="https://5imili.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Me</title>
+      <link>https://5imili.github.io/tags/me/</link>
+      <pubDate>Sat, 18 Mar 2017 20:53:54 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/tags/me/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
