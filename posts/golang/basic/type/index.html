@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
+var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。 如果显示初始化变量的值，可以省略变量类型，由编译器推断。
+Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如
+var x,y int //相同类型多个变量 var a, s = 10010, &quot;hello go&quot; //不同类型多个变量  按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:
+var ( x,y int a,s = 10010, &quot;hello go&quot; )   短变量声明符  在介绍词法的章节中已经看到过这种用法，比如:
+x := 10010 a , s := 10010, &quot;hello go&quot;  这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:">
+  <meta property="og:description" content="类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
+var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。 如果显示初始化变量的值，可以省略变量类型，由编译器推断。
+Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如
+var x,y int //相同类型多个变量 var a, s = 10010, &quot;hello go&quot; //不同类型多个变量  按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:
+var ( x,y int a,s = 10010, &quot;hello go&quot; )   短变量声明符  在介绍词法的章节中已经看到过这种用法，比如:
+x := 10010 a , s := 10010, &quot;hello go&quot;  这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:">
+  <meta name="twitter:description" content="类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
+var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为 …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/type/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/type/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="类型">类型</h1>
+
+<pre><code>1. 变量
+2. 命名
+3. 常量
+4. 基本类型
+5. 引用类型
+6. 类型转换
+7. 自定义类型
+</code></pre>
+
+<h4 id="变量">变量</h4>
+
+<p>Go语言有两种方式定义变量：</p>
+
+<pre><code class="language-text">var 关键字
+:= 短变量声明符
+</code></pre>
+
+<ul>
+<li>var关键字</li>
+</ul>
+
+<pre><code class="language-go">var x int   //自动初始化为0
+var y = false   //自动推断为bool类型
+</code></pre>
+
+<p>和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。
+如果显示初始化变量的值，可以省略变量类型，由编译器推断。</p>
+
+<p>Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如</p>
+
+<pre><code class="language-go">var x,y int             //相同类型多个变量
+var a, s = 10010, &quot;hello go&quot;    //不同类型多个变量
+</code></pre>
+
+<p>按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:</p>
+
+<pre><code class="language-go">var (
+    x,y int
+    a,s = 10010, &quot;hello go&quot;
+)
+</code></pre>
+
+<ul>
+<li>短变量声明符</li>
+</ul>
+
+<p>在介绍词法的章节中已经看到过这种用法，比如:</p>
+
+<pre><code class="language-go">    x := 10010
+    a , s := 10010, &quot;hello go&quot;
+</code></pre>
+
+<p>这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:</p>
+
+<pre><code class="language-go">var x = 10010
+func main(){
+    println(&amp;x, x)
+    ...
+    x := &quot;hello go&quot; //对全局变量重新定义并初始化
+    println(&amp;x, x)
+}
+</code></pre>
+
+<p>可想而知最终酿成的后果;为了正确使用这种简单的短变量声明方式，请遵循如下限制：</p>
+
+<pre><code class="language-text">  1. 定义变量的同时，显示初始化
+  2. 不能提供数据类型
+  3. 只能在函数体内部使用
+  4. 函数体内不能使用短变量重复声明
+  5. 不能使用短变量声明这种方式来设置字段值
+  6. 不能使用nil初始化一个未指定类型的变量
+</code></pre>
+
+<p>思考下面的代码片段，输出结果是什么？</p>
+
+<pre><code class="language-go">func test(){
+    x := 1
+    fmt.Println(x)
+    {   
+        fmt.Println(x)
+        x = 3 
+        x := 2
+        fmt.Println(x)
+        x = 5
+    }
+    fmt.Println(x)
+}
+</code></pre>
+
+<p>如何检查你的代码中是否存在这样的声明？</p>
+
+<pre><code class="language-sh"># go tool vet -shadow yourfile.go
+</code></pre>
+
+<p>Go编译器会将未使用的局部变量当作错误，比如:</p>
+
+<pre><code class="language-go">func main() {
+    x := 1
+    var a int       //a declared and not used
+    fmt.Println(x)
+} 
+</code></pre>
+
+<p>那么思考一下下面的代码，会不会报错？</p>
+
+<pre><code class="language-go">func main() {
+    x := 1
+    const a = 10010   // ???                                                                                                                                                                                             
+    fmt.Println(x)
+} 
+</code></pre>
+
+<p>所以要记住函数体中存在未使用的常量，不会引发编译器报错;</p>
+
+<h4 id="常量">常量</h4>
+
+<p>常量表示运行时恒定不变的值，由const关键字声明，常量值必须是在编译期可确定的字符、字符串、数字或布尔值。
+声明常量的同时可以指定其常量类型，或者由Go编译器通过初始化值推断，如果显示指定其常量类型，那么就必须保证常量左右值类型一致。
+必要时要做类型转换。并且右值不能超出常量类型的取值范围，否则会造成溢出错误。比如：</p>
+
+<pre><code class="language-go">const(
+    x , y = 100, -10010
+    b byte = byte(x)    //类型不一致需要做类型转换
+    c uint8 = uint8(y) //溢出
+)
+</code></pre>
+
+<p>思考：修改一下上面的代码，只进行声明而没有对其初始化和指定类型，结果会怎样？</p>
+
+<pre><code class="language-go">const(
+    x = 100
+    y
+    s string = &quot;hello go&quot;                                                                                                                                                                                      
+    c
+)
+fmt.Printf(&quot;%T , %v\n&quot;,y,y)
+fmt.Printf(&quot;%T , %v\n&quot;,c,c)
+</code></pre>
+
+<p>结论证明： 在常量组中如果不指定常量的类型和初始化值，则与上一行非空常量的右值相同</p>
+
+<p>常量值可以是Go编译器能计算出结果的表达式，如unsafe.Sizeof, len,cap,iota等。</p>
+
+<h4 id="枚举">枚举</h4>
+
+<p>Go语言没有明确上的定义枚举enum类型，不过可以通过iota关键字来实现一组递增常量的定义，比如:</p>
+
+<pre><code class="language-go">const (
+    _ = iota
+    KB = 1 &lt;&lt; (10 * iota)   // 1&lt;&lt;(10 * 1)
+    MB                      // 1&lt;&lt;(10 * 2)
+    GB                      // 1&lt;&lt;(10 * 3)
+)
+</code></pre>
+
+<p>多常量定义中也可以使用iota,它们各自单独计算，确保常量组中每行常量的列数量相等即可，比如：</p>
+
+<pre><code class="language-go">const(
+    a ,b = iota,iota *10    //0 , 0 * 10
+    c ,d                    //1 ， 1 * 10
+)
+</code></pre>
+
+<p>如果中断iota自增,需要显示恢复，且后续的常量值将按行序递增，比如:</p>
+
+<pre><code class="language-go">const(
+    a = iota
+    b           //b = ???
+    c = 100
+    d           //d = ???
+    e = iota    //c = ???
+    f           //f = ???
+)
+</code></pre>
+
+<p>自增常量可以指定常量类型，甚至可以自定义类型，比如：</p>
+
+<pre><code class="language-go">const(
+    f float = iota //指定常量类型
+)
+type color byte
+const(
+    black color = iota  //自定义类型
+    red
+    blue
+)
+</code></pre>
+
+<ul>
+<li>常量VS变量</li>
+</ul>
+
+<pre><code class="language-text">常量是“只读”属性
+变量在运行期分配内存，而常量是在编译期间直接展开，作为指令数据使用
+数字常量不会分配存储空间，不能像变量那样可以进行内存寻址
+</code></pre>
+
+<p>比如：</p>
+
+<pre><code class="language-go">const x = 10 
+const y byte = x    // 相当于const y byte = 100
+const a int = 10    //显示指定常量类型，编译器做强类型检查
+const b byte = a    // cannot use a (type int) as type byte in const initializer
+</code></pre>
+
+<h4 id="基本类型">基本类型</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">长度</th>
+<th align="center">默认值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">bool</td>
+<td align="center">1</td>
+<td align="center">false</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">byte</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">alias for uint8</td>
+</tr>
+
+<tr>
+<td align="center">rune</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">alias for int32</td>
+</tr>
+
+<tr>
+<td align="center">int, uint</td>
+<td align="center">4 或 8</td>
+<td align="center">0</td>
+<td align="center">32 或 64 位</td>
+</tr>
+
+<tr>
+<td align="center">int8,uint8</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">-128 ~ 127, 0 ~ 255</td>
+</tr>
+
+<tr>
+<td align="center">int16, uint16</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">-32768 ~ 32767, 0 ~ 65535</td>
+</tr>
+
+<tr>
+<td align="center">int32, uint32</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">-21亿 ~ 21 亿, 0 ~ 42 亿</td>
+</tr>
+
+<tr>
+<td align="center">int64, uint64</td>
+<td align="center">8</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">float32</td>
+<td align="center">4</td>
+<td align="center">0.0</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">float64</td>
+<td align="center">8</td>
+<td align="center">0.0</td>
+<td align="center">默认浮点数类型</td>
+</tr>
+
+<tr>
+<td align="center">complex64</td>
+<td align="center">8</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">complex128</td>
+<td align="center">16</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">uintptr</td>
+<td align="center">4 或 8</td>
+<td align="center">0</td>
+<td align="center">足以存储指针的uint</td>
+</tr>
+
+<tr>
+<td align="center">string</td>
+<td align="center"></td>
+<td align="center">&rdquo;&rdquo;</td>
+<td align="center">UTF-8 字符串</td>
+</tr>
+
+<tr>
+<td align="center">struct</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">结构体</td>
+</tr>
+
+<tr>
+<td align="center">interface</td>
+<td align="center"></td>
+<td align="center">nil</td>
+<td align="center">接⼝</td>
+</tr>
+
+<tr>
+<td align="center">function</td>
+<td align="center"></td>
+<td align="center">nil</td>
+<td align="center">函数</td>
+</tr>
+
+<tr>
+<td align="center">slice</td>
+<td align="center"></td>
+<td align="center">nil</td>
+<td align="center">切片:引用类型</td>
+</tr>
+
+<tr>
+<td align="center">map</td>
+<td align="center"></td>
+<td align="center">nil</td>
+<td align="center">字典:引⽤用类型</td>
+</tr>
+
+<tr>
+<td align="center">channel</td>
+<td align="center"></td>
+<td align="center">nil</td>
+<td align="center">通道:引⽤用类型</td>
+</tr>
+
+<tr>
+<td align="center">array</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">数组类型就是值类型，声明方式 [n]T，声明n个大小的T类型数组</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="引用类型">引用类型</h4>
+
+<p>特指slice,map和channel这三种预定义类型，他们具有比数字、数组等更复杂的存储结构;
+引用类型的创建必须是用make函数来创建，因为除了分配内存之外，还有一系列属性需要初始化，比如指针, 长度，甚至包括哈希分布,数据队列等。
+而内置函数new只是按照指定类型长度分配零值内存，返回指针。比如：</p>
+
+<pre><code class="language-go">p := new(map[string]int) //new函数返回指针
+m := *p
+m[&quot;go&quot;] = 1     //panic: assignment to entry in nil map(运行时)
+</code></pre>
+
+<h4 id="自定义类型">自定义类型</h4>
+
+<p>使用关键字type可以定义用户自定义类型，包括基于基本数据类型创建，或者结构体和函数等类型，比如：</p>
+
+<pre><code class="language-go">type flags byte
+const (
+    exec flags = 1 &lt;&lt; iota
+    write 
+    read
+)
+</code></pre>
+
+<p>与var、const类似，多个type定义也可以合并成组，比如：</p>
+
+<pre><code class="language-go">    type (
+        user struct{
+            name string
+            age int
+        }
+
+        f func(user)
+    )                       //自定义一组类型
+
+    u := user{&quot;Tom&quot;,20}
+    var say f = func(s user){
+        fmt.Println(s.name, s.age)
+    }
+    say(u)
+</code></pre>
+
+<p>自定义类型与基础类型相比，它们具有相同的数据结构，但它们不存在任何关系，除操作符外，自定义类型不会继承基础类型的其它信息，它们属于完全不同的两种类型，
+即它们之间不能做隐式转换，不能视为别名甚至不能用于比较表达式。比如:</p>
+
+<pre><code class="language-go">    type(
+        data int
+    )
+    var d data = 10
+    var x int = d       //cannot use d (type data) as type int in assignment
+    println(x == d)     //invalid operation: x == d (mismatched types int and data)
+</code></pre>
+
+<h4 id="未命名类型">未命名类型</h4>
+
+<p>与有明确标志符的bool, int, string等类型相比，数组、切片、字典、通道等类型与具体元素类型或长度等属性有关，所以称作
+未命名类型(unnamed type)。当然可以用type为其提供具体名称，将其改变为命名类型(named type)。当然可以用type为其提供具体名称，将其改变为命名类型</p>
+
+<p>具有相同声明的未命名类型视作同一类型，比如：</p>
+
+<pre><code class="language-text">1. 具有相同基类型的指针
+2. 具有相同元素类型和长度的数组(array)
+3. 具有相同元素类型的切片(slice)
+4. 具有相同键值类型的字典(map)
+5. 具有相同数据类型及操作方向的通道(channel)
+6. 具有相同字段序列(字段名、字段类型、标签以及字段顺序)的结构体(struct)
+7. 具有相同签名(参数类型，参数顺序和返回值列表，不包括参数名)的函数(func)
+8. 具有相同方法集(方法名、方法签名、不包括顺序)的接口(interface)
+</code></pre>
+
+<p>结构体的tag经常被初学者忽视，它也属于结构体类型组成的一部分，而不仅仅是元数据描述。</p>
+
+<h4 id="类型转换">类型转换</h4>
+
+<p>类型转换在日常开发中是不可避免的问题，Go语言属于强类型语言，除常量、别名以及未命名类型之外，其它不同类型之间的转换都需要显示类型转换;好处是我们至少能知道语句及表达式的确切含义，比如：</p>
+
+<pre><code class="language-go">a := 10         //int
+b := byte(a)    //byte
+c := a + int(b) //确保类型一致性
+d := b + byte(a)//确保类型一致性
+</code></pre>
+
+<p>如果类型转换的目标是指针、单向通道、没有返回值的函数类型，那么为了避免语法歧义带来的类型转换错误，必须使用括号，比如</p>
+
+<pre><code class="language-go">x := 100
+p := *int(&amp;x) //cannot convert &amp;x (type *int) to type int
+                //invalid indirect of int(&amp;x) (type int)
+pc := &lt;-chan int(c) //invalid operation: pc &lt;- 3 (send to non-chan type int)
+
+</code></pre>
+
+<p>正确做法如下:</p>
+
+<pre><code class="language-go">p := (\*int)(&amp;x) // (\*int)(&amp;x)
+(&lt;-chan int)(c) //单向通道
+(func()) (f)     //无返回值的函数
+(func()int) (f) //有返回值的函数，但是也可以不用括号:func()int(f),但是为了影响程序可读性，建议加上括号
+</code></pre>
+
+<p>完善上面的代码片段，继续验证和扩展你的想法。</p>
+
+<p>下一节课我们会继续讲解Go语言表达式，包括：关键字、运算符、初始化和流程控制。</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/utest/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/reflect/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

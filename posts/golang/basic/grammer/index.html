@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
+ 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足跨语言、 跨平台的转换和文本处理需求，关于Unicode更详细说明，参见官网 *Unicode*。 当前，你只需要记住一条规则：
+Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   注释  - 行注释: 用两斜杠&quot;//&quot;开始到这一行结束 - 块注释: 从&quot;/*&quot; 开始到 &quot;*/&quot;结束  Go语言的词法元素包括4类:
+ 标志符 (identifier) 关键字 (keyword) 运算符 (operator)和分隔符 (delimiter) 字面量 (literal)  一般情况下，空格符、制表符、回车符和换行符都会被忽略，除非它们作为多个语言符号之间的分隔符的一部分。 另外，Go语言会自动为代码插入分号以进行语句分隔，所以不在特殊情况下不需要显示的插入分号;
+标志符 标志符就是对变量、常量、函数以及自定义类型进行命名。Go语言标志符的命名规范是由若干字母、下划线&rdquo;_&ldquo;和数字组成的字符序列，字符序列的第一个字符必须为字母，且首字母 标志符是区分大小写的。在使用标志符之前必须进行声明，一个声明就是将一个非空的标志符与常量、类型、变量、函数或代码包绑定在一起。在 同一个代码区块中，不允许重复声明同一个标志符，并且该标志符的作用域与所属代码区块的范围相同。
+ 预定义标志符  Go语言中有一类特殊的标志符，被叫做预定义标志符。这类标志符是在Go语言的源代码中被声明的，具体声明如下：
+基本数据类型名： int、float、string... 接口类型名：error 常量名：true,false和iota 内建函数名：append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover   空标志符  Go语言有一个名为 &ldquo;_&rdquo; 的特殊标志符,叫(blank identifier)。通常作为忽略占位符使用，可以作表达式左值，但无法读取内容。 空标志符也常用来临时规避对未使用变量和导入包的错误检查，但需注意的是，它也属于预定义标志符。
+ 限定标志符  在Go语言开发过程中，会经常访问其他代码包中的变量或类型，这时就需要用到限定标志符。 可以把代码包名称称作是限定标志符前缀，前缀和包中的标志符之间用英文的点(&ldquo;.&rdquo;)符号分隔。 要应用其它代码包中的标志符时，需要满足两个前提：
+ 代码包必须被提前导入到该代码文件中 该标志符在代码包必须是可被导出的  怎么才算是标志符可被导出的呢？">
+  <meta property="og:description" content="基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
+ 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足跨语言、 跨平台的转换和文本处理需求，关于Unicode更详细说明，参见官网 *Unicode*。 当前，你只需要记住一条规则：
+Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   注释  - 行注释: 用两斜杠&quot;//&quot;开始到这一行结束 - 块注释: 从&quot;/*&quot; 开始到 &quot;*/&quot;结束  Go语言的词法元素包括4类:
+ 标志符 (identifier) 关键字 (keyword) 运算符 (operator)和分隔符 (delimiter) 字面量 (literal)  一般情况下，空格符、制表符、回车符和换行符都会被忽略，除非它们作为多个语言符号之间的分隔符的一部分。 另外，Go语言会自动为代码插入分号以进行语句分隔，所以不在特殊情况下不需要显示的插入分号;
+标志符 标志符就是对变量、常量、函数以及自定义类型进行命名。Go语言标志符的命名规范是由若干字母、下划线&rdquo;_&ldquo;和数字组成的字符序列，字符序列的第一个字符必须为字母，且首字母 标志符是区分大小写的。在使用标志符之前必须进行声明，一个声明就是将一个非空的标志符与常量、类型、变量、函数或代码包绑定在一起。在 同一个代码区块中，不允许重复声明同一个标志符，并且该标志符的作用域与所属代码区块的范围相同。
+ 预定义标志符  Go语言中有一类特殊的标志符，被叫做预定义标志符。这类标志符是在Go语言的源代码中被声明的，具体声明如下：
+基本数据类型名： int、float、string... 接口类型名：error 常量名：true,false和iota 内建函数名：append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover   空标志符  Go语言有一个名为 &ldquo;_&rdquo; 的特殊标志符,叫(blank identifier)。通常作为忽略占位符使用，可以作表达式左值，但无法读取内容。 空标志符也常用来临时规避对未使用变量和导入包的错误检查，但需注意的是，它也属于预定义标志符。
+ 限定标志符  在Go语言开发过程中，会经常访问其他代码包中的变量或类型，这时就需要用到限定标志符。 可以把代码包名称称作是限定标志符前缀，前缀和包中的标志符之间用英文的点(&ldquo;.&rdquo;)符号分隔。 要应用其它代码包中的标志符时，需要满足两个前提：
+ 代码包必须被提前导入到该代码文件中 该标志符在代码包必须是可被导出的  怎么才算是标志符可被导出的呢？">
+  <meta name="twitter:description" content="基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
+ 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足 …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/grammer/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/grammer/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="基本词法">基本词法</h1>
+
+<p>在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器
+能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。</p>
+
+<ul>
+<li>源代码表示</li>
+</ul>
+
+<p>Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码
+方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足跨语言、
+跨平台的转换和文本处理需求，关于Unicode更详细说明，参见官网 *<a href="http://www.unicode.org">Unicode</a>*。
+当前，你只需要记住一条规则：</p>
+
+<pre><code class="language-text">Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。
+</code></pre>
+
+<ul>
+<li>注释</li>
+</ul>
+
+<pre><code class="language-text">- 行注释: 用两斜杠&quot;//&quot;开始到这一行结束
+- 块注释: 从&quot;/*&quot; 开始到 &quot;*/&quot;结束
+</code></pre>
+
+<p>Go语言的词法元素包括4类:</p>
+
+<ol>
+<li>标志符 (identifier)</li>
+<li>关键字 (keyword)</li>
+<li>运算符 (operator)和分隔符 (delimiter)</li>
+<li>字面量 (literal)</li>
+</ol>
+
+<p>一般情况下，空格符、制表符、回车符和换行符都会被忽略，除非它们作为多个语言符号之间的分隔符的一部分。
+另外，Go语言会自动为代码插入分号以进行语句分隔，所以不在特殊情况下不需要显示的插入分号;</p>
+
+<h4 id="标志符">标志符</h4>
+
+<p>标志符就是对变量、常量、函数以及自定义类型进行命名。Go语言标志符的命名规范是由若干字母、下划线&rdquo;_&ldquo;和数字组成的字符序列，字符序列的第一个字符必须为字母，且首字母
+标志符是区分大小写的。在使用标志符之前必须进行声明，一个声明就是将一个非空的标志符与常量、类型、变量、函数或代码包绑定在一起。在
+同一个代码区块中，不允许重复声明同一个标志符，并且该标志符的作用域与所属代码区块的范围相同。</p>
+
+<ul>
+<li>预定义标志符</li>
+</ul>
+
+<p>Go语言中有一类特殊的标志符，被叫做预定义标志符。这类标志符是在Go语言的源代码中被声明的，具体声明如下：</p>
+
+<pre><code class="language-text">基本数据类型名： int、float、string...
+接口类型名：error
+常量名：true,false和iota
+内建函数名：append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover
+</code></pre>
+
+<ul>
+<li>空标志符</li>
+</ul>
+
+<p>Go语言有一个名为 &ldquo;_&rdquo; 的特殊标志符,叫(blank identifier)。通常作为忽略占位符使用，可以作表达式左值，但无法读取内容。
+空标志符也常用来临时规避对未使用变量和导入包的错误检查，但需注意的是，它也属于预定义标志符。</p>
+
+<ul>
+<li>限定标志符</li>
+</ul>
+
+<p>在Go语言开发过程中，会经常访问其他代码包中的变量或类型，这时就需要用到限定标志符。
+可以把代码包名称称作是限定标志符前缀，前缀和包中的标志符之间用英文的点(&ldquo;.&rdquo;)符号分隔。
+要应用其它代码包中的标志符时，需要满足两个前提：</p>
+
+<ol>
+<li>代码包必须被提前导入到该代码文件中</li>
+<li>该标志符在代码包必须是可被导出的</li>
+</ol>
+
+<p>怎么才算是标志符可被导出的呢？</p>
+
+<ol>
+<li>标志符名称中的第一个字符必须大写</li>
+<li>标志符必须是被声明在一个代码包中的变量、类型、结构体类型的字段名、函数或方法名称等。</li>
+</ol>
+
+<p>因为Go语言根据标志符名称中的第一个字母的大小写来确定该标志符的访问权限;具体规则是当标志符名称的第一个字符为小写时，
+其访问权限就是&rdquo;包级私有的&rdquo;，只有与该标志符在一个代码包的代码才能访问到它。
+当标志符名称的第一个字符为大写时，其访问权限为&rdquo;公开的&rdquo;, 意味着该标志符可以被任何代码包的任何代码通过限定标志符访问。</p>
+
+<p>用一个例子来总结上面的内容！</p>
+
+<pre><code class="language-go">package main    //main 包名标志符
+import (        //import 导入其它代码包
+	&quot;fmt&quot;       //fmt 标准代码包名标志符
+	&quot;strconv&quot;   // strconv 标准代码包名标志符
+)
+func main() {   //main 函数名标志符
+	var s string = &quot;10010&quot;    //string 预定义标志符
+    v, _ := strconv.Atoi(s) //v自定义标志符,_空白标志符
+	fmt.Printf(&quot;%T, %v&quot;, v, v) //fmt.Printf 限定标志符
+}
+</code></pre>
+
+<pre><code class="language-text">注意： 代码包标志符并不属于任何一个作用域，代码包声明只是为了区分若干源代码文件
+是否属于同一个代码包。或者指定导入代码包时代表该代码包的引用名称。
+</code></pre>
+
+<p>命名建议：</p>
+
+<ol>
+<li>尽量使用短命名，长名字并非你想象的那么更易读，多加文档和注释比格外长的名字更实用</li>
+<li>混合大小写，且使用驼峰拼写格式，注意首字母的大小写愿意</li>
+<li>保持package的名字和目录保持一致，尽量采取简短有意义的包名，不要和标准库名称冲突，包名应该为小写单词，不要使用下划线或者混合大小写</li>
+<li>函数参数和返回值以小写字母开头</li>
+<li>不要使用保留关键字作为标志符</li>
+<li>不建议使用与预定义常量、类型、内置函数相同的名字作为标志符</li>
+<li>专有名字通常全部大写</li>
+</ol>
+
+<h4 id="字面量">字面量</h4>
+
+<p>在计算机科学中，字面量是用于表达源代码中一个固定基本值的表示法(notation)。几乎所有计算机编程
+语言都具有对基本值的字面量表示，比如：整数、浮点数、字符串、字符和布尔类型的数值都有对应的
+字面量表示;
+比如：数字15这个值是唯一的，但表示的方式有很多种：</p>
+
+<pre><code>二进制表达：1111
+八进制表达：017
+十进制表达：15
+十六进制表达：0xF
+</code></pre>
+
+<p>对于开发者来说，当然知道要表达的意思，但是要把这种思想传达给编译器，
+因为编译器对源代码做词法分析时会自动判决当前用户的输入属于哪一类字面量;</p>
+
+<p>go语言的字面量与变量类型应关系：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">字面量种类</th>
+<th align="center">变量的类型</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">布尔</td>
+<td align="center">bool</td>
+<td align="center">true/false</td>
+</tr>
+
+<tr>
+<td align="center">字符</td>
+<td align="center">rune</td>
+<td align="center">包含在单引号&rdquo;之中的字符</td>
+</tr>
+
+<tr>
+<td align="center">整型</td>
+<td align="center">int</td>
+<td align="center">15, 017与0xF</td>
+</tr>
+
+<tr>
+<td align="center">浮点</td>
+<td align="center">float64</td>
+<td align="center">0.,1.1,1.e+0.1E6,.25,.25e+5</td>
+</tr>
+
+<tr>
+<td align="center">复数</td>
+<td align="center">complex128</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">字符串</td>
+<td align="center">string</td>
+<td align="center">包含在双引号 &ldquo;&ldquo;或反引号 ``之中</td>
+</tr>
+</tbody>
+</table>
+
+<p>举例说明一下：</p>
+
+<pre><code class="language-go">package main
+import (
+	&quot;fmt&quot;
+	&quot;reflect&quot;
+)
+
+func main() {
+	i := 0xf
+	f := .25
+	c := 'c'
+	s := `go`
+	cx := 011i
+	
+	fmt.Println(reflect.ValueOf(i), reflect.TypeOf(i))
+	fmt.Println(reflect.ValueOf(f), reflect.TypeOf(f))
+	fmt.Println(reflect.ValueOf(c), reflect.TypeOf(c))
+	fmt.Println(reflect.ValueOf(s), reflect.TypeOf(s))
+  fmt.Println(reflect.ValueOf(cx), reflect.TypeOf(cx))
+}
+输出：
+15 int
+0.25 float64
+99 int32
+go string
+(0+11i) complex128
+</code></pre>
+
+<p>字面量的通俗理解：编译器根据用户的输入，推论出输入的数据属于什么数据类型。</p>
+
+<p>这些特殊标志符会在以后的学习中都能接触到，我们再具体讨论其用法;</p>
+
+<p>下一节我们会继续讲解Go语言数据类型，包括：变量、常量、基本类型、引用类型、类型转换以及自定义类型</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/interface/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/goroutine/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
+Go语言提供：
+并发执行(goroutines) 同步和消息传输(channels) 多路并发控制(select)  Go语言创建一个并发任务单元只需要在函数调用之前添加go关键字即可，每个任务单元会保存函数指针、调用参数，还会分配执行所需的 栈内存空间，相比系统默认MB级别的线程栈，goroutine自定义栈仅须2KB，所以能够创建上千万个并发任务，自定义栈采取的是按需分配 策略，在需要时进行扩容，最大能够达到GB的规模。 比如创建一个并发任务单元：
+package main func main(){ go println(&quot;hello gopher!!&quot;) go func(msg string) { fmt.Println(msg) }(&quot;going&quot;) }  使用go创建完并发任务之后，新建的任务会被放置在任务队列中，等待调度器安排合适的系统线程获取执行权，当前流程不会阻塞，也不会等待任务 的启动，并且不能保证运行时并发任务的执行次序。
+如何等待并发任务的结束？
+1. 采用通道阻塞机制，然后发出退出信号 2. 等待多个任务单元时，推荐使用sync.WaitGroup   channel wait  func main(){ done := make(chan bool) //创建一个无缓冲通道，用于 go func(s string){ println(&quot;working&quot;) time.Sleep(time.Second) //业务逻辑处理 println(s) println(&quot;done&quot;) close(done) //done-&gt;true }(&quot;hello gopher&quot;) println(&quot;wait.">
+  <meta property="og:description" content="并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
+Go语言提供：
+并发执行(goroutines) 同步和消息传输(channels) 多路并发控制(select)  Go语言创建一个并发任务单元只需要在函数调用之前添加go关键字即可，每个任务单元会保存函数指针、调用参数，还会分配执行所需的 栈内存空间，相比系统默认MB级别的线程栈，goroutine自定义栈仅须2KB，所以能够创建上千万个并发任务，自定义栈采取的是按需分配 策略，在需要时进行扩容，最大能够达到GB的规模。 比如创建一个并发任务单元：
+package main func main(){ go println(&quot;hello gopher!!&quot;) go func(msg string) { fmt.Println(msg) }(&quot;going&quot;) }  使用go创建完并发任务之后，新建的任务会被放置在任务队列中，等待调度器安排合适的系统线程获取执行权，当前流程不会阻塞，也不会等待任务 的启动，并且不能保证运行时并发任务的执行次序。
+如何等待并发任务的结束？
+1. 采用通道阻塞机制，然后发出退出信号 2. 等待多个任务单元时，推荐使用sync.WaitGroup   channel wait  func main(){ done := make(chan bool) //创建一个无缓冲通道，用于 go func(s string){ println(&quot;working&quot;) time.Sleep(time.Second) //业务逻辑处理 println(s) println(&quot;done&quot;) close(done) //done-&gt;true }(&quot;hello gopher&quot;) println(&quot;wait.">
+  <meta name="twitter:description" content="并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
+Go语言提供：
+并发执 …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/goroutine/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/goroutine/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="并发">并发</h1>
+
+<ul>
+<li>并发(Concurrency) VS 并行(Parallelism)</li>
+</ul>
+
+<pre><code class="language-text">并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。
+并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。
+</code></pre>
+
+<p>两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。
+可以参照*<a href="http://www.vaikan.com/docs/Concurrency-is-not-Parallelism/#landing-slide">Concurrency is not Parallelism</a>*加深理解</p>
+
+<p>Go语言提供：</p>
+
+<pre><code class="language-text">并发执行(goroutines)
+同步和消息传输(channels)
+多路并发控制(select)
+</code></pre>
+
+<p>Go语言创建一个并发任务单元只需要在函数调用之前添加go关键字即可，每个任务单元会保存函数指针、调用参数，还会分配执行所需的
+栈内存空间，相比系统默认MB级别的线程栈，goroutine自定义栈仅须2KB，所以能够创建上千万个并发任务，自定义栈采取的是按需分配
+策略，在需要时进行扩容，最大能够达到GB的规模。
+比如创建一个并发任务单元：</p>
+
+<pre><code class="language-go">package main
+
+func main(){
+    go println(&quot;hello gopher!!&quot;)
+    go func(msg string) {
+        fmt.Println(msg)
+    }(&quot;going&quot;)
+}
+</code></pre>
+
+<p>使用go创建完并发任务之后，新建的任务会被放置在任务队列中，等待调度器安排合适的系统线程获取执行权，当前流程不会阻塞，也不会等待任务
+的启动，并且不能保证运行时并发任务的执行次序。</p>
+
+<p>如何等待并发任务的结束？</p>
+
+<pre><code>1. 采用通道阻塞机制，然后发出退出信号
+2. 等待多个任务单元时，推荐使用sync.WaitGroup
+</code></pre>
+
+<ul>
+<li>channel wait</li>
+</ul>
+
+<pre><code class="language-go">func main(){
+    done := make(chan bool)     //创建一个无缓冲通道，用于
+    go func(s string){
+        println(&quot;working&quot;)
+        time.Sleep(time.Second)     //业务逻辑处理
+        println(s)
+        println(&quot;done&quot;)
+        close(done)
+        //done-&gt;true
+    }(&quot;hello gopher&quot;)
+    println(&quot;wait...&quot;)
+    &lt;-done
+}
+</code></pre>
+
+<ul>
+<li>sync wait</li>
+</ul>
+
+<pre><code class="language-go">func main(){
+    var wg  sync.WaitGroup              
+    for i:=0;i &lt;10 ;i++ {
+        wg.Add(1)                           //计数+1，注意：要在goroutine之外执行计数加1
+        go func(s string,workerID int){
+            defer wg.Done()                 //计数-1
+            time.Sleep(time.Second)
+            println(s , &quot;ID:&quot;,workerID)
+        }(&quot;hello gopher&quot;,i)
+    }
+    println(&quot;main wait...&quot;)
+    wg.Wait()                               //阻塞等待，直到计数器归零
+    println(&quot;all done.&quot;)                                                                       
+}
+</code></pre>
+
+<ul>
+<li>GOMAXPROCS
+在日常开发高并发程序时，可能会创建很多协程，而协程是运行在线程基础上的，在任意执行时刻，只希望有限的几个线程参与并发任务的执行，
+该数量默认与处理器核数相等，可用runtime.GOMAXPROCS函数进行修改。比如：</li>
+</ul>
+
+<pre><code class="language-go">func count(){
+    x := 0
+    for i:=0; i &lt;  math.MaxUint32;i++{
+        x += i
+    }   
+    println(x)
+}
+
+func c1(n int){
+    for i:= 0;i &lt; n;i++{
+        count()
+    }   
+}
+
+func c2(n int){
+    var wg sync.WaitGroup
+    for i:= 0;i &lt; n;i++{
+        wg.Add(1)
+        go func(){
+            count()
+            wg.Done()
+        }()
+    }   
+    wg.Wait()
+}
+
+func main(){
+    n := runtime.GOMAXPROCS(0)      //返回CPU数目
+    start := time.Now()
+    c1(n)
+    println(&quot;c1: &quot;,time.Now().Sub(start).Seconds())
+    start = time.Now()
+    c2(n)
+    println(&quot;c2: &quot;,time.Now().Sub(start).Seconds())                                            
+}
+输出：
+9223372030412324865
+9223372030412324865
+c1:  +4.143495e+000
+9223372030412324865
+9223372030412324865
+c2:  +2.110481e+000
+</code></pre>
+
+<ul>
+<li><p>Local Storage</p>
+
+<p>Goroutine与线程不同，goroutine无法获取ID，无法设置优先级，也没有局部存储(TLS),甚至连返回值都会被抛弃。但是除了
+优先级外，其他功能都能够自己实现，比如：</p></li>
+</ul>
+
+<pre><code class="language-go">type gr struct{
+    id  int 
+    res int 
+}
+func main(){
+    var wg sync.WaitGroup
+    var grs [5]gr
+    for i:=0;i&lt;len(grs);i++{
+        wg.Add(1)
+        go func(id int){
+            grs[id].id = id
+            grs[id].res = id*10                                                                
+            wg.Done()
+        }(i)
+    }   
+    wg.Wait()
+    fmt.Println(grs)
+}
+输出：
+[{0 0} {1 10} {2 20} {3 30} {4 40}]
+局部缓存也可以使用切片、字典或通道等，如果使用字典需要注意同步处理。
+</code></pre>
+
+<ul>
+<li>Gosched</li>
+</ul>
+
+<p>Gosched机制是主动释放出线程去执行其它任务单元，将该任务单元放回任务队列中，等待下一次线程调度时恢复执行。
+因为运行时，调度器会主动向占用长时间(10ms)运行的任务发出抢占调度，所以该函数很少被显示应用，比如：</p>
+
+<pre><code class="language-go">func say(s string){
+    for i:=0; i &lt; 10;i++{
+        runtime.Gosched()       //让出当前线程
+        fmt.Println(s)
+    }   
+}
+
+func main(){
+    //runtime.GOMAXPROCS(2)                                                                    
+    go say(&quot;hello&quot;)
+    say(&quot;gopher&quot;)
+}
+</code></pre>
+
+<ul>
+<li>Goexit</li>
+</ul>
+
+<p>Goexit机制是让goroutine自身主动结束，立即终止整个调用堆栈，并确保所有已注册的延迟函数调用都会按照FIFO规则被执行，该函数不会影响其他并发任务单元的运行，
+也不会引发panic，自然不会被捕获，比如：</p>
+
+<pre><code class="language-go">func main(){
+    done := make(chan bool)
+    go func(){
+        defer close(done)
+        defer println(&quot;a&quot;)
+        func(){
+            println(&quot;b&quot;)
+            defer func(){
+                println(&quot;recover is nil: &quot;,recover() == nil)                                   
+            }() 
+            func(){
+                println(&quot;c&quot;)
+                runtime.Goexit()
+                println(&quot;c.exit&quot;)
+            }() 
+            println(&quot;b.exit&quot;)
+        }() 
+        println(&quot;a.exit&quot;)
+    }() 
+    &lt;-done
+}
+输出：
+b
+c
+recover is nil:  true
+a
+</code></pre>
+
+<p>注意：os.Exit函数是终止整个进程，不会执行任何延迟调用</p>
+
+<ul>
+<li>通道(channel)
+Channel是用来在并发程序场景下，同步多goroutine之间进行安全通信的一种机制;
+Go语言鼓励使用CSP(Communicating Sequential Process)通道代替内存共享，实现并发环境下安全通信。
+通道从底层实现来看是一个(FIFO)队列，在使用通道时有两种模式：</li>
+</ul>
+
+<p>同步模式：
+发送和接收双方需要匹配出现，匹配成功后，将数据复制给对方，
+如果匹配失败，则有一方被置入等待队列(阻塞)，直到另一方出现后才被唤醒。
+保证取数据‘先于’放数据。同样说白了就是保证放的时候肯定有另外的goroutine在取，否则就因放不进去而阻塞。</p>
+
+<p>异步模式：
+该模式抢夺的则是数据缓冲区，发送方要求有空间可以写入，接收方则要求缓冲区有数据可以读取，
+在不满足需求的情况下，双方同样会加入到等待队列(阻塞)，直到缓冲区腾出空间或有新数据写入。
+保证往里放数据‘先于’对应的取数据。说白了就是保证在取的时候里面肯定有数据，否则就因取不到而阻塞。</p>
+
+<p>使用通道前，必须使用内置函数make先显示创建通道，使用&rdquo;&lt;-&ldquo;符号来操作通道，使用结束后，
+同样使用内部函数close显示关闭通道，通道关闭之后，不能再向通道写入数据，比如:
+在前面已经描述过利用通道作为事件通知的场景，下面进一步了解一下通道。</p>
+
+<pre><code class="language-go">var ChanName = make(&quot;chan&quot; | &quot;chan&quot; &quot;&lt;-&quot; | &quot;&lt;-&quot; &quot;chan&quot; ElementType,Capacity)  .
+...
+close(ChanName)
+</code></pre>
+
+<p>同步模式：</p>
+
+<pre><code class="language-go">func main(){
+    var ch = make(chan string,3)    //创建带3个字符串数据缓冲区的异步通道
+    ch &lt;- &quot;hello&quot;
+    ch &lt;- &quot;gopher&quot;          //还有空间，不会阻塞
+    ch &lt;- &quot;1&quot;
+    //ch &lt;- &quot;2&quot;
+    println(&lt;-ch)
+    println(&lt;-ch)                                                                                                         
+}
+</code></pre>
+
+<p>缓冲区大小是通道的一个属性，而不是类型的一部分，另外通道自身也是一种引用类型，所以可以
+相等操作符来判断是否为同一对象或者是否为nil，比如：</p>
+
+<pre><code class="language-go">func main(){
+    var b = make(chan int,10)
+    var a = make(chan int)
+    var c chan string                                                                                                     
+    println(a == b)
+    println(c == nil)
+}
+输出：
+false
+true
+</code></pre>
+
+<p>通过使用cap和len函数来计算通道缓冲区的容量和当前已缓冲的数量，对于非缓冲区的通道则返回0,比如：
+.</p>
+
+<pre><code class="language-go">func main(){
+    var a = make(chan&lt;- int)
+    var b = make(chan&lt;- int,10)
+    b &lt;- 1
+    b &lt;- 2
+    b &lt;- 3
+    println(cap(a), len(a))                                                                                               
+    println(cap(b), len(b))
+}
+输出：
+0 0
+10 3
+</code></pre>
+
+<p>除了使用简单的方式发送和接收通道，还可以使用range和multi-valued assignment
+形式进行接收操作，比如：</p>
+
+<pre><code class="language-go">func main(){
+    done := make(chan bool) // 创建一个channel用以同步goroutine
+    c := make(chan int)
+    go func() {             // 在goroutine中执行输出操作
+        defer close(done)
+        println(&quot;read message&quot;)
+        /*
+        for {
+            x, ok := &lt;-c        //阻塞5秒
+            if !ok{
+                break
+            }
+            println(x)
+        }*/
+        for x:= range c{        //阻塞5秒
+            println(x)                                                                                                    
+        }
+        time.Sleep(2 * time.Second)
+    }()
+    time.Sleep(5 * time.Second)
+    c &lt;- 1
+    c &lt;- 2
+    c &lt;- 3
+    close(c)
+    println(&quot;waiting over&quot;)
+    &lt;-done                      // 等待goroutine结束
+}
+</code></pre>
+
+<p>通道作为事件通知，并非只是通知结束，可以作为任何事件的通知，比如：</p>
+
+<pre><code class="language-go">func run(id int, wg *sync.WaitGroup,ready &lt;-chan bool){
+    defer wg.Done()
+    println(id, &quot;: Ready&quot;)
+    &lt;-ready
+    println(id, &quot;: Runing...&quot;)
+    time.Sleep(time.Second *1) 
+    println(id, &quot;: Ok&quot;)
+}
+
+func main(){
+    var wg sync.WaitGroup
+    ready := make(chan bool)
+    for i:=0 ;i &lt; 5;i++{
+        wg.Add(1)
+        go run(i,&amp;wg, ready)
+    }   
+    time.Sleep(time.Second *3)                                                                                            
+    close(ready)
+    wg.Wait()
+    println(&quot;End&quot;)
+}
+输出：
+...
+</code></pre>
+
+<p>对于closed或nil的通道，都有相应的发送和接收规则如下：</p>
+
+<pre><code class="language-text">向closed状态的通道发送数据会引发panic
+从closed状态的通道读取数据，返回已缓存的数据或零值
+无论发送和接收nil状态的通道，都会被阻塞(死锁)
+</code></pre>
+
+<pre><code class="language-go">func main() {
+    ch := make(chan bool, 2)
+    ch &lt;- true
+    ch &lt;- true
+    close(ch)
+
+    for i := 0; i &lt; cap(ch) +1 ; i++ {
+        v, ok := &lt;-ch
+        fmt.Println(v, ok) 
+    }   
+}
+输出：
+true true
+true true
+false false         
+注意：
+第一个false 表示的是 channel 类型的零值
+第二个false 表示的是 channel 的启用状态，false表示 channel 关闭状态
+重复关闭和关闭nil状态的通道都会引发panic
+</code></pre>
+
+<ul>
+<li>单向
+为了使程序的操作逻辑更加严谨，日常开发中可以限制通道的收发方向，因为通道默认是双向的，并不
+区分接收和发送端，比如：</li>
+</ul>
+
+<pre><code class="language-go">func main(){
+    var wg sync.WaitGroup
+    var c = make(chan string)
+    var recv &lt;-chan string = c      //创建接收方向的通道
+    var send chan&lt;- string = c      //创建发送方向的通道
+    wg.Add(2)
+    go func(){
+        defer wg.Done()
+        for x := range recv{
+            println(x)
+        }   
+    }() 
+    go func(){
+        defer wg.Done()
+        send &lt;- &quot;hello&quot;
+        send &lt;- &quot;gopher&quot;
+        close(send)             //关闭发送方向的通道
+    }()                                                                                                                   
+    wg.Wait()                   //等待结束
+}
+输出：
+hello
+gopher
+</code></pre>
+
+<p>是否可以在单向通道上进行逆向操作，以及关闭接收方向通道 ？</p>
+
+<pre><code class="language-go">func main(){
+    var c = make(chan string,2)
+    var recv &lt;-chan string = c 
+    var send chan&lt;- string = c 
+    recv &lt;- &quot;hello&quot;
+    &lt;-send
+    close(recv)
+}
+输出：
+invalid operation: recv &lt;- &quot;hello&quot; (send to receive-only type &lt;-chan string)
+invalid operation: &lt;-send (receive from send-only type chan&lt;- string)
+invalid operation: close(recv) (cannot close receive-only channel)
+</code></pre>
+
+<p>是否可以将单向通道转回正常通道 ？</p>
+
+<pre><code class="language-go">func main(){
+    var a,b chan string
+    var c = make(chan string)                                                                                             
+    var recv &lt;-chan string = c
+    var send chan&lt;- string = c
+    a = (chan string)(recv)
+    b = (chan string)(send)
+}
+输出：
+cannot convert recv (type &lt;-chan string) to type chan string
+cannot convert send (type chan&lt;- string) to type chan string
+</code></pre>
+
+<ul>
+<li>选择(select)
+在日常开发中，经常会遇到同时处理多个通道的场景，那么可以使用select语句，进行随即选择一个可用的通道做收发处理，比如：</li>
+</ul>
+
+<pre><code class="language-go">func main(){
+	var wg sync.WaitGroup
+	wg.Add(3)
+	var a ,b = make(chan int), make(chan int)
+	go func(){
+		defer wg.Done()
+		for{
+			select{             //随即选择可读的通道
+			case i,ok := &lt;-a:
+				if !ok{
+					a = nil     //如果通道关闭了，则设置为nil阻塞，
+					break
+				}
+				println(&quot;a&quot;, i)
+			case i,ok := &lt;-b:
+				if !ok{
+					b = nil
+					break
+				}
+				println(&quot;b&quot;, i)
+			}
+			if a ==nil &amp;&amp; b ==nil{      //通道全部关闭后，则终止接收
+				return
+			}
+		}
+	}()
+	go func(){
+		defer wg.Done()
+		defer close(a)
+		for i := 0;i &lt; 2; i++{
+			a&lt;- i
+		}
+	}()
+	go func(){
+		defer wg.Done()
+		defer close(b)
+		for i := 0;i &lt; 4; i++{
+			b&lt;- i*10
+		}
+	}()
+	wg.Wait()
+}
+输出：
+b 0
+a 0
+a 1
+b 10
+b 20
+b 30
+</code></pre>
+
+<p>如果全部通道都不可操作时，select会执行default语句，如此可以避开阻塞，比如：</p>
+
+<pre><code class="language-go">func main(){
+    done := make(chan bool)
+    c := make(chan int)
+
+    go func(){
+        defer close(done)
+        for{
+            select{
+                case x,ok := &lt;-c:
+                    if !ok{
+                        return
+                    }   
+                    println(x)
+                default:                //关键所在
+            }   
+            println(time.Now().Unix())
+            time.Sleep(time.Second)     //合理处理业务逻辑
+        }   
+    }() 
+    time.Sleep(time.Second * 5)
+    c&lt;-10
+    close(c)
+    &lt;-done
+}
+</code></pre>
+
+<p>日常开发中，经常会碰到设置定时器和操作超时的场景，Go标准库提供了timeout,timer和ticker通道实现，比如：</p>
+
+<pre><code class="language-go">func main(){
+    timer := time.NewTimer(time.Second)
+    ticker := time.NewTicker(time.Second * 2)
+    done := make(chan bool)
+
+    go func(){
+        for{
+            select{
+            case &lt;-time.After(time.Second *5): //模拟超时
+                println(&quot;time out&quot;)
+                done&lt;- true
+                return
+            }
+        }
+    }()
+    go func(){
+        for {
+            select{
+            case &lt;-timer.C:
+                println(&quot;timer expired&quot;)
+                timer.Reset(time.Second)  //重置定时器
+            case &lt;-ticker.C:
+                println(&quot;ticker expired&quot;)
+            case &lt;-done:
+                println(&quot;Done&quot;)
+                timer.Stop()        //停止定时器
+                return
+            }                                                                                                             
+        }
+    }()
+    &lt;-(chan struct{})(nil)  //使用nil通道阻塞进程
+}
+输出：
+timer expired
+ticker expired
+timer expired
+timer expired
+ticker expired
+timer expired
+time out
+Done
+</code></pre>
+
+<ul>
+<li>信号(Signal)</li>
+</ul>
+
+<p>信号是Linux, 类Unix和其它POSIX兼容的操作系统中用来进程间通讯的一种方式。
+一个信号就是一个异步的消息通知，发送给某个进程，或者同进程的某个线程，告诉它们某个事件发生了，
+收到信号后，进程会有相应的信号处理函数被执行。Go语言中的信号捕获机制是利用通道来完成的，这里不做过多信号解释，
+建议参考 <em>&lt;&lt; UNIX环境高级编程 &gt;&gt;</em> 书中关于信号的部分，了解更多关于信号内容。</p>
+
+<pre><code class="language-go">//func Notify(c chan&lt;- os.Signal, sig ...os.Signal)  //信号注册函数原型  
+func main(){
+    sigs := make(chan os.Signal，1)  //创建信号通道
+    done := make(chan bool)                                                                                           
+    signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)  //信号注册
+
+    go func() {
+        sig := &lt;-sigs        //等待接收信号
+        fmt.Println(sig)
+        done &lt;- true
+    }() 
+
+    fmt.Println(&quot;awaiting signal&quot;)
+    &lt;-done
+    fmt.Println(&quot;exiting&quot;)
+}
+</code></pre>
+
+<p>日常开发中，信号处理多用在服务程序开发中，比如可以通过syscall.SIGUSR1信号通知更新配置文件，
+结合logrotate与syscall.SIGUSR2信号通知处理日志文件切割，实现优雅关闭服务等，比如：</p>
+
+<pre><code class="language-go">func main(){
+    sigs := make(chan os.Signal，1)
+    signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM，syscall.SIGUSR1,syscall.SIGUSR2)  
+endless:
+    for {
+        select {
+        case s := &lt;-sigs:              
+            if s == syscall.SIGUSR1{
+                ...
+            }else if s == syscall.SIGUSR2{
+                ...
+            }else{
+                fmt.Println(&quot;Signal (%v) received, stoppingn &quot;, s)
+                break endless
+            }
+        }   
+    }   
+}
+</code></pre>
+
+<ul>
+<li>性能&amp;安全</li>
+</ul>
+
+<p>通道为goroutines之间通信提供了便利的条件，但是在享受便利的同时也应该关注性能和安全问题，比如对于性能来说，
+因为通道从实现上来说，内部依然使用锁实现同步机制，所以在高并发和对性能有要求的场景下，
+可以将目标数据封装成大数据块进行传输，可以改善频繁加解锁造成的性能问题。
+对于安全性来说，在使用通道时，可能引发的goroutine leak，比如当goroutines处于发送和接收阻塞状态时，导致
+gorouties会在等待队列中休眠，此时垃圾回收器不会对goroutine和它引用的资源进行回收，造成资源泄露，比如：</p>
+
+<pre><code class="language-go">func test(){
+    c := make(chan int)
+    for i:=0;i&lt;10;i++{
+        go func(i int){
+            println(i,&quot; start&quot;)
+            c &lt;- 1                                                                                                        
+            println(i,&quot; over&quot;)
+        }(i) 
+    }   
+}
+func main(){
+    test()
+    for{
+        time.Sleep(time.Second)
+        runtime.GC()
+    }   
+}
+输出：
+# GODEBUG=&quot;gctrace=1,schedtrace=1000,scheddetail=1&quot; ./cha13 
+1  start
+...
+SCHED 0ms: gomaxprocs=2 idleprocs=0 threads=5 spinningthreads=0 idlethreads=0 runqueue=0 gcwaiting=0 nmidlelocked=0 stopwait=0 sysmonwait=0
+  P0: status=1 schedtick=2 syscalltick=1 m=4 runqsize=0 gfreecnt=0
+  P1: status=1 schedtick=10 syscalltick=0 m=2 runqsize=0 gfreecnt=0
+  M4: p=0 curg=9 mallocing=0 throwing=0 preemptoff= locks=2 dying=0 helpgc=0 spinning=false blocked=false lockedg=-1
+  M3: p=-1 curg=-1 mallocing=0 throwing=0 preemptoff= locks=0 dying=0 helpgc=0 spinning=false blocked=false lockedg=-1
+  M2: p=1 curg=-1 mallocing=0 throwing=0 preemptoff= locks=1 dying=0 helpgc=0 spinning=true blocked=false lockedg=-1
+  M1: p=-1 curg=-1 mallocing=0 throwing=0 preemptoff= locks=1 dying=0 helpgc=0 spinning=false blocked=false lockedg=-1
+  M0: p=-1 curg=14 mallocing=0 throwing=0 preemptoff= locks=0 dying=0 helpgc=0 spinning=false blocked=true lockedg=-1
+  G1: status=4(sleep) m=-1 lockedm=-1
+  G2: status=4(force gc (idle)) m=-1 lockedm=-1
+  G3: status=4(GC sweep wait) m=-1 lockedm=-1
+  G4: status=4(chan send) m=-1 lockedm=-1
+  G5: status=4(chan send) m=-1 lockedm=-1
+  G6: status=4(chan send) m=-1 lockedm=-1
+  G7: status=4(chan send) m=-1 lockedm=-1
+  G8: status=4(chan send) m=-1 lockedm=-1
+  G9: status=2() m=4 lockedm=-1
+  G10: status=4(chan send) m=-1 lockedm=-1
+  G11: status=4(chan send) m=-1 lockedm=-1
+  G12: status=4(chan send) m=-1 lockedm=-1
+  G13: status=4(chan send) m=-1 lockedm=-1
+  G14: status=3() m=0 lockedm=-1
+可以看出有大量的goroutine处于chan send状态，无法结束，试想一下在高并发服务的环境下，test函数如果频繁被调用，
+秒级就会产生大量阻塞状态的goroutines，会给服务带来很大的负面影响。
+</code></pre>
+
+<pre><code>总结：在不同的场景下要注意采用非阻塞还是阻塞机制，以免造成不可必要的安全问题。
+</code></pre>
+
+<ul>
+<li>同步</li>
+</ul>
+
+<p>通道解决了goroutines之间数据安全通信的问题，但是通道不能替代锁的功能，他们用在不同的场景，通道用于解决逻辑
+层次的多并发处理架构，而锁则是用于解决局部范围内的数据共享访问安全问题。
+Go标准库sync提供了互斥锁和读写锁来保护局部范围内的数据访问安全，另有原子操作等机制，满足了日常开发的需要。</p>
+
+<ul>
+<li>互斥锁(Mutex)</li>
+</ul>
+
+<p>使用互斥锁加锁后，多goroutine不能读也不能写，允许只有一个goroutine读或者写的场景，所以该锁也叫做全局锁，
+并且不能再次对其进行加锁，直到对其解锁后，才能再次加锁．适用于读写不确定场景，即读写次数没有明显的区别，比如：</p>
+
+<pre><code class="language-go">func main() {
+    var state = make(map[int]int)       
+    var mutex = &amp;sync.Mutex{}           
+
+    for r := 0; r &lt; 100; r++ {
+        go func() {
+            total := 0
+            for {
+                mutex.Lock()
+                key := rand.Intn(5)
+                total += state[key]
+                mutex.Unlock()
+            }
+        }()
+    }
+
+    for w := 0; w &lt; 10; w++ {
+        go func() {
+            for {
+                mutex.Lock()
+                key := rand.Intn(5)
+                state[key] = val
+                mutex.Unlock()
+            }
+        }()
+    }
+    time.Sleep(time.Second)
+    mutex.Lock()
+    fmt.Println(&quot;state:&quot;, state)
+    mutex.Unlock()
+}
+</code></pre>
+
+<p>在结构体中使用锁变量时，需要相关方法的接收者必须为指针(pointer-receiver)，否则会因为变量复制
+导致锁机制失效，并且锁的粒度要控制在最小范围，及早释放，提高效率，比如：</p>
+
+<pre><code class="language-go">type data struct{
+    state map[int]int
+    l sync.Mutex        //互斥锁
+}
+func (d *data)read(){   //接收者一定为(d *data)，不能为(d data)
+    total := 0
+    for {
+        key := rand.Intn(5)
+        d.l.Lock()              //加互斥锁
+        total += d.state[key]
+        d.l.Unlock()
+    }
+}
+func (d *data)write(){  //接收者一定为(d *data)，不能为(d data)
+    for {
+        key := rand.Intn(5)
+        val := rand.Intn(100)
+        d.l.Lock()
+        d.state[key] = val
+        d.l.Unlock()
+    }
+}
+func main() {
+    var d data
+     d.state = make(map[int]int)
+     for r := 0; r &lt; 10; r++ {
+         go d.read()
+     }
+    for w := 0; w &lt; 10; w++ {
+        go d.write()
+    }
+    time.Sleep(time.Second)
+    d.l.Lock()
+    fmt.Println(d.state)
+    d.l.Unlock()
+}
+</code></pre>
+
+<ul>
+<li>读写锁(RWMutex)</li>
+</ul>
+
+<p>读写锁是针对读写的互斥锁，为了提高读效率，适用于读多写少的场景;读写锁基本遵循两大原则：</p>
+
+<pre><code class="language-text">1. 加读锁时，多goroutine可以同时读但不能写
+2. 加写锁时，多goroutine不能读也不能写
+</code></pre>
+
+<pre><code class="language-go">type data struct{
+    state map[int]int
+    l sync.RWMutex   //读写锁
+}
+func (d *data)read(){
+    total := 0
+    for {
+        key := rand.Intn(5)
+        d.l.RLock()         //加读锁
+        total += d.state[key]
+        d.l.RUnlock()
+    }   
+}
+func (d *data)write(){
+    for {
+        key := rand.Intn(5)
+        val := rand.Intn(100)
+        d.l.Lock()
+        d.state[key] = val 
+        d.l.Unlock()
+    }
+}
+func main() {
+    var d data
+     d.state = make(map[int]int)
+     for r := 0; r &lt; 10000; r++ {       //多读少写
+         go d.read()
+     }   
+    for w := 0; w &lt; 10; w++ {
+        go d.write()
+    }
+    time.Sleep(time.Second*3)
+    d.l.RLock()
+    fmt.Println(d.state)
+    d.l.RUnlock()
+}
+</code></pre>
+
+<ul>
+<li>原子操作(atomic)
+atomic是最轻量级的锁，原子操作即是进行过程中不能被中断的操作。
+针对某个值的原子操作在被进行的过程中，CPU绝不会再去进行其他的针对该值的操作。为了实现这样的严谨性，
+原子操作仅会由一个独立的CPU指令代表和完成。比如：</li>
+</ul>
+
+<pre><code class="language-go">type Counter int64
+func (c *Counter) Add() {
+    *c++
+}
+func (c *Counter) Value() int64 {                                                                                         
+    return int64(*c)
+}
+func main(){
+    runtime.GOMAXPROCS(runtime.NumCPU())
+    counter := Counter(0)
+    for i:= 0;i&lt;10;i++{
+        go func(){
+            for j:= 0; j &lt;1000 ;j++{
+                counter.Add()
+            }   
+        }() 
+    }   
+    time.Sleep(time.Second *3) 
+    fmt.Println(counter.Value())
+}
+输出：
+6845
+</code></pre>
+
+<p>原子操作共有5种：增或减，比较并交换，载入，存储，交换,各原子操作的含义可以查阅对应的文档。</p>
+
+<p>使用原子操作重构上面的例子，比如：</p>
+
+<pre><code class="language-go">type Counter int64
+func (c *Counter) Add() {
+    atomic.AddInt64((*int64)(c), 1)
+    //*c++
+}
+func (c *Counter) Value() int64 {
+    return atomic.LoadInt64((*int64)(c))
+    //return int64(*c)
+}
+func main(){
+    runtime.GOMAXPROCS(runtime.NumCPU())
+    counter := Counter(0)
+
+    for i:= 0;i&lt;10;i++{                                                                                                   
+        go func(){
+            for j:= 0; j &lt;1000 ;j++{
+                counter.Add()
+            }   
+        }() 
+    }   
+
+    time.Sleep(time.Second *3) 
+    fmt.Println(counter.Value())
+}
+输出：
+10000
+</code></pre>
+
+<p>相关建议：</p>
+
+<pre><code class="language-text">- 对性能要求较高时， 应该避免使用延迟解锁(defer Unlock)
+- 读写并发场景下，使用RWMutex提高性能
+- 对单个数据读写操作时，应该使用原子操作
+</code></pre>
+
+<p>Go提供了内置的数据竞争检测工具，可以在测试、编译、运行时传入&rdquo;-race&rdquo;选项，go tool就可以打开竞争检查，比如：</p>
+
+<pre><code>编译和运行时环境：
+var i int = 0
+func main() {
+    go func() {
+        for {
+            i++
+            fmt.Println(&quot;subroutine: i = &quot;, i)
+            time.Sleep(1 * time.Second)
+        }
+    }()
+
+    for {
+        i++
+        fmt.Println(&quot;mainroutine: i = &quot;, i)
+        time.Sleep(1 * time.Second)
+    }                                                                                                                     
+}
+输出：
+# go build -race file.go
+# go run -race file.go
+
+测试时环境：
+package myrace
+
+import &quot;fmt&quot;
+import &quot;time&quot;
+import &quot;testing&quot;                                                                                                          
+func race() {
+    var i int = 0
+    go func() {
+        for {
+            i++
+            fmt.Println(&quot;subroutine: i = &quot;, i)
+            time.Sleep(1 * time.Second)
+        }
+    }()
+
+    for {
+        i++
+        fmt.Println(&quot;mainroutine: i = &quot;, i)
+        time.Sleep(1 * time.Second)
+    }
+}
+func TestRace(t *testing.T){
+    race()
+}
+输出：
+# go test -v -race file_test.go 
+</code></pre>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/grammer/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/func/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

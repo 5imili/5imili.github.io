@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
+Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比如：
+func hello(){ //左花括号不能另起一行 println(&quot;hello&quot;) }  Go语言中定义和应用函数时，有如下几点需要注意的点：
+ 函数无须前置声明 不支持命名嵌套定义，支持匿名嵌套 函数只能判断是否为nil，不支持其它比较操作 支持多返回值 支持命名返回值 支持返回局部变量指针 支持匿名函数和闭包  func hello() { //左括号不能另起一行 } func add(x,y int) (sum int){ //命名返回值 sum = x &#43; y return } func vals()(int,int){ //支持多返回值 return 2,3 } func a(){} func b(){} func add(x,y int) (*int){ //支持返回局部变量指针 sum := x &#43; y return &amp;sum } func main(){ println(a==b) //只能判断是否为nil，不支持其它比较操作 func hello() { //不支持命名嵌套定义 println(&quot;hello&quot;) } }  具备相同签名(参数和返回值)的函数才视为同一类型函数，比如：">
+  <meta property="og:description" content="函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
+Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比如：
+func hello(){ //左花括号不能另起一行 println(&quot;hello&quot;) }  Go语言中定义和应用函数时，有如下几点需要注意的点：
+ 函数无须前置声明 不支持命名嵌套定义，支持匿名嵌套 函数只能判断是否为nil，不支持其它比较操作 支持多返回值 支持命名返回值 支持返回局部变量指针 支持匿名函数和闭包  func hello() { //左括号不能另起一行 } func add(x,y int) (sum int){ //命名返回值 sum = x &#43; y return } func vals()(int,int){ //支持多返回值 return 2,3 } func a(){} func b(){} func add(x,y int) (*int){ //支持返回局部变量指针 sum := x &#43; y return &amp;sum } func main(){ println(a==b) //只能判断是否为nil，不支持其它比较操作 func hello() { //不支持命名嵌套定义 println(&quot;hello&quot;) } }  具备相同签名(参数和返回值)的函数才视为同一类型函数，比如：">
+  <meta name="twitter:description" content="函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
+Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比 …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/func/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/func/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="函数">函数</h1>
+
+<pre><code class="language-text">1. 定义
+2. 参数
+3. 返回值
+4. 匿名函数
+5. 延迟调用
+6. 错误处理 
+</code></pre>
+
+<ul>
+<li>定义</li>
+</ul>
+
+<p>函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。
+另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。</p>
+
+<p>Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比如：</p>
+
+<pre><code class="language-go">func hello(){   //左花括号不能另起一行
+    println(&quot;hello&quot;)
+}
+</code></pre>
+
+<p>Go语言中定义和应用函数时，有如下几点需要注意的点：</p>
+
+<pre><code> 函数无须前置声明
+ 不支持命名嵌套定义，支持匿名嵌套
+ 函数只能判断是否为nil，不支持其它比较操作
+ 支持多返回值
+ 支持命名返回值
+ 支持返回局部变量指针
+ 支持匿名函数和闭包
+</code></pre>
+
+<pre><code class="language-go">func hello()
+{               //左括号不能另起一行
+}
+
+func add(x,y int) (sum int){    //命名返回值
+    sum = x + y
+    return
+}
+
+func vals()(int,int){       //支持多返回值
+    return 2,3
+}
+
+func a(){}
+func b(){}
+
+func add(x,y int) (*int){      //支持返回局部变量指针
+    sum := x + y
+    return &amp;sum
+}
+
+func main(){
+    println(a==b)       //只能判断是否为nil，不支持其它比较操作
+    func hello() {      //不支持命名嵌套定义
+        println(&quot;hello&quot;)
+    }
+}
+</code></pre>
+
+<p>具备相同签名(参数和返回值)的函数才视为同一类型函数，比如：</p>
+
+<pre><code class="language-go">func hello() {
+    fmt.Println(&quot;hello&quot;)
+}
+func say(f func()){                                                                                                                                   
+    f()
+}
+
+func main(){
+    f := hello
+    say(f)
+}
+</code></pre>
+
+<ul>
+<li>参数
+Go语言中给函数传参时需要注意以下几点：</li>
+</ul>
+
+<pre><code> 不支持默认参数
+ 不支持命名实参
+ 参数视作为函数的局部变量
+ 必须按签名顺序传递指定类型和数量的实参
+ 相邻的同类型参数可以合并
+ 支持不定长变参，实质上是slice
+</code></pre>
+
+<pre><code class="language-go">func test(x,y int, s string, _ bool){   //相邻的同类型参数可以合并
+    return
+}
+
+func add(x ,y int)int{  //参数视作为函数的局部变量
+    x := 100            //no new variables on left side of :=
+    var y int = 200     //y redeclared in this block
+    return x +y
+}
+
+func main(){
+    //test(1,2,&quot;s&quot;)       //not enough arguments in call to test                                                                                                                             
+    test(1,2,&quot;s&quot;,false)
+}
+</code></pre>
+
+<p>不管传递的是指针、引用还是其它类型参数，都是值拷贝传递的，区别在于拷贝的目标是目标对象还是拷贝指针而已。
+在函数调用之前，编译器会为形参和返回值分配内存空间，并将实参拷贝到形参内存。比如：</p>
+
+<pre><code class="language-go">func test1(x *int){
+    fmt.Printf(&quot;%p, %v\n&quot;,&amp;x ,x)
+}
+
+func main(){
+    a := 0x100
+    p := &amp;a
+    fmt.Printf(&quot;%p, %v\n&quot;, &amp;p, p)
+    test1(p)
+}
+输出：
+0xc42002c020, 0xc42000a320
+0xc42002c030, 0xc42000a320
+从结构中看出， 实参和形参指向同一目标，但是传递的指针是被赋值了的
+</code></pre>
+
+<p>如果函数参数过多，可以将参数封装成一个结构体类型，比如：</p>
+
+<pre><code class="language-go">type serverOption struct{
+    addr    string
+    port int 
+    path    string
+    timeout time.Duration
+}
+
+func newOption() * serverOption{
+    return &amp;serverOption{
+        addr:&quot;127.0.0.1&quot;,
+        port:8080,
+        path:&quot;/var/www&quot;,
+        timeout: time.Second * 5,
+    }   
+}
+func (s *serverOption)server(){
+    println(&quot;run server&quot;)
+}
+
+func main(){
+    s := newOption()
+    s.port = 80
+    s.server()
+    for{}                                                                                                                                             
+}
+</code></pre>
+
+<ul>
+<li>变参
+变参本质上是一个切片(slice)，只能接收一到多个同类型参数，且必须放在参数列表尾部，比如：</li>
+</ul>
+
+<pre><code class="language-go">func add(args ...int) int {
+  total := 0
+  for _, v := range args {
+    total += v
+  }
+  return total
+}
+func main() {
+  fmt.Println(add(1,2,3))
+}
+</code></pre>
+
+<p>实质上是切片，那是否可以直接传个切片或数组呢？</p>
+
+<pre><code class="language-go">func test1(s string, a ...int){
+    fmt.Printf(&quot;%T, %v\n&quot;, a, a)    //[]int, [1 2 3 4]
+}
+{
+    a := [4]int{1,2,3,4}
+    test1(&quot;s&quot;, a)     //cannot use a (type [4]int) as type int in argument to test1                                                                                                                               
+    test1(&quot;s&quot;, a[:]     //cannot use a[:] (type []int) as type int in argument to test1
+    test1(&quot;s&quot;, a[:]...) //切片展开
+}
+</code></pre>
+
+<p>变参既然是切片，那么参数复制的是切片的本身，并不包括底层的数组，因此可以修改原数据，
+也可以copy底层数据，防止原数据被修改，比如：</p>
+
+<pre><code class="language-go">func test1(a ...int){
+    for i := range a{
+        a[i] += 100
+    }
+}
+func main(){
+    a := [4]int{1,2,3,4}
+    // b := make([]int,0)
+    // copy(b,a[:])         
+    // test1(b[:]...)
+    test1(a[:]...)                                                                                                                                                 
+    for i := range a{
+        fmt.Println(a[i])
+    }
+}
+</code></pre>
+
+<ul>
+<li>匿名函数
+匿名函数就是没有定义函数名称的函数。我们可以在函数内部定义匿名函数，也叫函数嵌套。
+匿名函数可以直接被调用，也可以赋值给变量、作为参数或返回值。比如：</li>
+</ul>
+
+<pre><code class="language-go">func main(){
+    func(s string){     //直接被调用
+        println(s)
+    }(&quot;hello gopher!!!&quot;)
+    /*
+    func(s string){     //未被调用
+        println(s)
+    }
+    */
+}
+
+func main(){
+    hi := func(s string){   //赋值给变量
+        println(s)
+    }                                                                                                                                                 
+    hi(&quot;hello gopher!!!&quot;)
+}
+
+func test(f func(string)){
+    f(&quot;hello gopher!!!&quot;)
+}
+func main(){
+    hi := func(s string){
+        println(s)
+    }
+    test(hi)     //作为参数                                                                                                                                     
+}
+
+func test()func(string){
+    hi := func(s string){   //作为返回值
+        println(s)
+    }
+    return hi
+}
+
+func main(){
+    f := test()                                                                                                                                       
+    f(&quot;hello gopher!!!&quot;)
+}
+</code></pre>
+
+<p>普通函数和匿名函数都可以作为结构体的字段，比如：</p>
+
+<pre><code class="language-go">{
+    type calc struct{
+        mul func(x,y int)int
+    }
+    x := calc{
+        mul: func(x,y int)int{                                                                                                                        
+            return (x*y)
+        },
+    }
+    println(x.mul(2,3))
+}
+</code></pre>
+
+<p>也可以经通道传递，比如：</p>
+
+<pre><code class="language-go">{
+    c := make(chan func(int, int)int, 2)
+    c &lt;- func(x,y int) int {return x + y}
+    println((&lt;-c)(2,3))
+}
+</code></pre>
+
+<ul>
+<li>闭包(closure)
+是指在上下文中引用了自由变量(未绑定到特定对象)的代码块(函数)，或者说是代码块(函数)与和引用环境的组合体。</li>
+</ul>
+
+<pre><code class="language-go">func intSeq()func()int{
+    i := 0
+    println(&amp;i)
+    return func()int{
+        i += 1
+        println(&amp;i,i)
+        return i
+    }   
+}
+                                                                                                                                                      
+func main(){
+    nextInt := intSeq()
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+
+    newInt := intSeq()
+    fmt.Println(newInt())
+}
+输出：
+0xc42000a320
+0xc42000a320 1
+1
+0xc42000a320 2
+2
+0xc42000a320 3
+3
+0xc42007a010
+0xc42007a010 1
+1
+</code></pre>
+
+<p>当nextInt函数返回后，通过输出指针，我们可以看出函数在main运行时，依然引用的是原环境变量指针，这种现象称作闭包。
+所以说，闭包是函数和引用环境变量的组合体。正因为闭包是通过指针引用环境变量，那么就会导致该变量的生命周期
+变长，甚至被分配到堆内存。如果多个匿名函数引用同一个环境变量，会让事情变得更加复杂，比如：</p>
+
+<pre><code class="language-go">func test()[]func(){
+    var s []func()
+    for i:= 0;i &lt; 3;i++{
+        s =  append(s, func(){
+            println(&amp;i , i)
+        })
+    }
+    return s
+}
+func main(){
+    funcSlice := test()
+    for _ , f := range funcSlice{
+        f()
+    }
+}
+输出：
+0xc42000a320 3
+0xc42000a320 3
+0xc42000a320 3
+</code></pre>
+
+<p>解决方法就是每次用不同的环境变量或参数赋值，比如修改后的test函数：</p>
+
+<pre><code class="language-go">func test()[]func(){
+    var s []func()
+    for i:= 0;i &lt; 3;i++{
+        x := i
+        s =  append(s, func(){
+            println(&amp;x , x)                                                                                                                           
+        })
+    }
+    return s
+}
+</code></pre>
+
+<p>闭包在不用传递参数的情况下就可以读取和修改环境变量，当然我们是要为这种遍历付出代价的，所以日常开发中，在高并发服务
+的场景下建议慎用，除非你明确你的需求必须这样做。</p>
+
+<ul>
+<li>延迟调用
+Go语言提供defer关键字，用于延迟调用，延迟到当函数返回前被执行，多用于资源释放、解锁以及错误处理等操作。</li>
+</ul>
+
+<pre><code class="language-go">func main() {
+    f, err := createFile(&quot;defer.txt&quot;)
+    if err != nil {
+        fmt.Println(err.Error())
+        return
+    }   
+    defer closeFile(f)
+    writeFile(f)
+}
+
+func createFile(filePath string) (*os.File, error) {
+    f, err := os.Create(filePath)
+    if err != nil {
+        return nil, err 
+    }   
+    return f, nil 
+}
+
+func writeFile(f *os.File) {
+    fmt.Println(&quot;write file&quot;)
+    fmt.Fprintln(f, &quot;hello gopher!&quot;)
+}
+
+func closeFile(f *os.File) {
+    fmt.Println(&quot;close file&quot;)
+    f.Close()
+}
+</code></pre>
+
+<p>如果一个函数内引用了多个defer，它们的执行顺序是怎么样的呢？</p>
+
+<pre><code class="language-go">package main
+
+func main() {
+	defer println(&quot;a&quot;)
+	defer println(&quot;b&quot;)
+}
+输出：
+b
+a
+</code></pre>
+
+<p>如果函数中引入了panic函数，那么延迟调用defer会不会被执行呢？</p>
+
+<pre><code class="language-go">func main() {
+    defer println(&quot;a&quot;)
+    panic(&quot;d&quot;)                                                                                                                                        
+    defer println(&quot;b&quot;)
+}
+</code></pre>
+
+<p>日常开发中，一定要记住defer是在函数结束时才被调用的，如果应用不合理，可能会造成资源浪费，给gc带来压力，甚至
+造成逻辑错误，比如：</p>
+
+<pre><code class="language-go">func main() {
+    for i := 0;i &lt; 10000;i++{
+        filePath := fmt.Sprintf(&quot;/data/log/%d.log&quot;, i)
+        fp, err := os.Open(filePath)
+        if err != nil{
+            continue
+        }
+        defef fp.Close()    //这是要在main函数返回时才会执行的，不是在循环结束后执行，延迟调用，导致占用资源
+        //do stuff...
+    }
+}
+
+修改方案是直接调用Close函数或将逻辑封装成独立函数：
+func logAnalisys(p string){
+    fp, err := os.Open(p)
+    if err != nil{
+        continue
+    }
+    defef fp.Close()
+    //do stuff
+}
+
+func main() {
+    for i := 0;i &lt; 10000;i++{
+        filePath := fmt.Sprintf(&quot;/data/log/%d.log&quot;, i)
+        logAnalisys(filePath)
+    }
+}
+</code></pre>
+
+<p>在性能方面，延迟调用花费的代价也很大，因为这个过程包括注册、调用等操作，还有额外的内存开销。比如：</p>
+
+<pre><code>package main
+
+import &quot;testing&quot;
+import &quot;fmt&quot;
+import &quot;sync&quot;
+
+var m sync.Mutex
+
+func test(){
+	m.Lock()
+	m.Unlock()
+}
+
+func testCap(){
+	m.Lock()
+	defer m.Unlock()
+}
+
+func BenchmarkTest(t *testing.B){
+	for i:= 0;i &lt; t.N; i++{
+		test()
+	}
+}
+
+func BenchmarkTestCap(t *testing.B){
+	for i:= 0;i &lt; t.N; i++{
+		testCap()
+	}
+}
+
+func main(){
+	resTest := testing.Benchmark(BenchmarkTest)
+	fmt.Printf(&quot;BenchmarkTest \t %d, %d ns/op,%d allocs/op, %d B/op\n&quot;, resTest.N, resTest.NsPerOp(), resTest.AllocsPerOp(), resTest.AllocedBytesPerOp())
+	resTest = testing.Benchmark(BenchmarkTestCap)
+	fmt.Printf(&quot;BenchmarkTestCap \t %d, %d ns/op,%d allocs/op, %d B/op\n&quot;, resTest.N, resTest.NsPerOp(), resTest.AllocsPerOp(), resTest.AllocedBytesPerOp())
+}
+输出：
+BenchmarkTest 	 50000000, 27 ns/op,0 allocs/op, 0 B/op
+estCap 	 20000000, 112 ns/op,0 allocs/op, 0 B/op
+</code></pre>
+
+<p>在要求高性能的高并发场景下，应避免使用延迟调用。
+- 错误处理
+Go语言标准库将将error定义为接口类型，以便实现自定义错误类型。比如：</p>
+
+<pre><code class="language-go">type error interface{
+    Error() string
+}
+</code></pre>
+
+<p>按照Go语言编程习惯，error总是最后一个函数返回值，并且标准库提供了创建函数，可以方便的
+创建错误消息的error对象。比如：</p>
+
+<pre><code class="language-go">func divTest(x ,y int)(int, error){
+    if y == 0{
+        return 0, errors.New(&quot;division by zero&quot;)
+    }   
+    return x/y,nil
+}
+func main(){
+    v, err := divTest(3,0)
+    if err != nil{
+        log.Fatalln(err.Error())
+    }   
+    println(v)                                                                                                                                        
+}
+</code></pre>
+
+<p>日常开发中，我们需要根据需求自定义错误类型，可以存放更多的上下文信息，或者跟觉错误类型做出相应的错误处理。比如：</p>
+
+<pre><code class="language-go">type NegativeError struct{
+    x, y int
+}
+func (NegativeError)Error()string{
+    return &quot;negative value error&quot;
+}
+
+type MolError struct {
+    x, y int
+}
+func (MolError)Error()string{
+    return &quot;devision by zero&quot;
+}
+
+func molTest(x ,y int)(int, error){
+    if y == 0{
+        return 0, MolError{x,y}
+    }
+    if x &lt; 0 || y &lt; 0{
+        return 0, NegativeError{x,y}
+    }
+    return x%y,nil
+}
+func main(){
+    v, err := molTest(3,-1)
+    if err != nil{
+        switch e := err.(type){     //获取错误类型
+            case MolError:
+                println(e.x,e.y)
+            case NegativeError:
+                println(e.x,e.y)
+            default:
+                println(e)
+        }
+        log.Fatalln(err.Error())
+    }
+    println(v)
+}
+</code></pre>
+
+<p>与error相比，panic/recover在应用上更类似于try/catch结构化。</p>
+
+<pre><code class="language-go">func panic() interface{}   
+func recover() interface{}
+</code></pre>
+
+<p>panic 立即中断但前函数处理流程，执行延迟调用。recover在延迟调用中可以捕获并返回panic产生的错误对象，比如：</p>
+
+<pre><code class="language-go">func Myrecover(){
+    if err := recover(); err != nil{
+        log.Fatalln(err)
+    }   
+}
+
+func main(){
+    println(&quot;start...&quot;)
+    defer Myrecover()
+    panic(&quot;dead&quot;)                                                                                                                                     
+    println(&quot;end...&quot;)
+}
+</code></pre>
+
+<p>如果有连续多次调用panic的场景，只有最后一次panic会被recover捕获处理，比如：</p>
+
+<pre><code class="language-go">func Myrecover(){
+    if err := recover(); err != nil{
+        log.Fatalln(err)
+    }   
+}
+
+func main(){
+    defer Myrecover()
+    defer func(){
+        panic(&quot;a bad problem&quot;)
+    }()
+    panic(&quot;a problem&quot;)
+}
+</code></pre>
+
+<p>recover只有在延迟调用函数中才能得到正常工作，比如：</p>
+
+<pre><code class="language-go">func main() {
+    defer Myrecover()
+    defer log.Println(recover())
+    defer println(recover())
+    panic(&quot;a problem&quot;) 
+}
+输出：
+(0x0,0x0)
+2016/11/12 07:07:54 &lt;nil&gt;
+2016/11/12 07:07:54 a problem
+exit status 1
+</code></pre>
+
+<p>在日常开发过程中，经常需要进行调试，可以使用函数输出完整的调用栈信息，比如：</p>
+
+<pre><code class="language-go">func Myrecover(){
+    if err := recover(); err != nil{
+        fmt.Println(err)
+        debug.PrintStack()
+        //log.Fatalln(err)
+    }
+}
+func main(){
+    defer Myrecover()
+    panic(&quot;a problem&quot;)
+}
+输出：
+a problem
+goroutine 1 [running]:
+runtime/debug.Stack(0xc42002c010, 0xc42003fe20, 0x1)
+	/root/data/go/src/runtime/debug/stack.go:24 +0x79
+runtime/debug.PrintStack()
+	/root/data/go/src/runtime/debug/stack.go:16 +0x22
+main.Myrecover()
+	/root/data/gopath/test/panic.go:10 +0x85
+panic(0x48a5e0, 0xc42000a320)
+	/root/data/go/src/runtime/panic.go:458 +0x243
+main.main()
+	/root/data/gopath/test/panic.go:16 +0x8d
+</code></pre>
+
+<p>日常开发中，只有在系统发生了不可恢复性或无法正常工作的错误可以使用panic，比如端口号被占用、数据库未启动、文件系统错误等，否则不建议使用。</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/goroutine/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/flow/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

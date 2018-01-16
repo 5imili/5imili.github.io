@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根据receiver类型自动在基础类型 和指针类型之间转换，比如：  type rect struct { width, height, area int } func (r *rect) pointer() { r.width &#43;= 2 r.area = r.width * r.height } func (r rect) value() { r.width &#43;= 4 r.area = r.width * r.height } func main() { r := rect{width: 10, height: 5} r.value() fmt.Println(r) r.pointer() fmt.Println(r) /* r := &amp;rect{width: 10, height: 5} r.">
+  <meta property="og:description" content="方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根据receiver类型自动在基础类型 和指针类型之间转换，比如：  type rect struct { width, height, area int } func (r *rect) pointer() { r.width &#43;= 2 r.area = r.width * r.height } func (r rect) value() { r.width &#43;= 4 r.area = r.width * r.height } func main() { r := rect{width: 10, height: 5} r.value() fmt.Println(r) r.pointer() fmt.Println(r) /* r := &amp;rect{width: 10, height: 5} r.">
+  <meta name="twitter:description" content="方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根 …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/method/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/method/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="方法">方法</h1>
+
+<pre><code>1. 定义
+2. 匿名字段
+3. 方法集
+4. 表达式
+</code></pre>
+
+<ul>
+<li>定义
+方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据
+receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有
+可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根据receiver类型自动在基础类型
+和指针类型之间转换，比如：</li>
+</ul>
+
+<pre><code class="language-go">type rect struct {
+    width, height, area int
+}
+
+func (r *rect) pointer() {
+    r.width += 2
+    r.area = r.width * r.height
+}
+func (r rect) value() {
+    r.width += 4
+    r.area = r.width * r.height
+}
+
+func main() {
+    r := rect{width: 10, height: 5}
+    r.value()
+    fmt.Println(r)
+    r.pointer()
+    fmt.Println(r)
+/*
+    r := &amp;rect{width: 10, height: 5}
+    r.value()
+    fmt.Println(r)
+    r.pointer()
+    fmt.Println(r)
+*/                                                                                                                                                    
+}
+输出：
+{10 5 0}
+{12 5 60}
+</code></pre>
+
+<p>如果使用指针调用方法时，需要注意不能使用多级指针，且必须使用合法的指针(包括nil)或能取实例地址，比如：</p>
+
+<pre><code class="language-go">type X struct{}                                                                                                                                       
+
+func (x *X)test(){
+    fmt.Println(&quot;hello gopher&quot;)
+}
+
+func main(){
+    var x *X
+    fmt.Println(x)
+    x.test()
+    &amp;X{}.test() //cannot take the address of X literal
+}
+</code></pre>
+
+<p>如何选择方法的receiver类型 ？</p>
+
+<pre><code>- 如果要修改实例状态，用*T
+- 如果不需要修改实例状态的小对象或固定值，建议用T
+- 如果是大对象，建议用*T，可以减少复制成本
+- 引用类型、字符串、函数等指针包装对象，用T
+- 如果对象实例中包含Mutex等同步字段，用*T, 以免因复制造成锁无效
+- 无法确定需求的情况，都用*T
+</code></pre>
+
+<ul>
+<li>匿名字段
+可以像访问匿名字段成员那样调用其方法，由编译器负责查找，比如：</li>
+</ul>
+
+<pre><code class="language-go">type person  struct{}
+
+type Man struct{
+    person
+}
+func (p person)toWork()string{
+    return &quot;Tom&quot;
+}
+func main(){
+    var m Man 
+    fmt.Println(m.toWork())                                                                                                              
+}
+输出：
+Tom
+</code></pre>
+
+<p>如果Man结构体也有个同名的toWork方法，此时调用逻辑如下，比如:</p>
+
+<pre><code class="language-go">type person  struct{}
+
+type Man struct{
+    person
+}
+
+func (p person)toWork()string{
+    return &quot;Tom to work&quot;
+}
+
+func (m Man)toWork()string {
+    return &quot;me to work&quot;
+}
+func main(){
+    var m Man
+    fmt.Println(m.toWork())         //me to work
+    fmt.Println(m.person.toWork())  //Tom to work                                                                                                      
+}
+</code></pre>
+
+<ul>
+<li>方法集
+Go规范中提到了一个与类型相关的方法集(method set)，这决定了它是否实现了某个接口。</li>
+</ul>
+
+<pre><code>- 类型T方法集包含所有receiver T方法
+- 类型*T方法集包含所有receiver T + *T的方法
+- 匿名嵌入S，T方法集包含所有receiver S方法
+- 匿名嵌入*S,T方法集包含所有receiver S + receiver *S方法
+- 匿名嵌入\*S或匿名嵌入S，*T方法集包含所有receiver S + receiver *S方法
+</code></pre>
+
+<pre><code class="language-go">type S struct{}
+
+type T struct{
+    S   
+}
+
+func (S) SVal()  {}  
+func (*S) SPtr() {}
+func (T) TVal()  {}  
+func (*T) TPtr() {}
+
+func methodSet(a interface{}) {
+    t := reflect.TypeOf(a)
+    for i, n := 0, t.NumMethod(); i &lt; n; i++ {
+        m := t.Method(i)
+        fmt.Println(m.Name, m.Type)
+    }   
+}
+                                                                                                                                                      
+func main() {
+    var t T 
+    methodSet(t)
+    println(&quot;--------------&quot;)
+    methodSet(&amp;t)
+}
+输出：
+SVal func(main.T)
+TVal func(main.T)
+--------------
+SPtr func(*main.T)
+SVal func(*main.T)
+TPtr func(*main.T)
+TVal func(*main.T)
+</code></pre>
+
+<p>很显然， 匿名字段就是为扩展方法集准备的。否则没有必要少写个字段而大费周章。这种组合没有父子依赖关系，
+整体与局部松耦合，可以任意增加来实现扩展。各单元互无关联，实现与维护更加简单。</p>
+
+<ul>
+<li>方法表达式
+方法是一种特殊的函数，除了可以直接调用之外，还可以进行赋值或当作参数传递，下面是Go语言的方法定义格式，比如：</li>
+</ul>
+
+<pre><code class="language-go">func (p mytype) funcname(q type) (r,s type) { return 0,0}
+</code></pre>
+
+<p>本质上这就是一种语法糖，方法调用如下：</p>
+
+<pre><code class="language-go">instance.method(args) -&gt; (type).func(instance, args)
+</code></pre>
+
+<p>instance 就是Reciever，左边的称为Method Value;右边则是Method Expression，Go推荐使用左边形式。
+Method Value是包装后的状态对象，总是与特定的对象实例关联在一起(类似闭包)，
+而Method Expression会被还原成普通的函数，将Receiver作为第一个显式参数，调用时需额外传递。
+二者本质上没有区别，只是Method Value 看起来更像面向对象的格式,且编译器会自动进行类型转换；
+Method Expression更直观，更底层，编译器不会进行类型转换，会按照实际表达意义去执行，更易于理解。</p>
+
+<ul>
+<li>Method Expression</li>
+</ul>
+
+<pre><code>type Person struct {
+    Age int 
+    Name string
+}
+
+func (p Person) GetAge() int{
+    return  p.Age
+}
+
+func (p *Person) SetAge(i int){
+    p.Age =  i
+}
+
+func main(){
+    p := Person{20, &quot;Tom&quot;}
+    setAge := (*Person).SetAge   //(\*Person)必须用括号，整体相当于func(p *Person)                                                                                                
+    setAge(&amp;p,50)                  //编译器不会进行类型转换
+    getAge := Person.GetAge
+    fmt.Println(getAge(p))
+}
+输出：
+50
+</code></pre>
+
+<ul>
+<li>Method Value</li>
+</ul>
+
+<pre><code class="language-go">func main(){
+    p := Person{20, &quot;Tom&quot;}
+    setAge := p.SetAge      //编译器会自动进行类型转换
+    setAge(50)                                                                                                                                        
+    getAge := p.GetAge
+    fmt.Println(getAge())
+}
+</code></pre>
+
+<p>只要receiver参数类型正确，使用nil同样可以执行，比如：</p>
+
+<pre><code class="language-go">type N int 
+
+func (n N) value(){
+    println(n)
+}
+func (n *N) pointer(){
+    println(n)
+}
+
+func main(){
+    var n *N
+    n.pointer()
+    (*N)(nil).pointer()
+    (*N).pointer(nil)                                                                                                                                 
+}
+</code></pre>
+
+<p>这样写程序并没有什么意义，只是希望你能理解并安全使用Method Value和Method Expression</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/package/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/interface/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

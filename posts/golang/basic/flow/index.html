@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="流程控制 Go语言的流程控制主要分为三大类：
+1. 条件判断 2. 循环控制 3. 无条件跳转  条件判断 Go语言的条件判断由if &hellip; else if &hellip; else 语句实现，条件表达式值必须是布尔类型，可省略圆括号，但是花括号不能省略且左花括号不能另起一行，比如：
+if 7%2 == 0 { fmt.Println(&quot;7 is even&quot;) } else { fmt.Println(&quot;7 is odd&quot;) } if 8%4 == 0 { //可以没有else只有if语句 fmt.Println(&quot;8 is divisible by 4&quot;) }  Go语言比较特别的是在条件判读语句中支持初始化语句,允许定义局部变量，但是这个变量的作用域仅限于该条件逻辑块内，比如：
+if num := 9; num &lt; 0 { fmt.Println(num, &quot;is negative&quot;) } else if num &lt; 10 { fmt.Println(num, &quot;has 1 digit&quot;) } else { fmt.">
+  <meta property="og:description" content="流程控制 Go语言的流程控制主要分为三大类：
+1. 条件判断 2. 循环控制 3. 无条件跳转  条件判断 Go语言的条件判断由if &hellip; else if &hellip; else 语句实现，条件表达式值必须是布尔类型，可省略圆括号，但是花括号不能省略且左花括号不能另起一行，比如：
+if 7%2 == 0 { fmt.Println(&quot;7 is even&quot;) } else { fmt.Println(&quot;7 is odd&quot;) } if 8%4 == 0 { //可以没有else只有if语句 fmt.Println(&quot;8 is divisible by 4&quot;) }  Go语言比较特别的是在条件判读语句中支持初始化语句,允许定义局部变量，但是这个变量的作用域仅限于该条件逻辑块内，比如：
+if num := 9; num &lt; 0 { fmt.Println(num, &quot;is negative&quot;) } else if num &lt; 10 { fmt.Println(num, &quot;has 1 digit&quot;) } else { fmt.">
+  <meta name="twitter:description" content="流程控制 Go语言的流程控制主要分为三大类：
+1. 条件判断 2. 循环控制 3. 无条件跳转  条件判断 Go语言的条件判断由if &hellip; else if &hellip; else 语句实现，条件表达式值必须是布尔类型，可省略圆括号，但是花括号不能省略且左花括号不能另起一行，比如：
+if 7%2 == 0 { fmt.Println(&quot;7 is even&quot;) } …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/flow/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/flow/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="流程控制">流程控制</h1>
+
+<p>Go语言的流程控制主要分为三大类：</p>
+
+<pre><code class="language-text">1. 条件判断
+2. 循环控制
+3. 无条件跳转
+</code></pre>
+
+<h4 id="条件判断">条件判断</h4>
+
+<p>Go语言的条件判断由if &hellip; else if &hellip; else 语句实现，条件表达式值必须是布尔类型，可省略圆括号，但是花括号不能省略且左花括号不能另起一行，比如：</p>
+
+<pre><code class="language-go">    if 7%2 == 0 {
+        fmt.Println(&quot;7 is even&quot;)
+    } else {
+        fmt.Println(&quot;7 is odd&quot;)
+    }
+
+    if 8%4 == 0 {   //可以没有else只有if语句
+        fmt.Println(&quot;8 is divisible by 4&quot;)
+    }
+</code></pre>
+
+<p>Go语言比较特别的是在条件判读语句中支持初始化语句,允许定义局部变量，但是这个变量的作用域仅限于该条件逻辑块内，比如：</p>
+
+<pre><code class="language-go">    if num := 9; num &lt; 0 {
+        fmt.Println(num, &quot;is negative&quot;)
+    } else if num &lt; 10 {
+        fmt.Println(num, &quot;has 1 digit&quot;)
+    } else {
+        fmt.Println(num, &quot;has multiple digits&quot;)
+    }
+</code></pre>
+
+<p>最典型的应用就是字典的查找：</p>
+
+<pre><code class="language-go">    if v, ok := map1[key1]; ok{
+        ...
+    }
+</code></pre>
+
+<p>优化建议：
+&gt; 1. 对于那些过于复杂的组合条件判断，建议独立出来封装成函数，将流程控制和实现细节分离，使你的代码更加模块化，提高可读性。
+&gt; 2. 有些时需要写很多的if-else实现一些复杂的逻辑处理，这时代码看上去就很罗嗦很冗长，而且也不易于以后的维护，用switch&hellip;case来很好的解决这个问题。</p>
+
+<ul>
+<li>switch&hellip;case</li>
+</ul>
+
+<p>switch与if类似，也用于选择执行，执行的过程从上至下顺序匹配各个case，基本用法如下：</p>
+
+<pre><code class="language-go">switch sExpr {
+    case expr1:
+        some instructions
+    case expr2:
+        some other instructions
+    case expr3:
+        some other instructions
+    default:
+        other code
+}
+</code></pre>
+
+<p>switch中的表达式可以不是常量或字符串，甚至可以沒有表达式，若没有表达式则匹配true, 如同if-else if-else,与
+其它编程语言的switch用法基本相同，不同的是在每个case中隐藏了break,不过也可以显示加入break。
+当case匹配成功后，处理当前case的处理逻辑，正常情况下，处理完成后就跳出整个switch，但这不是绝对的，
+可以使用fallthrough强迫程序执行后面的case; 如果没有任何case匹配成功，则执行default逻辑，比如:</p>
+
+<pre><code class="language-go">{
+    i := 2
+    switch i {              //将i 与case条件匹配
+    case 1:
+        fmt.Println(&quot;one&quot;)
+        //break             //没有实际意义
+    case 2:
+        fmt.Println(&quot;two&quot;)  //直接跳出switch
+    case 3:
+        fmt.Println(&quot;three&quot;)
+    }
+}                           
+
+{
+    switch time.Now().Weekday() {
+    case time.Saturday, time.Sunday: //在同一个case中可以写多个表达式，它们之间是逻辑或的关系
+        fmt.Println(&quot;it's the weekend&quot;)
+    default:
+        fmt.Println(&quot;it's a weekday&quot;)
+    }
+}                           
+
+{
+    t := time.Now()
+    switch {            //没有表达式，相当于if-else
+    case t.Hour() &lt; 12:
+        fmt.Println(&quot;it's before noon&quot;)
+    default:
+        fmt.Println(&quot;it's after noon&quot;)
+    }
+}
+{
+    i := 2
+    switch i {
+    case 1:
+        fmt.Println(&quot;one&quot;)
+    case 2:
+        fmt.Println(&quot;two&quot;)                                                                                                                                                                                         
+        fallthrough             //使用fallthrough强迫程序执行后面的case
+    case 3:
+        fmt.Println(&quot;three&quot;)
+    }
+}
+</code></pre>
+
+<h4 id="循环控制">循环控制</h4>
+
+<p>for是Go语言中仅有的一种循环语句，下面是常见的三种用法：</p>
+
+<pre><code class="language-go">    for j := 7; j &lt;= 9; j++ { //典型的用法 initial/condition/after
+        fmt.Println(j)
+    }
+
+    i := 1
+    for i &lt;= 3 {            //类似while(i &lt;= 3){} 或for ; i&lt;=3 ;;{}
+        fmt.Println(i)
+        i = i + 1
+    }
+
+    for {                   //类似while(true){} 或for true {}
+        fmt.Println(&quot;loop&quot;)
+        break
+    }
+</code></pre>
+
+<p>初始化语句只会被执行一次，并且初始化表达式支持函数调用或定义局部变量;</p>
+
+<p>在日常开发中for经常与range搭配，for&hellip;range被用来遍历字符串、数组、切片、字典和通道等，返回索引和键值数据，比如:</p>
+
+<pre><code class="language-go">{
+    for i, c := range &quot;go&quot; {            //range string
+        fmt.Println(i, c)
+    }
+
+    nums := []int{2, 3, 4}
+    for i, num := range nums {          //range array/slice
+        fmt.Println(i, &quot;:&quot;, num)
+    }
+
+    kvs := map[string]string{&quot;a&quot;: &quot;apple&quot;, &quot;b&quot;: &quot;banana&quot;}
+    for k, v := range kvs {         //range map
+        fmt.Printf(&quot;%s -&gt; %s\n&quot;, k, v)
+    }
+    
+    chs := make(chan int,10)    //range channel
+    chs &lt;- 1
+    chs &lt;- 2
+    close(chs)                                                                                                                                                                                                     
+    for v := range chs {
+        fmt.Println(v)
+    }
+}
+</code></pre>
+
+<p>归纳如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">data type</th>
+<th align="center">first value</th>
+<th align="center">second value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">string</td>
+<td align="center">index</td>
+<td align="center">s[index]</td>
+</tr>
+
+<tr>
+<td align="center">array/slice</td>
+<td align="center">index</td>
+<td align="center">v[index]</td>
+</tr>
+
+<tr>
+<td align="center">map</td>
+<td align="center">key</td>
+<td align="center">value</td>
+</tr>
+
+<tr>
+<td align="center">channel</td>
+<td align="center">element</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="无条件跳转">无条件跳转</h4>
+
+<p>Go语言有三种跳转类型，分别是 continue, break, goto</p>
+
+<pre><code class="language-text">continue：仅用于for循环内部 ，终止本次循环，立即进入下一轮循环
+break：用于for循环, switch,select语句，终止整个语句块的执行
+goto：定点跳转，但不能跳转到其他函数或内层代码块内
+</code></pre>
+
+<p>看下面的例子：</p>
+
+<pre><code class="language-go">func over(){
+    over:   //label over defined and not used
+    println(&quot;call over&quot;)
+}
+
+func main(){
+    rand.Seed(time.Now().UnixNano())
+
+    for {
+        loop:
+        x := rand.Intn(100)     //获取一个100以内的随机数
+        if x % 2 == 0{
+            continue        //终止本次循环，立即进入下一轮循环
+        }
+        if x &gt; 50{
+            break           //终止整个语句块的执行
+        }
+        println(x)
+    }
+    goto over       //label over not defined
+    goto loop       //goto loop jumps into block starting
+}
+</code></pre>
+
+<p>goto 的习惯用法</p>
+
+<pre><code class="language-go">{
+    f, err := os.Open(&quot;/tmp/dat&quot;)
+    if err != nil{
+        ....
+        goto exit
+    }
+    ...
+    n1, err := f.Read(b1)
+    if err != nil{
+        goto end
+    }
+    ...
+                                                                                                                                                                                                                   
+end:
+    println(&quot;clear resource and exit&quot;)
+    f.close()
+exit:
+    return
+}
+</code></pre>
+
+<p>完善上面的代码，验证和扩展所有功能</p>
+
+<p>下一节 函数</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/func/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/express/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
+string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字节数组的开始，但是没有NULL或&rsquo;\0&rsquo;结尾标志。 表示方式很简单，用双引号(&ldquo;&rdquo;)或者反引号(``)，它们的区别是：
+ 双引号之间的转义符会被转义，而反引号之间的转义符保持不变 反引号支持跨行编写，而双引号则不可以   { println(&quot;hello\tgo&quot;) //输出hello	go println(`hello\tgo`) //输出hello\tgo } { println( &quot;hello go&quot; ) //syntax error: unexpected semicolon or newline, expecting comma or ) println(`hello go`) } 输出： hello go  在前面类型的章节中描述过字符串的默认值是&rdquo;&ldquo;，而不是nil,比如：
+var s string println( s == &quot;&quot; ) //true println( s == nil ) //invalid operation: s == nil (mismatched types string and nil)  Go字符串支持 &ldquo;&#43; , &#43;= , == , !">
+  <meta property="og:description" content="数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
+string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字节数组的开始，但是没有NULL或&rsquo;\0&rsquo;结尾标志。 表示方式很简单，用双引号(&ldquo;&rdquo;)或者反引号(``)，它们的区别是：
+ 双引号之间的转义符会被转义，而反引号之间的转义符保持不变 反引号支持跨行编写，而双引号则不可以   { println(&quot;hello\tgo&quot;) //输出hello	go println(`hello\tgo`) //输出hello\tgo } { println( &quot;hello go&quot; ) //syntax error: unexpected semicolon or newline, expecting comma or ) println(`hello go`) } 输出： hello go  在前面类型的章节中描述过字符串的默认值是&rdquo;&ldquo;，而不是nil,比如：
+var s string println( s == &quot;&quot; ) //true println( s == nil ) //invalid operation: s == nil (mismatched types string and nil)  Go字符串支持 &ldquo;&#43; , &#43;= , == , !">
+  <meta name="twitter:description" content="数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
+string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字 …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/data/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/data/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="数据">数据</h1>
+
+<pre><code>1. 字符串
+2. 数组
+3. 切片
+4. 字典
+5. 结构
+</code></pre>
+
+<h4 id="字符串">字符串</h4>
+
+<p>Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：</p>
+
+<pre><code class="language-go">string.go 
+type stringStruct struct {
+	str unsafe.Pointer
+	len int
+}
+</code></pre>
+
+<blockquote>
+<p>字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字节数组的开始，但是没有NULL或&rsquo;\0&rsquo;结尾标志。
+表示方式很简单，用双引号(&ldquo;&rdquo;)或者反引号(``)，它们的区别是：</p>
+
+<ol>
+<li>双引号之间的转义符会被转义，而反引号之间的转义符保持不变</li>
+<li>反引号支持跨行编写，而双引号则不可以</li>
+</ol>
+</blockquote>
+
+<pre><code class="language-go">{
+    println(&quot;hello\tgo&quot;)    //输出hello	go
+    println(`hello\tgo`)    //输出hello\tgo
+}
+
+{
+    println( &quot;hello 
+        go&quot; )                   //syntax error: unexpected semicolon or newline, expecting comma or )
+
+    println(`hello                                                                                                                                                                                                 
+        go`)
+}
+输出：
+hello 
+	go
+</code></pre>
+
+<p>在前面类型的章节中描述过字符串的默认值是&rdquo;&ldquo;，而不是nil,比如：</p>
+
+<pre><code class="language-go">var s string
+println( s == &quot;&quot; )  //true
+println( s == nil ) //invalid operation: s == nil (mismatched types string and nil)
+</code></pre>
+
+<p>Go字符串支持 &ldquo;+ , += , == , != , &lt; , &gt;&rdquo; 六种运算符</p>
+
+<p>Go字符串允许用索引号访问字节数组(非字符)，但不能获取元素的地址：比如</p>
+
+<pre><code class="language-go">{
+    var a = &quot;hello&quot;
+    println(a[0])       //输出 104
+    println(&amp;a[1])      //cannot take the address of a[1]
+}
+</code></pre>
+
+<p>Go字符串允许用切片的语法返回子串(起始和结束索引号)</p>
+
+<pre><code class="language-go">    var a = &quot;0123456&quot;                                                                                                                                                                                              
+    println(a[:3])      //0,1,2
+    println(a[1:3])     //1,2
+    println(a[3:])      //3,4,5,6
+</code></pre>
+
+<p>日常开发中，经常会有遍历字符串的场景，比如：</p>
+
+<pre><code>{
+    var a = &quot;Go语言&quot;
+    for i:=0;i &lt; len(a);i++{                //以byte方式按字节遍历
+        fmt.Printf(&quot;%d: [%c]\n&quot;, i, a[i])
+    }
+    for i, v := range a{                    //以rune方式遍历                                                                                               
+        fmt.Printf(&quot;%d: [%c]\n&quot;, i, v)
+    }
+}
+输出：    
+0: [G]
+1: [o]
+2: [è]
+3: [¯]
+4: [­]
+5: [è]
+6: [¨]
+7: []
+0: [G]
+1: [o]
+2: [语]
+5: [言]
+</code></pre>
+
+<p>在Go语言中，字符串的底层使用byte数组存的，并且是不可以改变的，所以byte方式每次得到的只有一个byte，而中文字符是占3个byte的。
+rune采用计算字符串长度的方式与byte方式不同，比如：</p>
+
+<pre><code class="language-go">println(utf8.RuneCountInString(a)) // 结果为  4
+println(len(a)) // 结果为 8
+</code></pre>
+
+<p>所以如果想要获得期待的那种结果的话，需要先将字符串a转换为rune切片，再使用内置的len函数，比如:</p>
+
+<pre><code class="language-go">{
+    r := []rune(a)
+    for i:= 0;i &lt; len(r);i++{
+        fmt.Printf(&quot;%d: [%c]\n&quot;, i, r[i])
+    }
+}
+</code></pre>
+
+<p>所以，在遍历或处理的字符串的情况下，如果其中存在中文，尽量使用rune方式处理。</p>
+
+<ul>
+<li>转换
+前面讲过不能修改原字符串，如果修改的话需要将字符串转换成[]byte或[]rune , 然后在转换回来，比如：</li>
+</ul>
+
+<pre><code class="language-go">{
+    var a = &quot;hello go&quot;                                                                                                       
+    a[1] = 'd'              //cannot assign to a[1]
+}
+{
+    var a = &quot;hello go&quot;
+    bs := []byte(a)
+    ...                                                                                                                                                                                                            
+    s2 := string(bs)
+
+    rs := []rune(a)
+    ...
+    s3 := string(rs)
+}
+</code></pre>
+
+<p>Go语言支持用&rdquo;+&ldquo;运算符进行字符串拼接，但是每次拼接都需要重新分配内存，如果频繁构造一个很长的字符串，
+则性能影响就会很大，比如：</p>
+
+<pre><code class="language-go">func test1()string{
+    var s string
+    for i:= 0;i &lt; 1000 ;i++{
+        s += &quot;a&quot; 
+    }   
+    return s
+}
+
+func Benchmark_test1(b *testing.B){
+    for i:= 0;i &lt; b.N; i++{
+        test1()                                                                                                                                                                                                    
+    }   
+}
+输出：
+# go test str1_b_test.go  -bench=&quot;test1&quot; -benchmem
+Benchmark_test1-2   	    5000	    227539 ns/op	  530338 B/op	     999 allocs/op
+</code></pre>
+
+<p>常用的改进方法是预分配足够的内存空间，然后使用strings.Join函数，
+该函数会统计出所有参数的长度，并一次性完成内存分配操作，改进一下上面的代码：</p>
+
+<pre><code class="language-go">func test()string{
+    s := make([]string,1000)
+    for i:= 0;i &lt; 1000 ;i++{
+        s[i] = &quot;a&quot; 
+    }   
+    return strings.Join(s,&quot;&quot;)
+}
+func Benchmark_test(b *testing.B){
+    for i:= 0;i &lt; b.N; i++{
+        test()
+    }   
+}
+输出：
+# go test -v b_test.go  -bench=&quot;test1&quot; -benchmem
+Benchmark_test1-2   	  200000	     10765 ns/op	    2048 B/op	       2 allocs/op
+</code></pre>
+
+<p>在日常开发中，可以使用fmt.Sprintf函数来格式化和拼接较少的字符串操作，比如：</p>
+
+<pre><code class="language-go">{
+    a := 10010
+    as := fmt.Sprintf(&quot;%d&quot;,a)
+    fmt.Printf(&quot;%T , %v\n&quot;,as,as)
+}
+</code></pre>
+
+<h4 id="数组">数组</h4>
+
+<p>数组是内置(build-in)类型，是一组存放相同类型数据的集合，数组的数据类型是由存储的元素类型和数组的长度共同决定的,
+初始化之后长度是固定无法修改的，数组也支持逻辑判断运算符 ”==“， ”！=“，定义方式如下：</p>
+
+<pre><code class="language-go">{
+    var a [10]int
+    var b [20]int
+    println(a == b)         //invalid operation: a == b (mismatched types [10]int and [20]int)
+}
+</code></pre>
+
+<p>即使元素类型相同，但是长度不同数组，也不属于同一类型。</p>
+
+<p>数组的初始化相对灵活，下标索引值从0开始，支持按索引位置初始化，对于未初始化的数组，编译器将给以默认值。</p>
+
+<pre><code class="language-go">{
+    var a[4] int                //元素初始化为0
+    b := [4] int{0,1}           //未初始化的元素将被初始化为0
+    c := [4] int{0, 2: 3}       //可指定索引位置初始化
+    d := [...]int{0,1,2}        //编译器根据初始化值数量来确定数组的长度
+    e := [...]int{1, 3:3}       //支持索引位置初始化，但数组长度与其无关
+    
+    type user struct{
+        name string
+        age int 
+    }   
+
+    d := [...] user{            //复合数据类型数组可省略元素初始化类型标签
+        {&quot;a&quot;,1},
+        {&quot;b&quot;,2},
+    }
+}
+</code></pre>
+
+<p>定义多维数组时，只有数组的第一维度允许使用 &ldquo;&hellip;&rdquo;</p>
+
+<pre><code class="language-go">    x := [2]int{2,2}
+    a := [2][2]int{{1,2},{2,2}}
+    b := [...][2]int{{2,3},{2,2},{3,3}}
+    c := [...][2][2]int{{ {2,3},{2,2} },{{3,3},{4,4}} }
+</code></pre>
+
+<p>计算数组长度时，无论使用内置的len还是cap，返回的都是第一维度的长度，比如：</p>
+
+<pre><code class="language-go">    fmt.Println(x, len(x), cap(x))    
+    fmt.Println(a, len(a), cap(x))
+    fmt.Println(b, len(b), cap(x))
+    fmt.Println(c, len(c), cap(x))
+输出：
+[2 2] 2 2
+[[1 2] [2 2]] 2 2
+[[2 3] [2 2] [3 3]] 3 2
+[[[2 3] [2 2]] [[3 3] [4 4]]] 2 2
+</code></pre>
+
+<ul>
+<li>数组指针&amp;指针数组</li>
+</ul>
+
+<p>数组除了可以存放具体类型的数据，也可以存放指针，比如：</p>
+
+<pre><code class="language-go">{ 
+    x, y := 10, 20
+    a := [...]*int{&amp;x, &amp;y}      //指针数组 
+    p := &amp;a                     //数组的指针
+}
+</code></pre>
+
+<ul>
+<li>数组复制</li>
+</ul>
+
+<p>Go语言数组是值(非引用)类型，所以在赋值和参数传递过程中都会复制整个数组数据，比如:</p>
+
+<pre><code class="language-go">func test(x [2]int){
+    fmt.Printf(&quot;x:= %p,%v\n&quot;, &amp;x, x)
+}
+
+func main(){ 
+    a := [2] int{1, 2}
+    test(a)                     //传参过程中完全复制
+    var b [2]int
+    b = a                       //赋值过程中完全复制
+    fmt.Printf(&quot;a:= %p,%v\n&quot;, &amp;a, a)
+    fmt.Printf(&quot;b:= %p,%v\n&quot;, &amp;b, b)                                                                                                                                                                               
+}
+输出：
+x:= 0xc42000a330,[1 2]
+a:= 0xc42000a320,[1 2]
+b:= 0xc42000a370,[1 2]
+</code></pre>
+
+<h4 id="切片-slice">切片(slice)</h4>
+
+<p>在日常开发中，更多的场景是是需要一个可以动态更新长度的数据存储结构，切片本身并非是动态数组或数组指针，
+ 他内部通过指针引用底层数组，并设定相关属性将数据读写操作限定在指定区域内。</p>
+
+<pre><code class="language-go">/runtime/slice.go
+
+type slice struct {
+	array unsafe.Pointer
+	len   int
+	cap   int
+}
+</code></pre>
+
+<ul>
+<li>切片初始化</li>
+</ul>
+
+<p>切片有两种基本初始化方式：
+&gt; 切片可以通过内置的make函数来初始化，初始化时len=cap，一般使用时省略cap参数，默认和len参数相同，在追加元素时，如果容量cap不足时，将按len的2倍动态扩容。
+&gt; 通过数组来初始化切片，以开始和结束索引位置来确定最终所引用的数组片段</p>
+
+<pre><code class="language-go">//make([]T, len, cap) //T是切片的数据的类型，len表示切片的长度，cap表示capacity
+{
+    s := make([]int,5)      //len: 5  cap: 5
+    s := make([]int,5,10)    //len: 5  cap: 10
+    s := []int{1,2,3}
+}                           
+
+{
+    arr := [...]int{0,1,2,3,4,5,6,7,8,9}
+    s1 := arr[:]
+    s2 := arr[2:5]
+    s3 := arr[2:5:7]
+    s4 := arr[4:]
+    s5 := arr[:4]
+    s6 := arr[:4:6]
+
+    fmt.Println(&quot;s1: &quot;,s1, len(s1),cap(s1))
+    fmt.Println(&quot;s2: &quot;,s2, len(s2),cap(s2))
+    fmt.Println(&quot;s3: &quot;,s3, len(s3),cap(s3))
+    fmt.Println(&quot;s4: &quot;,s4, len(s4),cap(s4))
+    fmt.Println(&quot;s5: &quot;,s5, len(s5),cap(s5))
+    fmt.Println(&quot;s6: &quot;,s6, len(s6),cap(s6))
+}
+输出：
+s1:  [0 1 2 3 4 5 6 7 8 9] 10 10
+s2:  [2 3 4] 3 8
+s3:  [2 3 4] 3 5
+s4:  [4 5 6 7 8 9] 6 6
+s5:  [0 1 2 3] 4 10
+s6:  [0 1 2 3] 4 6
+</code></pre>
+
+<p>cap 表示切片所引用数组片段的真实长度，len表示已经赋过值的最大下标(索引)值加1.</p>
+
+<p>注意下面两种初始化方式的区别：</p>
+
+<pre><code class="language-go">{
+    var a  []int
+    b := []int{}
+    fmt.Println(a==nil,b==nil)
+
+    fmt.Printf(&quot;a: %#v\n&quot;, (*reflect.SliceHeader)(unsafe.Pointer(&amp;a)))
+    fmt.Printf(&quot;b: %#v\n&quot;, (*reflect.SliceHeader)(unsafe.Pointer(&amp;b)))
+    fmt.Printf(&quot;a size %d\n&quot;, unsafe.Sizeof(a))
+    fmt.Printf(&quot;b size %d\n&quot;, unsafe.Sizeof(b))
+}
+输出：
+true false
+a: &amp;reflect.SliceHeader{Data:0x0, Len:0, Cap:0}
+b: &amp;reflect.SliceHeader{Data:0x5168b0, Len:0, Cap:0}
+a size 24
+b size 24
+说明：
+1. 变量b的内部指针被赋值，即使该指针指向了runtime.zerobase，但它依然完成了初始化操作
+2. 变量a表示一个未初始化的切片对象，切片本身依然会分配所需的内存
+</code></pre>
+
+<p>切片之间不支持逻辑运算符，仅能判断是否为nil，比如：</p>
+
+<pre><code class="language-go">{
+    var a  []int
+    b := []int{}
+    fmt.Println(a==b) //invalid operation: a == b (slice can only be compared to nil)
+}
+</code></pre>
+
+<ul>
+<li>reslice</li>
+</ul>
+
+<p>在原slice的基础上进行新建slice，新建的slice依旧指向原底层数组，新创建的slice不能超出原slice
+的容量，但是不受其长度限制，并且如果修改新建slice的值，对所有关联的切片都有影响，比如:</p>
+
+<pre><code class="language-go">{
+    s := []string{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;}
+
+    s1 := s[1:3]        //b,c
+    fmt.Println(s1, len(s1),cap(s1))
+    s1_1 := s1[2:5]        //c,d,e
+    fmt.Println(s1_1, len(s1_1),cap(s1_1))
+}
+输出：
+[b c] 2 6
+[d e f] 3 4
+</code></pre>
+
+<ul>
+<li>append</li>
+</ul>
+
+<p>向切片尾部追加数据，返回新的切片对象; 数据被追加到原底层数组，如果超出cap限制，则为新切片对象重新分配
+数组，新分配的数组cap是原数组cap的2倍，比如：</p>
+
+<pre><code class="language-go">{
+    s := make([]int,0,5)
+    s = append(s , 1)
+    s = append(s , 2,3,4,5)
+    fmt.Printf(&quot;%p, %v, %d\n&quot;, s,s, cap(s))
+                                                                                                                                                                                                                   
+    s = append(s , 6)       //重新分配内存
+    fmt.Printf(&quot;%p, %v, %d\n&quot;, s, s, cap(s))
+}
+输出：
+0xc420010210, [1 2 3 4 5], 5
+0xc4200140a0, [1 2 3 4 5 6], 10
+</code></pre>
+
+<p>如果是向nil切片追加数据，则会高频率的重新分配内存和数据复制，比如:</p>
+
+<pre><code class="language-go">{
+    var s []int
+    fmt.Printf(&quot;%p, %v, %d\n&quot;, s,s, cap(s))
+    for i:= 0; i &lt; 10;i++{
+        s = append(s, i)
+        fmt.Printf(&quot;%p, %v, %d\n&quot;, s, s, cap(s))
+    }
+}
+</code></pre>
+
+<p>所以为了避免程序运行中的频繁的资源开销，在某些场景下建议预留出足够多的空间。</p>
+
+<ul>
+<li>copy</li>
+</ul>
+
+<p>两个slice之间复制数据时，允许指向同一个底层数组，并允许目标区间重叠。最终复制的长度以较短的切片长度(len)
+为准，比如：</p>
+
+<pre><code class="language-go">{
+    s1 := []int{0, 1, 2, 3, 4, 5 ,6}
+    s2 := []int{7, 8 ,9}
+    copy(s1,s2)
+    fmt.Println(s1,len(s1),cap(s1))
+    s1 = []int{0, 1, 2, 3, 4, 5 ,6}
+    s2 = []int{7, 8 ,9}                                                                                                                                                                                            
+    copy(s2,s1)
+    fmt.Println(s2,len(s2),cap(s2))
+}
+</code></pre>
+
+<p>可不可以在同一切片之间复制数据呢？</p>
+
+<p>在日常开发过程中，如果slice长时间引用一个大数组中很小的片段，那么建议新建一个独立的切片，并复制出所需的
+数据，以便原数组内存可以被gc及时释优化回收。</p>
+
+<h4 id="字典-map">字典(map)</h4>
+
+<pre><code>初始化
+基本操作
+遍历
+排序
+</code></pre>
+
+<ul>
+<li>字典初始化
+map的声明格式如下： map[KeyType]ValueType</li>
+</ul>
+
+<p>字典是无序键值对集合，字典要求KeyType必须是支持相等运算符(==,!=)的数据类型，比如数字、字符串、指针、数组、结构体，
+以及对应的接口类型，ValueType可以是任意类型，字典也是引用类型，使用make函数或者初始化表达式语句来创建。</p>
+
+<pre><code class="language-go">{
+    m := make(map[string]int)
+    m[&quot;a&quot;] = 1 
+    m[&quot;b&quot;] = 2 
+
+    m2 := map[int]struct{   //匿名结构体
+        x int 
+    }{  
+        1: {x:100},
+        2: {x:200},
+    }   
+    fmt.Println(m,m2)
+}
+</code></pre>
+
+<p>字典基本操作</p>
+
+<pre><code class="language-go">{
+    m := make(map[string]int)
+    m[&quot;route&quot;] = 66 //添加key
+    i := m[&quot;route&quot;] //读取key
+    j := m[&quot;root&quot;]  //the value type is int, so the zero value is 0
+    n := len(m) //获取长度
+    //n := cap(m)   // ???
+    delete(m, &quot;route&quot;) //删除key
+}
+</code></pre>
+
+<p>访问不存在的键值，不会引发错误，默认返回ValueType的零值，那能否根据零值来判断key的存在呢 ？</p>
+
+<p>在读取map操作时， 可以使用双返回值来正常读取map，比如：</p>
+
+<pre><code class="language-go">{
+    j, ok := m[&quot;root&quot;]
+}
+</code></pre>
+
+<p>ok是个bool类型变量，如果key真实存在，则ok的值为true，反之为false，如果你只是想测试key是否存在而不
+获取值的话，可以使用忽略字符&rdquo;_&ldquo;。</p>
+
+<p>在修改map值操作时，因为受内存访问安全和哈希算法等缘故，字典被设计成&rdquo;not adrressable&rdquo;，因此不能直接修改
+value成员(结构体或数组)。</p>
+
+<pre><code class="language-go">{
+    m := map[int] user {
+        1 : {
+            name:&quot;tom&quot;,
+            age:19},
+    }
+    m[1].age = 1        //cannot assign to struct field m[1].age in map                                                                                                                                                                             
+}
+</code></pre>
+
+<p>有两种改造方式：
+&gt; 一是对整个value进行重新复制
+&gt; 二是声明map时valueType为指针类型</p>
+
+<pre><code class="language-go">{
+    m := map[int] user {
+        1 : {
+            name:&quot;tom&quot;,
+            age:19},
+    }
+    u := m[1]
+    u.age = 1
+    m[1] = u
+}
+{
+    m := map[int] *user {
+        1 : {
+            name:&quot;tom&quot;,
+            age:19},
+    }
+    m[1].age += 1
+}
+</code></pre>
+
+<p>不能对nil字典进行写操作，但是可以读，比如：</p>
+
+<pre><code class="language-go">{
+    var m map[string]int
+    //p := m[&quot;a&quot;]       //ok
+    m[&quot;a&quot;] = 1          //panic: assignment to entry in nil map
+}
+</code></pre>
+
+<p>map遍历</p>
+
+<pre><code class="language-go">{
+//  var m = make(map[string]int)
+    var m = map[string]int{}
+    m[&quot;route&quot;] = 66
+    m[&quot;root&quot;] = 67
+    for key,value := range m{
+        fmt.Println(&quot;Key:&quot;, key, &quot;Value:&quot;, value)
+    }
+}
+</code></pre>
+
+<p>因为map是无序的，如果想按照有序key输出的话，可以先把所有的key取出，然后对key进行排序，再遍历map，比如:</p>
+
+<pre><code class="language-go">{
+    m := make(map[int]int)
+    var keys []int
+    for i := 0 ;i &lt;= 5;i++{
+        m[i] = i
+    }
+                                                                                                                                                      
+    for k, v := range m{
+        fmt.Println(&quot;Key:&quot;,k,&quot;Value:&quot;,v)
+    }   
+    for k := range m{
+        keys = append(keys, k)
+    }   
+    sort.Ints(keys)
+    for _, k := range keys{
+        fmt.Println(&quot;Key:&quot;,k,&quot;Value:&quot;,m[k])
+    }
+}
+</code></pre>
+
+<p>并发
+字典不是并发安全的数据结构，如果某个任务正在对字典进行写操作，那么其他任务就不能对该字典执行并发操作(读、写、删除)，
+否则会导致程序崩溃，比如:</p>
+
+<pre><code class="language-go">{
+    m := make(map[string]int)
+    go func(){
+        for {
+            m[&quot;a&quot;] += 1
+            time.Sleep(time.Microsecond)
+        }   
+    }() 
+
+    go func (){ 
+        for{
+            _ = m[&quot;b&quot;]
+            time.Sleep(time.Microsecond)
+        }   
+    }() 
+    select{}
+}
+输出：
+fatal error: concurrent map read and map write
+</code></pre>
+
+<p>go语言编译器提供了这种问题(竞争)的检测方式，比如：</p>
+
+<pre><code class="language-bash"># go run -race file.go
+</code></pre>
+
+<p>安全</p>
+
+<p>可以使用 sync.RWMutex 实现同步，避免并发环境多goroutings同时读写操作，继续完善上面的例子，比如：</p>
+
+<pre><code class="language-go">{
+    var lock = new(sync.RWMutex)                                                                                                                      
+    m := make(map[string]int)
+    go func(){
+        for {
+            lock.Lock()
+            m[&quot;a&quot;]++
+            lock.Unlock()
+            time.Sleep(time.Microsecond)
+        }   
+    }() 
+
+    go func (){ 
+        for{
+            lock.RLock()
+            _ = m[&quot;b&quot;]
+            lock.RUnlock()
+            time.Sleep(time.Microsecond)
+        }   
+    }() 
+    select{}
+}
+</code></pre>
+
+<p>性能</p>
+
+<p>在创建字典时预先准备足够的空间有助于提升性能，减少扩张时内存动态分配和重复哈希操作，比如：</p>
+
+<pre><code class="language-go">package main
+
+import &quot;testing&quot;
+import &quot;fmt&quot;
+
+func test() map[int]int {
+	m := make(map[int]int)
+	for i:=0; i &lt; 1000; i++{
+		m[i] = 1
+	}
+	return m
+}
+
+func testCap() map[int]int{
+	m := make(map[int]int,1000)
+	for i:=0; i &lt; 1000; i++{
+		m[i] = 1
+	}
+	return m
+}
+
+
+func BenchmarkTest(t *testing.B){
+	for i:= 0;i &lt; t.N; i++{
+		test()
+	}
+}
+
+func BenchmarkTestCap(t *testing.B){
+	for i:= 0;i &lt; t.N; i++{
+		testCap()
+	}
+}
+
+func main(){
+	resTest := testing.Benchmark(BenchmarkTest)
+	fmt.Printf(&quot;BenchmarkTest \t %d, %d ns/op,%d allocs/op, %d B/op\n&quot;, resTest.N, resTest.NsPerOp(), resTest.AllocsPerOp(), resTest.AllocedBytesPerOp())
+	resTest = testing.Benchmark(BenchmarkTestCap)
+	fmt.Printf(&quot;BenchmarkTestCap \t %d, %d ns/op,%d allocs/op, %d B/op\n&quot;, resTest.N, resTest.NsPerOp(), resTest.AllocsPerOp(), resTest.AllocedBytesPerOp())
+}
+输出：
+# go run conmap.go
+BenchmarkTest 	 10000, 160203 ns/op,98 allocs/op, 89556 B/op
+BenchmarkTestCap 20000, 65478 ns/op,12 allocs/op, 41825 B/op
+</code></pre>
+
+<h4 id="结构体-struct">结构体(struct)</h4>
+
+<p>结构体由一系列被称为字段的命名元素组成。每个字段由名称和类型组成，字段名称可以被显示指定，也可以是匿名的。
+声明一个结构体类型时，字段名称必须唯一，可使用&rdquo;_&ldquo;补位，支持使用自身指针类型成员。
+字段名和排列顺序都属于结构体类型组成的部分，编译器会对结构体中的字段做对齐优化，比如：</p>
+
+<pre><code class="language-go">type Person struct{
+    name string
+    age int
+    _ int
+} 
+</code></pre>
+
+<p>初始化</p>
+
+<pre><code>可按顺序初始化全部字段
+使用命名方式初始化指定字段
+</code></pre>
+
+<pre><code class="language-go">type Person struct{
+    name string
+    age int                                                                                                                                           
+}
+
+{
+    p := Person{
+        &quot;Tom&quot;,
+        20,
+    }
+    /*              //初始化排列顺序不能错乱
+    p := Person{
+        20,                                                                                                                                           
+        &quot;Tom&quot;,
+    }   
+    */                  
+    /*
+    p := Person{
+        &quot;Tom&quot;}         //too few values in struct initializer
+    */
+    p1 := Person{
+        name: &quot;Tom&quot;,
+        age: 20,
+    }
+    p2 := Person{
+        name: &quot;unknown&quot;,                                                                                                                              
+    }
+}
+</code></pre>
+
+<p>因为命名初始化不受结构体扩展和字段顺序变化的影响，在日常开发中，建议使用命名初始化。</p>
+
+<p>可以在函数体中直接定义匿名结构类型变量或用作字段类型，比如：</p>
+
+<pre><code class="language-go">{
+    u := struct{        //直接定义匿名结构体变量
+        name string
+        age int 
+    }{  
+        &quot;Tom&quot;,
+        20, 
+    }
+    type file struct{
+        name string
+        attr struct{        //定义匿名结构类型字段
+            size int 
+            perm int 
+        }
+    }
+    f := file{
+        name: &quot;passwd&quot;,
+        attr:{          //missing type in composite literal
+            size: 1,                                                                                                                                  
+            perm: 1,
+        },  
+    }
+    f.attr.size = 1     //ok
+    f.attr.perm = 1
+}
+</code></pre>
+
+<p>结构体比较</p>
+
+<p>只有在所有字段类型全部支持相等运算符时，才可以做相等操作，比如:</p>
+
+<pre><code class="language-go">
+type data struct{
+    x int 
+    //y map[int]int
+    y []int
+}                                                                                                                                                     
+
+func main(){
+    d1 := data{x:1}
+    d2 := data{x:2}
+    fmt.Println(d1 == d2) //(struct containing []int cannot be compared)
+}
+</code></pre>
+
+<p>可以使用结构体指针直接操作结构体，但是不能是多级指针，比如：</p>
+
+<pre><code class="language-go">{
+    type Person struct{
+        name string
+        age int
+    }
+
+    p := &amp;Person{
+        &quot;Li&quot;,
+        20,
+    }
+    fmt.Println(p)
+    p.name = &quot;Tom&quot;
+    p.age = 10
+    fmt.Println(p)
+    p2 := &amp;p
+    *p2.name = &quot;Tom2&quot;   //p2.name undefined (type **Person has no field or method name)
+    //(*p2).name = &quot;Tom2&quot;
+    fmt.Println(p2)
+}
+</code></pre>
+
+<ul>
+<li>空结构体</li>
+</ul>
+
+<p>空结构体(struct{}) 是指没有字段的结构体类型，无论是空结构体还是空结构体数组，其长度都为0,比如：</p>
+
+<pre><code class="language-go">{
+    var a  struct{}
+    var b  [100]struct{}                                                                                                                              
+    println(unsafe.Sizeof(a), unsafe.Sizeof(b))
+}
+输出：
+0 0
+</code></pre>
+
+<p>但这并不影响对元素的操作，切片的内置子切片、长度和容量等属性依旧可以工作比如：</p>
+
+<pre><code class="language-go">{
+    var b  [100]struct{}
+    s := b[:]           //slice
+    s[0] = struct{}{}
+    s[1] = struct{}{}
+    s[2] = struct{}{}
+    fmt.Println(s[3], len(s),cap(s))
+}
+输出：
+{} 100 100
+</code></pre>
+
+<p>空结构体可以像其他结构体一样正常使用，空结构体也具有正常结构体的属性，但就使用来说，一般用在通道元素类型做事件通知，
+比如:</p>
+
+<pre><code class="language-go">func hello(name string, done chan struct{}) {
+    fmt.Println(&quot;hello &quot;,name)
+    done &lt;- struct{}{}
+}
+
+func main() {
+    done := make(chan struct{})
+    langs := []string{&quot;Go&quot;, &quot;C&quot;, &quot;C++&quot;, &quot;Java&quot;, &quot;Perl&quot;, &quot;Python&quot;}
+    for _, l := range langs {
+        go hello(l, done)
+    }   
+
+    for _ = range langs {
+        &lt;-done
+    }   
+                                                                                                                                                      
+}
+</code></pre>
+
+<ul>
+<li>匿名字段</li>
+</ul>
+
+<p>匿名字段就是只有类型没有名字的字段(anonymous field)，也称作嵌入类型或嵌入字段，比如:</p>
+
+<pre><code class="language-go">type attr struct{
+    name string
+    age int 
+}
+type Person struct{
+    id int 
+    attr            //结构体嵌入
+}
+
+func main(){
+    p := Person{
+        id: 20, 
+        attr:attr{      //显示初始化
+            name: &quot;Tom&quot;,
+            age:    20, 
+        },
+    }   
+    p.name = &quot;kite&quot;     //可以直接读写匿名字段成员   
+    p.attr.age = 21     //防止嵌入结构体成员与结构体成员重名                                                                                                                            
+}
+</code></pre>
+
+<p>除接口指针和多级指针以外的任何命名类型都可以作为匿名字段，比如：</p>
+
+<pre><code class="language-go">type data struct{
+    *int
+    //int               //duplicate field int
+    string
+}
+
+func initData(){
+    x := 100
+    d := data{
+        int: &amp;x,            //使用基本类型作为字段名
+        string: &quot;Tom&quot;,
+    }
+    fmt.Printf(&quot;%#v\n&quot;, d)                                                                                                                            
+}
+</code></pre>
+
+<ul>
+<li>字段标签</li>
+</ul>
+
+<p>Go语言结构体提供了在运行时，通过反射机制获取字段描述的元数据信息，尽管它不属于数据成员，
+但却是类型的组成的部分，日常开发中，常被用做格式校验和数据库关系映射等。</p>
+
+<pre><code class="language-go">type attr struct{
+    name string `姓名`
+    age int     `年龄`
+}
+type Person struct{
+    id int `身份证号码`
+    attr    `属性`
+}
+func main(){
+    p := Person{
+        id: 20,
+        attr:attr{
+            name: &quot;Tom&quot;,
+            age:    20,
+        },
+    }
+    v := reflect.ValueOf(p)
+    t := v.Type()
+
+    for i,n := 0,t.NumField(); i &lt; n; i++{
+        if v.Field(i).Kind().String() == &quot;struct&quot;{
+            v1 := v.Field(i)
+            t1 := v1.Type()
+            for j, m := 0, t1.NumField(); j &lt; m ; j++{
+                fmt.Printf(&quot;%s:  %v\n&quot;,t1.Field(j).Tag, v1.Field(j))
+            }
+        }else{
+            fmt.Printf(&quot;%s:  %v\n&quot;,t.Field(i).Tag,v.Field(i).Kind())
+        }
+    }
+}
+输出：
+身份证号码:  int
+姓名:  Tom
+年龄:  20
+</code></pre>
+
+<ul>
+<li>内存布局</li>
+</ul>
+
+<p>不管结构体含有多少个字段，其内存总是一次性分配的，各字段在相邻的地址空间按定义顺序排列，编译器通常
+会对其做对齐处理，对齐通常以所有字段中最长基础类型宽度为准。
+对于字段是引用类型、字符串和指针的，结构内存中只包含基本数据，比如：</p>
+
+<pre><code class="language-go">type Point struct{
+    x int
+    y int
+}
+type Value struct{
+    id int
+    name string
+    data []byte
+    next *Value
+    Point
+}
+
+func main(){
+    v := Value{
+        id: 1,
+        name: &quot;Tom&quot;,
+        data:[]byte{1,2,3,4},
+        next:nil,
+        Point:Point{
+            x: 100,y:200,
+        },
+    }
+    fmt.Printf(&quot;size: %d,align: %d\n&quot;, unsafe.Sizeof(v), unsafe.Alignof(v))
+    fmt.Printf(&quot;field\taddress\t\toffset\tsize\n&quot;)
+    fmt.Printf(&quot;id\t%p\t%d\t%d\n&quot;, &amp;v.id, unsafe.Offsetof(v.id), unsafe.Sizeof(v.id))
+    fmt.Printf(&quot;name\t%p\t%d\t%d\n&quot;, &amp;v.name, unsafe.Offsetof(v.name), unsafe.Sizeof(v.name))
+    fmt.Printf(&quot;data\t%p\t%d\t%d\n&quot;, &amp;v.data, unsafe.Offsetof(v.data), unsafe.Sizeof(v.data))
+    fmt.Printf(&quot;next\t%p\t%d\t%d\n&quot;, &amp;v.next, unsafe.Offsetof(v.next), unsafe.Sizeof(v.next))
+    fmt.Printf(&quot;x\t%p\t%d\t%d\n&quot;, &amp;v.Point.x, unsafe.Offsetof(v.Point.x), unsafe.Sizeof(v.Point.x))
+    fmt.Printf(&quot;y\t%p\t%d\t%d\n&quot;, &amp;v.Point.y, unsafe.Offsetof(v.Point.y), unsafe.Sizeof(v.Point.y))
+}
+输出：
+size: 72,align: 8
+field	address		offset	size
+id	    0xc4200140a0	0	8
+name	0xc4200140a8	8	16
+data	0xc4200140b8	24	24
+next	0xc4200140d0	48	8
+x	    0xc4200140d8	0	8
+y	    0xc4200140e0	8	8
+
+抽象布局：
+
+    |-------16--------|------------24------------|    |------16-------| 
++---+--------+--------+--------+--------+--------+----+-------+-------+
+|id |name.ptr|name.len|data.ptr|data.len|data.cap|next|point.x|point.y| 
++---+--------+--------+--------+--------+--------+----+-------+-------+
+0   8        16       24       32       40       48   56      64      72
+</code></pre>
+
+<p>练习下面的列子</p>
+
+<pre><code class="language-go">{   
+    v1 := struct{
+        a byte
+        s string
+        b byte
+    }{}
+    fmt.Printf(&quot;size: %d,align: %d\n&quot;, unsafe.Sizeof(v1), unsafe.Alignof(v1))
+    fmt.Printf(&quot;a\t%p\t%d\t%d\n&quot;, &amp;v1.a, unsafe.Offsetof(v1.a), unsafe.Sizeof(v1.a))
+    fmt.Printf(&quot;s\t%p\t%d\t%d\n&quot;, &amp;v1.s, unsafe.Offsetof(v1.s), unsafe.Sizeof(v1.s))
+    fmt.Printf(&quot;b\t%p\t%d\t%d\n&quot;, &amp;v1.b, unsafe.Offsetof(v1.b), unsafe.Sizeof(v1.b))
+
+    v2 := struct{
+        a byte
+        b []int
+        s byte
+    }{}
+    fmt.Printf(&quot;size: %d,align: %d\n&quot;, unsafe.Sizeof(v2), unsafe.Alignof(v2))
+    fmt.Printf(&quot;a\t%p\t%d\t%d\n&quot;, &amp;v2.a, unsafe.Offsetof(v2.a), unsafe.Sizeof(v2.a))
+    fmt.Printf(&quot;b\t%p\t%d\t%d\n&quot;, &amp;v2.b, unsafe.Offsetof(v2.b), unsafe.Sizeof(v2.b))
+    fmt.Printf(&quot;s\t%p\t%d\t%d\n&quot;, &amp;v2.s, unsafe.Offsetof(v2.s), unsafe.Sizeof(v2.s))
+
+    v3 := struct{
+        a struct{}
+        b int
+        c struct{}
+    }{}
+    fmt.Printf(&quot;size: %d,align: %d\n&quot;, unsafe.Sizeof(v3), unsafe.Alignof(v3))
+    fmt.Printf(&quot;a\t%p\t%d\t%d\n&quot;, &amp;v3.a, unsafe.Offsetof(v3.a), unsafe.Sizeof(v3.a))
+    fmt.Printf(&quot;b\t%p\t%d\t%d\n&quot;, &amp;v3.b, unsafe.Offsetof(v3.b), unsafe.Sizeof(v3.b))
+    fmt.Printf(&quot;c\t%p\t%d\t%d\n&quot;, &amp;v3.c, unsafe.Offsetof(v3.c), unsafe.Sizeof(v3.c))
+
+    v4 := struct{
+        a struct{}
+    }{}
+    fmt.Printf(&quot;size: %d,align: %d\n&quot;, unsafe.Sizeof(v4), unsafe.Alignof(v4))
+    fmt.Printf(&quot;a\t%p\t%d\t%d\n&quot;, &amp;v4.a, unsafe.Offsetof(v4.a), unsafe.Sizeof(v4.a))
+}
+</code></pre>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/express/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/my-first-post/" data-toggle="tooltip" data-placement="top" title="米粒成长记">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
