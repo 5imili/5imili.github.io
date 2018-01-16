@@ -5,24 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
-Go语言提供：
-并发执行(goroutines) 同步和消息传输(channels) 多路并发控制(select)  Go语言创建一个并发任务单元只需要在函数调用之前添加go关键字即可，每个任务单元会保存函数指针、调用参数，还会分配执行所需的 栈内存空间，相比系统默认MB级别的线程栈，goroutine自定义栈仅须2KB，所以能够创建上千万个并发任务，自定义栈采取的是按需分配 策略，在需要时进行扩容，最大能够达到GB的规模。 比如创建一个并发任务单元：
-package main func main(){ go println(&quot;hello gopher!!&quot;) go func(msg string) { fmt.Println(msg) }(&quot;going&quot;) }  使用go创建完并发任务之后，新建的任务会被放置在任务队列中，等待调度器安排合适的系统线程获取执行权，当前流程不会阻塞，也不会等待任务 的启动，并且不能保证运行时并发任务的执行次序。
-如何等待并发任务的结束？
-1. 采用通道阻塞机制，然后发出退出信号 2. 等待多个任务单元时，推荐使用sync.WaitGroup   channel wait  func main(){ done := make(chan bool) //创建一个无缓冲通道，用于 go func(s string){ println(&quot;working&quot;) time.Sleep(time.Second) //业务逻辑处理 println(s) println(&quot;done&quot;) close(done) //done-&gt;true }(&quot;hello gopher&quot;) println(&quot;wait.">
-  <meta property="og:description" content="并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
-Go语言提供：
-并发执行(goroutines) 同步和消息传输(channels) 多路并发控制(select)  Go语言创建一个并发任务单元只需要在函数调用之前添加go关键字即可，每个任务单元会保存函数指针、调用参数，还会分配执行所需的 栈内存空间，相比系统默认MB级别的线程栈，goroutine自定义栈仅须2KB，所以能够创建上千万个并发任务，自定义栈采取的是按需分配 策略，在需要时进行扩容，最大能够达到GB的规模。 比如创建一个并发任务单元：
-package main func main(){ go println(&quot;hello gopher!!&quot;) go func(msg string) { fmt.Println(msg) }(&quot;going&quot;) }  使用go创建完并发任务之后，新建的任务会被放置在任务队列中，等待调度器安排合适的系统线程获取执行权，当前流程不会阻塞，也不会等待任务 的启动，并且不能保证运行时并发任务的执行次序。
-如何等待并发任务的结束？
-1. 采用通道阻塞机制，然后发出退出信号 2. 等待多个任务单元时，推荐使用sync.WaitGroup   channel wait  func main(){ done := make(chan bool) //创建一个无缓冲通道，用于 go func(s string){ println(&quot;working&quot;) time.Sleep(time.Second) //业务逻辑处理 println(s) println(&quot;done&quot;) close(done) //done-&gt;true }(&quot;hello gopher&quot;) println(&quot;wait.">
-  <meta name="twitter:description" content="并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
-Go语言提供：
-并发执 …">
+  <title>并发</title>
+  <meta property="og:title" content="并发" />
+  <meta name="twitter:title" content="并发" />
+  <meta name="description" content="并发(Concurrency) VS 并行(Parallelism) 并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理">
+  <meta property="og:description" content="并发(Concurrency) VS 并行(Parallelism) 并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理">
+  <meta name="twitter:description" content="并发(Concurrency) VS 并行(Parallelism) 并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/goroutine/" />
@@ -201,7 +189,25 @@ Go语言提供：
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>并发</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -209,11 +215,7 @@ Go语言提供：
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h1 id="并发">并发</h1>
-
-<ul>
+        <ul>
 <li>并发(Concurrency) VS 并行(Parallelism)</li>
 </ul>
 
@@ -1156,12 +1158,12 @@ func TestRace(t *testing.T){
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/grammer/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/interface/" data-toggle="tooltip" data-placement="top" title="接口">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/func/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/grammer/" data-toggle="tooltip" data-placement="top" title="基本词法">Next Post &rarr;</a>
             </li>
           
         </ul>

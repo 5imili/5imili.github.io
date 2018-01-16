@@ -5,19 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
-string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字节数组的开始，但是没有NULL或&rsquo;\0&rsquo;结尾标志。 表示方式很简单，用双引号(&ldquo;&rdquo;)或者反引号(``)，它们的区别是：
- 双引号之间的转义符会被转义，而反引号之间的转义符保持不变 反引号支持跨行编写，而双引号则不可以   { println(&quot;hello\tgo&quot;) //输出hello	go println(`hello\tgo`) //输出hello\tgo } { println( &quot;hello go&quot; ) //syntax error: unexpected semicolon or newline, expecting comma or ) println(`hello go`) } 输出： hello go  在前面类型的章节中描述过字符串的默认值是&rdquo;&ldquo;，而不是nil,比如：
-var s string println( s == &quot;&quot; ) //true println( s == nil ) //invalid operation: s == nil (mismatched types string and nil)  Go字符串支持 &ldquo;&#43; , &#43;= , == , !">
-  <meta property="og:description" content="数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
-string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字节数组的开始，但是没有NULL或&rsquo;\0&rsquo;结尾标志。 表示方式很简单，用双引号(&ldquo;&rdquo;)或者反引号(``)，它们的区别是：
- 双引号之间的转义符会被转义，而反引号之间的转义符保持不变 反引号支持跨行编写，而双引号则不可以   { println(&quot;hello\tgo&quot;) //输出hello	go println(`hello\tgo`) //输出hello\tgo } { println( &quot;hello go&quot; ) //syntax error: unexpected semicolon or newline, expecting comma or ) println(`hello go`) } 输出： hello go  在前面类型的章节中描述过字符串的默认值是&rdquo;&ldquo;，而不是nil,比如：
-var s string println( s == &quot;&quot; ) //true println( s == nil ) //invalid operation: s == nil (mismatched types string and nil)  Go字符串支持 &ldquo;&#43; , &#43;= , == , !">
-  <meta name="twitter:description" content="数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
-string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字 …">
+  <title>数据</title>
+  <meta property="og:title" content="数据" />
+  <meta name="twitter:title" content="数据" />
+  <meta name="description" content="1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构 字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构： string.go type">
+  <meta property="og:description" content="1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构 字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构： string.go type">
+  <meta name="twitter:description" content="1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构 字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构： string.go type">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/data/" />
@@ -196,7 +189,25 @@ string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>数据</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -205,8 +216,6 @@ string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         
-
-<h1 id="数据">数据</h1>
 
 <pre><code>1. 字符串
 2. 数组
@@ -1267,12 +1276,12 @@ y	    0xc4200140e0	8	8
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/express/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/method/" data-toggle="tooltip" data-placement="top" title="方法">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/my-first-post/" data-toggle="tooltip" data-placement="top" title="米粒成长记">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/interface/" data-toggle="tooltip" data-placement="top" title="接口">Next Post &rarr;</a>
             </li>
           
         </ul>

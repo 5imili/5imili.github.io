@@ -5,23 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
-var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。 如果显示初始化变量的值，可以省略变量类型，由编译器推断。
-Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如
-var x,y int //相同类型多个变量 var a, s = 10010, &quot;hello go&quot; //不同类型多个变量  按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:
-var ( x,y int a,s = 10010, &quot;hello go&quot; )   短变量声明符  在介绍词法的章节中已经看到过这种用法，比如:
-x := 10010 a , s := 10010, &quot;hello go&quot;  这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:">
-  <meta property="og:description" content="类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
-var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。 如果显示初始化变量的值，可以省略变量类型，由编译器推断。
-Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如
-var x,y int //相同类型多个变量 var a, s = 10010, &quot;hello go&quot; //不同类型多个变量  按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:
-var ( x,y int a,s = 10010, &quot;hello go&quot; )   短变量声明符  在介绍词法的章节中已经看到过这种用法，比如:
-x := 10010 a , s := 10010, &quot;hello go&quot;  这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:">
-  <meta name="twitter:description" content="类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
-var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为 …">
+  <title>类型</title>
+  <meta property="og:title" content="类型" />
+  <meta name="twitter:title" content="类型" />
+  <meta name="description" content="1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型 变量 Go语言有两种方式定义变量： var 关键字 := 短变量声明符 var关键字 var x int //自动">
+  <meta property="og:description" content="1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型 变量 Go语言有两种方式定义变量： var 关键字 := 短变量声明符 var关键字 var x int //自动">
+  <meta name="twitter:description" content="1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型 变量 Go语言有两种方式定义变量： var 关键字 := 短变量声明符 var关键字 var x int //自动">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/type/" />
@@ -200,7 +189,25 @@ var 关键字 := 短变量声明符   var关键字  var x int //自动初始化�
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>类型</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -209,8 +216,6 @@ var 关键字 := 短变量声明符   var关键字  var x int //自动初始化�
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         
-
-<h1 id="类型">类型</h1>
 
 <pre><code>1. 变量
 2. 命名
@@ -687,12 +692,12 @@ pc := &lt;-chan int(c) //invalid operation: pc &lt;- 3 (send to non-chan type in
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/utest/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/express/" data-toggle="tooltip" data-placement="top" title="表达式">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/reflect/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/utest/" data-toggle="tooltip" data-placement="top" title="测试">Next Post &rarr;</a>
             </li>
           
         </ul>

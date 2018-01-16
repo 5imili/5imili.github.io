@@ -5,15 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="接口 1. 定义 2. 实现机制 3. 类型转换   接口(interface)定义  接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称作为(protocol)。 互相交互的双方，共同遵守事先规定的协议，使得交互双方在无须知道对方身份的情况下进行相互调用，而接口自身要实现的是做什么，而不关心 怎么做和谁来做，比如：
-type geometry interface { area() float64 perim() float64 } type circle struct { radius float64 } type rect struct { width, height float64 } func (r rect) perim() float64 { return 2 * r.width &#43; 2*r.height } func (r rect) area() float64 { return r.width * r.height } func (c circle) perim() float64 { return 2 * math.">
-  <meta property="og:description" content="接口 1. 定义 2. 实现机制 3. 类型转换   接口(interface)定义  接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称作为(protocol)。 互相交互的双方，共同遵守事先规定的协议，使得交互双方在无须知道对方身份的情况下进行相互调用，而接口自身要实现的是做什么，而不关心 怎么做和谁来做，比如：
-type geometry interface { area() float64 perim() float64 } type circle struct { radius float64 } type rect struct { width, height float64 } func (r rect) perim() float64 { return 2 * r.width &#43; 2*r.height } func (r rect) area() float64 { return r.width * r.height } func (c circle) perim() float64 { return 2 * math.">
-  <meta name="twitter:description" content="接口 1. 定义 2. 实现机制 3. 类型转换   接口(interface)定义  接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称作为(protocol)。 互相交互的双方，共同遵守事先规定的协议，使得交互双方在无须知道对方身份的情况下进行相互调用，而接口自身要实现的是做什么，而不关心 怎么做和谁来做，比如：
-type geometry interface …">
+  <title>接口</title>
+  <meta property="og:title" content="接口" />
+  <meta name="twitter:title" content="接口" />
+  <meta name="description" content="1. 定义 2. 实现机制 3. 类型转换 接口(interface)定义 接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称">
+  <meta property="og:description" content="1. 定义 2. 实现机制 3. 类型转换 接口(interface)定义 接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称">
+  <meta name="twitter:description" content="1. 定义 2. 实现机制 3. 类型转换 接口(interface)定义 接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/interface/" />
@@ -192,7 +189,25 @@ type geometry interface …">
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>接口</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -200,11 +215,7 @@ type geometry interface …">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h1 id="接口">接口</h1>
-
-<pre><code>1. 定义
+        <pre><code>1. 定义
 2. 实现机制
 3. 类型转换
 </code></pre>
@@ -443,12 +454,12 @@ func main() {
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/method/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/data/" data-toggle="tooltip" data-placement="top" title="数据">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/grammer/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/goroutine/" data-toggle="tooltip" data-placement="top" title="并发">Next Post &rarr;</a>
             </li>
           
         </ul>

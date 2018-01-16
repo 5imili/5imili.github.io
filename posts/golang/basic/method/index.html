@@ -5,12 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根据receiver类型自动在基础类型 和指针类型之间转换，比如：  type rect struct { width, height, area int } func (r *rect) pointer() { r.width &#43;= 2 r.area = r.width * r.height } func (r rect) value() { r.width &#43;= 4 r.area = r.width * r.height } func main() { r := rect{width: 10, height: 5} r.value() fmt.Println(r) r.pointer() fmt.Println(r) /* r := &amp;rect{width: 10, height: 5} r.">
-  <meta property="og:description" content="方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根据receiver类型自动在基础类型 和指针类型之间转换，比如：  type rect struct { width, height, area int } func (r *rect) pointer() { r.width &#43;= 2 r.area = r.width * r.height } func (r rect) value() { r.width &#43;= 4 r.area = r.width * r.height } func main() { r := rect{width: 10, height: 5} r.value() fmt.Println(r) r.pointer() fmt.Println(r) /* r := &amp;rect{width: 10, height: 5} r.">
-  <meta name="twitter:description" content="方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根 …">
+  <title>方法</title>
+  <meta property="og:title" content="方法" />
+  <meta name="twitter:title" content="方法" />
+  <meta name="description" content="1. 定义 2. 匿名字段 3. 方法集 4. 表达式 定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(re">
+  <meta property="og:description" content="1. 定义 2. 匿名字段 3. 方法集 4. 表达式 定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(re">
+  <meta name="twitter:description" content="1. 定义 2. 匿名字段 3. 方法集 4. 表达式 定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(re">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/method/" />
@@ -189,7 +189,25 @@
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>方法</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -197,11 +215,7 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h1 id="方法">方法</h1>
-
-<pre><code>1. 定义
+        <pre><code>1. 定义
 2. 匿名字段
 3. 方法集
 4. 表达式
@@ -453,12 +467,12 @@ func main(){
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/package/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/flow/" data-toggle="tooltip" data-placement="top" title="流程控制">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/interface/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/data/" data-toggle="tooltip" data-placement="top" title="数据">Next Post &rarr;</a>
             </li>
           
         </ul>

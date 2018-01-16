@@ -5,29 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
- 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足跨语言、 跨平台的转换和文本处理需求，关于Unicode更详细说明，参见官网 *Unicode*。 当前，你只需要记住一条规则：
-Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   注释  - 行注释: 用两斜杠&quot;//&quot;开始到这一行结束 - 块注释: 从&quot;/*&quot; 开始到 &quot;*/&quot;结束  Go语言的词法元素包括4类:
- 标志符 (identifier) 关键字 (keyword) 运算符 (operator)和分隔符 (delimiter) 字面量 (literal)  一般情况下，空格符、制表符、回车符和换行符都会被忽略，除非它们作为多个语言符号之间的分隔符的一部分。 另外，Go语言会自动为代码插入分号以进行语句分隔，所以不在特殊情况下不需要显示的插入分号;
-标志符 标志符就是对变量、常量、函数以及自定义类型进行命名。Go语言标志符的命名规范是由若干字母、下划线&rdquo;_&ldquo;和数字组成的字符序列，字符序列的第一个字符必须为字母，且首字母 标志符是区分大小写的。在使用标志符之前必须进行声明，一个声明就是将一个非空的标志符与常量、类型、变量、函数或代码包绑定在一起。在 同一个代码区块中，不允许重复声明同一个标志符，并且该标志符的作用域与所属代码区块的范围相同。
- 预定义标志符  Go语言中有一类特殊的标志符，被叫做预定义标志符。这类标志符是在Go语言的源代码中被声明的，具体声明如下：
-基本数据类型名： int、float、string... 接口类型名：error 常量名：true,false和iota 内建函数名：append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover   空标志符  Go语言有一个名为 &ldquo;_&rdquo; 的特殊标志符,叫(blank identifier)。通常作为忽略占位符使用，可以作表达式左值，但无法读取内容。 空标志符也常用来临时规避对未使用变量和导入包的错误检查，但需注意的是，它也属于预定义标志符。
- 限定标志符  在Go语言开发过程中，会经常访问其他代码包中的变量或类型，这时就需要用到限定标志符。 可以把代码包名称称作是限定标志符前缀，前缀和包中的标志符之间用英文的点(&ldquo;.&rdquo;)符号分隔。 要应用其它代码包中的标志符时，需要满足两个前提：
- 代码包必须被提前导入到该代码文件中 该标志符在代码包必须是可被导出的  怎么才算是标志符可被导出的呢？">
-  <meta property="og:description" content="基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
- 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足跨语言、 跨平台的转换和文本处理需求，关于Unicode更详细说明，参见官网 *Unicode*。 当前，你只需要记住一条规则：
-Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   注释  - 行注释: 用两斜杠&quot;//&quot;开始到这一行结束 - 块注释: 从&quot;/*&quot; 开始到 &quot;*/&quot;结束  Go语言的词法元素包括4类:
- 标志符 (identifier) 关键字 (keyword) 运算符 (operator)和分隔符 (delimiter) 字面量 (literal)  一般情况下，空格符、制表符、回车符和换行符都会被忽略，除非它们作为多个语言符号之间的分隔符的一部分。 另外，Go语言会自动为代码插入分号以进行语句分隔，所以不在特殊情况下不需要显示的插入分号;
-标志符 标志符就是对变量、常量、函数以及自定义类型进行命名。Go语言标志符的命名规范是由若干字母、下划线&rdquo;_&ldquo;和数字组成的字符序列，字符序列的第一个字符必须为字母，且首字母 标志符是区分大小写的。在使用标志符之前必须进行声明，一个声明就是将一个非空的标志符与常量、类型、变量、函数或代码包绑定在一起。在 同一个代码区块中，不允许重复声明同一个标志符，并且该标志符的作用域与所属代码区块的范围相同。
- 预定义标志符  Go语言中有一类特殊的标志符，被叫做预定义标志符。这类标志符是在Go语言的源代码中被声明的，具体声明如下：
-基本数据类型名： int、float、string... 接口类型名：error 常量名：true,false和iota 内建函数名：append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover   空标志符  Go语言有一个名为 &ldquo;_&rdquo; 的特殊标志符,叫(blank identifier)。通常作为忽略占位符使用，可以作表达式左值，但无法读取内容。 空标志符也常用来临时规避对未使用变量和导入包的错误检查，但需注意的是，它也属于预定义标志符。
- 限定标志符  在Go语言开发过程中，会经常访问其他代码包中的变量或类型，这时就需要用到限定标志符。 可以把代码包名称称作是限定标志符前缀，前缀和包中的标志符之间用英文的点(&ldquo;.&rdquo;)符号分隔。 要应用其它代码包中的标志符时，需要满足两个前提：
- 代码包必须被提前导入到该代码文件中 该标志符在代码包必须是可被导出的  怎么才算是标志符可被导出的呢？">
-  <meta name="twitter:description" content="基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
- 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足 …">
+  <title>基本词法</title>
+  <meta property="og:title" content="基本词法" />
+  <meta name="twitter:title" content="基本词法" />
+  <meta name="description" content="在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法">
+  <meta property="og:description" content="在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法">
+  <meta name="twitter:description" content="在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/grammer/" />
@@ -206,7 +189,25 @@ Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>基本词法</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -215,8 +216,6 @@ Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         
-
-<h1 id="基本词法">基本词法</h1>
 
 <p>在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器
 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。</p>
@@ -439,12 +438,12 @@ go string
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/interface/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/goroutine/" data-toggle="tooltip" data-placement="top" title="并发">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/goroutine/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/reflect/" data-toggle="tooltip" data-placement="top" title="反射">Next Post &rarr;</a>
             </li>
           
         </ul>
