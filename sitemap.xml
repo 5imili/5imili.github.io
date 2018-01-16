@@ -13,6 +13,58 @@
   </url>
   
   <url>
+    <loc>https://5imili.github.io/posts/golang/basic/data/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/express/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/flow/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/func/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/goroutine/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/grammer/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/interface/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/method/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/package/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/readme/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/reflect/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/type/</loc>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/utest/</loc>
+  </url>
+  
+  <url>
     <loc>https://5imili.github.io/categories/</loc>
     <priority>0</priority>
   </url>

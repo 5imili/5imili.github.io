@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
+- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
+workspace/ ├── bin │ └── server ├── pkg │ └── linux_amd64 │ └── service.a └── src ├── server │ ├── main.go └── service └── utils.go  在工作空间里，bin和pkg目录主要是受go install/get的命令影响，它们会把 编译结果(可执行文件/静态库)安装到这两个目录下，以实现增量编译。
+ 环境变量：  GOPATH：编译器等相关工具会按照GOPATH环境变量中设置的路径进行目标搜索，比如在 导入目标库时，排在GOPAH环境变量列表前面的路径比当前工作空间优先级高，go get将下载的第三方包保存到GOPAH环境变量列表中第一个工作空间内。 GOROOT：用于指定工具链以及标准库的存放位置。
+ 导入包 在使用标注库和第三方包之前，首先需要使用import导入，参数是以src目录为 始的绝对路径。编译器会先从标准库路径开始搜索，然后对GOPATH环境变量列表中的 各个路径进行搜索，比如：  import &quot;path/filepath&quot; //实际路径为/root/data/go/src/path/filepath/  为了避免引入的包名称冲突，可以使用包别名进行区分，比如：">
+  <meta property="og:description" content="包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
+- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
+workspace/ ├── bin │ └── server ├── pkg │ └── linux_amd64 │ └── service.a └── src ├── server │ ├── main.go └── service └── utils.go  在工作空间里，bin和pkg目录主要是受go install/get的命令影响，它们会把 编译结果(可执行文件/静态库)安装到这两个目录下，以实现增量编译。
+ 环境变量：  GOPATH：编译器等相关工具会按照GOPATH环境变量中设置的路径进行目标搜索，比如在 导入目标库时，排在GOPAH环境变量列表前面的路径比当前工作空间优先级高，go get将下载的第三方包保存到GOPAH环境变量列表中第一个工作空间内。 GOROOT：用于指定工具链以及标准库的存放位置。
+ 导入包 在使用标注库和第三方包之前，首先需要使用import导入，参数是以src目录为 始的绝对路径。编译器会先从标准库路径开始搜索，然后对GOPATH环境变量列表中的 各个路径进行搜索，比如：  import &quot;path/filepath&quot; //实际路径为/root/data/go/src/path/filepath/  为了避免引入的包名称冲突，可以使用包别名进行区分，比如：">
+  <meta name="twitter:description" content="包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
+- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
+workspace/ …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/package/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/package/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="包管理">包管理</h1>
+
+<pre><code>1. 工作空间
+2. 导入包
+3. 组织结构
+4. 依赖管理
+</code></pre>
+
+<ul>
+<li>工作空间</li>
+</ul>
+
+<p>工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中，
+以便相关工具能够正常工作。</p>
+
+<pre><code>- src：工程源代码存放路径
+- bin：可执行文件的安装路径
+- pkg：包安装路径，按照操作系统和平台进行隔离
+</code></pre>
+
+<p>比如：</p>
+
+<pre><code>workspace/
+├── bin
+│   └── server
+├── pkg
+│   └── linux_amd64
+│       └── service.a
+└── src
+    ├── server
+    │   ├── main.go
+    └── service
+        └── utils.go
+</code></pre>
+
+<p>在工作空间里，bin和pkg目录主要是受go install/get的命令影响，它们会把
+编译结果(可执行文件/静态库)安装到这两个目录下，以实现增量编译。</p>
+
+<ul>
+<li>环境变量：</li>
+</ul>
+
+<p>GOPATH：编译器等相关工具会按照GOPATH环境变量中设置的路径进行目标搜索，比如在
+导入目标库时，排在GOPAH环境变量列表前面的路径比当前工作空间优先级高，go
+get将下载的第三方包保存到GOPAH环境变量列表中第一个工作空间内。
+GOROOT：用于指定工具链以及标准库的存放位置。</p>
+
+<ul>
+<li>导入包
+在使用标注库和第三方包之前，首先需要使用import导入，参数是以src目录为
+始的绝对路径。编译器会先从标准库路径开始搜索，然后对GOPATH环境变量列表中的
+各个路径进行搜索，比如：</li>
+</ul>
+
+<pre><code class="language-go">import &quot;path/filepath&quot;  //实际路径为/root/data/go/src/path/filepath/
+</code></pre>
+
+<p>为了避免引入的包名称冲突，可以使用包别名进行区分，比如：</p>
+
+<pre><code class="language-go">import(
+	&quot;net/http&quot;
+	&quot;text/template&quot;
+	&quot;html/template&quot; //template redeclared as imported package name
+)
+import(
+	&quot;net/http&quot;
+	&quot;text/template&quot;
+	htemplate &quot;html/template&quot; //alias
+)
+
+</code></pre>
+
+<p>总结四种包导入方式：</p>
+
+<pre><code>import &quot;github.com/sanrenxing/service&quot;  //默认方式
+import S &quot;github.com/sanrenxing/service&quot; //别名方式
+import . &quot;github.com/sanrenxing/service&quot; //简便方式
+import _ &quot;github.com/sanrenxing/service&quot; //初始化方式，不引用，只用于初始化目标包
+</code></pre>
+
+<ul>
+<li>相对路径：</li>
+</ul>
+
+<p>在开发过程中，也可以使用相对路径进行包的引用，这并不影响进行项目的编译、运行和测试，
+如果项目不在工作空间里的话，会影响执行go install安装。
+反而如果在设置了GOPATH的工作空间中，相对路径将会导致编译失败。</p>
+
+<ul>
+<li>组织结构</li>
+</ul>
+
+<p>包(package) 是组织结构中最小单位，它是由一个或多个保存在同一个目录下的(不含子目录)的
+源码文件组成。包的用法类似名字空间(namespace)，它也是成员做用域和访问权限的边界。
+比如：</p>
+
+<pre><code class="language-go">#src/mycluster
+package cluster
+type ClusterInfo struct{}
+
+func NewCluster() *ClusterInfo{}
+</code></pre>
+
+<p>相同目录下所有源码文件必须使用相同的包名称，并且包名与目录名并无关系，不要求保持一致因为导入时使用绝对路径，所以在搜索路径下，包
+必须有唯一路径，但无须是唯一的名字，比如：</p>
+
+<pre><code># go list net/...
+net
+net/http
+net/http/cgi
+net/http/cookiejar
+net/http/fcgi
+net/http/httptest
+net/http/httptrace
+net/http/httputil
+net/http/internal
+net/http/pprof
+net/internal/socktest
+</code></pre>
+
+<ul>
+<li>权限</li>
+</ul>
+
+<pre><code>所有成员在相同包内都可以相互访问，无论是否在同一个源码文件中。
+首写字母为大写的全局变量、常量、类型、结构体字段、函数和方法等，可以在包外访问。
+</code></pre>
+
+<p>不过可以使用指针绕开限制，比如：</p>
+
+<pre><code class="language-go">/src/meta/data.go 
+package meta
+type data struct{
+	x int
+	Y int
+}
+func New()*data{
+	return new(data)
+}
+---------------------------------------------
+func main(){
+    m := meta.New()
+    m.Y = 100
+    p := (*struct{x int})(unsafe.Pointer(m))
+    p.x = 200
+    fmt.Printf(&quot;%+v\n&quot;,*m)
+}
+</code></pre>
+
+<ul>
+<li>初始化(init)</li>
+</ul>
+
+<p>源码包内每个源码文件都可以定义一个或多个init初始化函数，所有这些初始化函数以及标准库和导入第三方包都由编译器
+自动生成的一个包装函数进行调用，因此可保证在单一线程上执行，且只执行一次，
+但是编译器不能保证这些初始化函数的执行顺序。所以初始化函数中不应该有逻辑关联，最好只处理
+当前文件的初始化操作。</p>
+
+<p>编译器执行次序：首先确保所有全局变量初始化，然后执行初始化函数，最后进入main.main入口函数。</p>
+
+<p>讨论如下代码执行情况：</p>
+
+<pre><code class="language-go">//main.go
+func init(){
+    println(&quot;main&quot;)
+}
+
+func main(){
+    init()
+}
+</code></pre>
+
+<ul>
+<li>内部包(internal)</li>
+</ul>
+
+<p>内部包机制相当于增加了新的访问控制权限，比如，所有保存在internal目录下的包，只能
+被其父目录下的包访问。比如：</p>
+
+<pre><code class="language-go">service/
+├── internal
+│   ├── a
+│   │   └── a.go
+│   └── b
+│       └── b.go
+└── utils.go
+----------------------------------------------
+/service/utils.go
+package service
+import &quot;service/internal/a&quot;
+import &quot;service/internal/b&quot;
+
+func SayHello(){
+	println(&quot;i am service&quot;)
+	a.A()
+	b.B()
+}
+-----------------------------------------------
+/server/main.go
+package main
+import &quot;service&quot;
+import &quot;service/internal/a&quot; 
+
+func main(){
+	service.SayHello()
+	a.A()
+}
+编译时输出：
+imports service/internal/a: use of internal package not allowed
+</code></pre>
+
+<ul>
+<li>依赖管理</li>
+</ul>
+
+<p>在项目中常常会引入第三方依赖包，而第三方包都放到一个独立的工作空间中，那么就有可能导致
+版本冲突问题，但如果都放到项目目录中，久而久之，又可能会把项目目录搞得很乱，为此，Go
+引入名为vendor的机制，专门存放和管理第三方包，实现将源码与依赖整体打包分发。</p>
+
+<pre><code class="language-go"># cat server/vendor/github.com/sanrenxing/test/test.go
+package test
+func Test(){
+	println(&quot;test&quot;)
+}
+----------------------------------
+# cat server/main.go
+package main
+import &quot;service&quot;
+import &quot;github.com/sanrenxing/test&quot;
+
+func main(){
+	service.SayHello()
+	test.Test()
+}
+</code></pre>
+
+<p>在main.go中引入&rdquo;github.com/sanrenxing/test&rdquo;时，优先搜索vendor目录。</p>
+
+<p>如果引入的第三方包中也带有vendor目录，那么编译器该如何搜索包呢？</p>
+
+<pre><code>server/
+├── main.go
+├── server
+└── vendor
+    ├── github.com
+    │   └── sanrenxing
+    │       └── test
+    │           ├── test.go
+    │           └── vendor
+    │               └── github.com
+    ├── p
+    │   └── p.go
+    └── q
+        ├── test.go
+        └── vendor
+            └── p
+                └── p.go
+</code></pre>
+
+<pre><code class="language-go">vendor/p/p.go 
+package p
+func PP(){
+	println(&quot;pp&quot;)
+}
+------------------------
+vendor/q/vendor/p/p.go 
+package p
+func PP(){
+	println(&quot;PPP&quot;)
+}
+------------------------
+main.go
+package main
+import &quot;q&quot;
+import &quot;p&quot;
+
+func main(){
+	p.PP()
+	q.QQ()
+}
+</code></pre>
+
+<p>在main.go和test.go中分别import &ldquo;p&rdquo;, 则程序运行结果会怎样？</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/readme/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/method/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

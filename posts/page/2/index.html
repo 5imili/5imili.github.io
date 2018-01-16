@@ -5,18 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Me</title>
-  <meta property="og:title" content="Me" />
-  <meta name="twitter:title" content="Me" />
+  <title>Posts</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://5imili.github.io/tags/me/" />
+  <meta property="og:url" content="https://5imili.github.io/posts/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Mili&#39;s Storys" />
 
   <meta name="generator" content="Hugo 0.32.4" />
-  <link rel="canonical" href="https://5imili.github.io/tags/me/" />
-  <link rel="alternate" href="https://5imili.github.io/tags/me/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="canonical" href="https://5imili.github.io/posts/" />
+  <link rel="alternate" href="https://5imili.github.io/posts/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -185,7 +185,7 @@
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>#Me</h1>
+              <h1>Posts</h1>
               <hr class="small">
             </div>
           </div>
@@ -202,58 +202,129 @@
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="https://5imili.github.io/about/">
-                <h2 class="post-title">About me</h2>
+              <a href="https://5imili.github.io/posts/golang/basic/readme/">
+                <h2 class="post-title"></h2>
 
-                
-                  <h3 class="post-subtitle">
-                    米粒
-                  </h3>
                 
               </a>
 
               <p class="post-meta">
-                Posted on January 16, 2018
+                Posted on January 1, 0001
               </p>
               <div class="post-entry">
                 
                   
 
-<h3 id="info">Info</h3>
+<h3 id="golang编程基础">Golang编程基础</h3>
 
-<ul>
-<li>Mi lI（米粒）</li>
-<li>Beijing, China 🇨🇳</li>
-<li>Major in Software Engineering</li>
-<li>Career
-
-<ul>
-<li>xxx</li>
-</ul></li>
-</ul>
-
-<h3 id="contact">Contact</h3>
-
-<ul>
-<li>Wechat: 东北人@帝都老友记</li>
-<li>Email: 王宇@帝都老友记、石佛@帝都老友记、冠宇@帝都老友记</li>
-<li>微信公众号——(xxx)</li>
-</ul>
+<ol>
+<li><a href="/posts/golang/basic/grammer">词法</a></li>
+<li><a href="/posts/golang/basic/type">类型</a></li>
+<li><a href="/posts/golang/basic/express">表达式</a></li>
+<li><a href="/posts/golang/basic/flow">流程控制</a></li>
+<li><a href="/posts/golang/basic/data">数据</a></li>
+<li><a href="/posts/golang/basic/func">函数</a></li>
+<li><a href="/posts/golang/basic/method">方法</a></li>
+<li><a href="/posts/golang/basic/interface">接口</a></li>
+<li><a href="/posts/golang/basic/package">包管理</a></li>
+<li><a href="/posts/golang/basic/reflect">反射</a></li>
+<li><a href="/posts/golang/basic/utest">测试</a></li>
+<li><a href="/posts/golang/basic/goroutine">并发</a></li>
+</ol>
 
                 
               </div>
 
               
-                <span class="post-meta">
-                  
-                    #<a href="https://5imili.github.iotags/me/">me</a>&nbsp;
-                  
-                </span>
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://5imili.github.io/posts/golang/basic/reflect/">
+                <h2 class="post-title"></h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 1, 0001
+              </p>
+              <div class="post-entry">
+                
+                  反射 1. 类型 2. 值 3. 方法 4. 性能  类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头部也没有类型指针，通过其自身是无法在运行期 获取任何相关类型信息的，反射操作通过接口变量获取其自身类型外，还会保存实际 对象的类型数据。
+func TypeOf(i interface{}) Type func ValueOf(i interface{}) Value  上面两个反射入口函数，会将任何传入的对象转换为接口类型。
+type X32 int32 func main(){ var a X32 = 100 t := reflect.TypeOf(a) fmt.Println(t.Name(), t.Kind()) } 输出： X32 int32  需要注意的是Type和Kind的区别： Type表示对象的真实(静态)类型，Kind表示基础(底层)结构类型，所以在做类型 判断上需要明确需求，然后使用正确的方式。
+也可以使用反射来构造一些基础复合类型：
+func main(){ s := reflect.SliceOf(reflect.TypeOf(0)) m := reflect.MapOf(reflect.TypeOf(&quot;&quot;), reflect.TypeOf(0)) fmt.Println(s , m) } 输出： []int map[string]int  针对传入参数的类型需要加以注意，比如：
+type X32 int32 { var a X32 = 100 tx ,tp := reflect.
+                  <a href="https://5imili.github.io/posts/golang/basic/reflect/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://5imili.github.io/posts/golang/basic/type/">
+                <h2 class="post-title"></h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 1, 0001
+              </p>
+              <div class="post-entry">
+                
+                  类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
+var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。 如果显示初始化变量的值，可以省略变量类型，由编译器推断。
+Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如
+var x,y int //相同类型多个变量 var a, s = 10010, &quot;hello go&quot; //不同类型多个变量  按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:
+var ( x,y int a,s = 10010, &quot;hello go&quot; )   短变量声明符  在介绍词法的章节中已经看到过这种用法，比如:
+x := 10010 a , s := 10010, &quot;hello go&quot;  这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:
+                  <a href="https://5imili.github.io/posts/golang/basic/type/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://5imili.github.io/posts/golang/basic/utest/">
+                <h2 class="post-title"></h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 1, 0001
+              </p>
+              <div class="post-entry">
+                
+                  测试 1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控  单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否准确， 并且可以监控代码的质量。在任何时候都可以使用简单的命令验证全部功能，找出未完成的任务和因为中途代码修改导致的错误，它与性能测试以及 代码覆盖率等一起保障了代码总是在可控范围内。单元测试伴随在整个项目开发过程中，所以说单元测试代码同主工程一样重要。
+Go语言工具链和标准库提供了单元测试框架，给开发人员带来很大遍历，但也要按照如下需求编写测试代码，比如：
+- 测试代码要以*_test.go文件的形式放在当前包 - 测试函数要以*Test形式命名 - go test xxx_test.go 测试命令将忽略以&quot;\_&quot;和 &quot;.&quot;开头的测试文件 - go install/build 正常编译操作会忽略测试文件  import &quot;testing&quot; func sum(x,y int)int{ return x+y } func TestSum(t *testing.T){ if sum(1,2) !=3 { t.FailNow() } } 测试： #go test -v //测试当前包和所有子包，用go test -v ./...  testing.T 提供了控制测试结果和行为的方法，常用的如下，比如：
+Fail: 失败后继续执行当前测试函数 FailNow: 失败后立即终止执行当前测试函数 SkipNow: 跳过执行当前测试函数 Log: 报告错误信息，仅当失败或-v时输出 Parallel: 与有同样设置的测试函数并行执行 Error: 报告错误信息后继续，相当于Log + Fail Fatal: 报告错误信息后停止，相当于FailNow + Log  可以利用t.
+                  <a href="https://5imili.github.io/posts/golang/basic/utest/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
               
 
             </article>
           
         </div>
+        
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="/posts/page/1/">&larr; Newer Posts</a>
+              </li>
+            
+            
+          </ul>
         
       </div>
     </div>

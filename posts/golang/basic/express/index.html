@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Mili&#39;s Storys</title>
+  <meta property="og:title" content="Mili&#39;s Storys" />
+  <meta name="twitter:title" content="Mili&#39;s Storys" />
+  <meta name="description" content="表达式  1. 关键字 2. 运算符 3. 初始化  关键字 关键字是指被编程语言保留而不让编程人员作为标志符使用的字符序列。因此，关键字也称为保留字， 每种编程语言都有自己的关键字，从使用的角度看，我们可以把Go语言的25个关键字分为如下三类：
+1. 用于程序声明 2. 用于程序实体声明和定义 3. 用于程序流程控制的关键字     类别 关键字     程序声明 import, package   实体声明和定义 var,const,type,struct,func,interface,map,chan   流程控制 if,else,switch,case,fallthrough,default,for,range,continue,break,go,select,defer,goto,return    具体用法见后面章节
+运算符 运算符就是用于执行特定计算或逻辑操作的符号。 Go语言中全部运算符、分隔符以及其他特殊符号列表：
+&#43; &amp; &#43;= &amp;= &amp;&amp; == != ( ) - | -= |= || &lt; &lt;= [ ] * ^ *= ^= &lt;- &gt; &gt;= { } / &lt;&lt; /= &lt;&lt;= &#43;&#43; = := , ; % &gt;&gt; %= &gt;&gt;= -- !">
+  <meta property="og:description" content="表达式  1. 关键字 2. 运算符 3. 初始化  关键字 关键字是指被编程语言保留而不让编程人员作为标志符使用的字符序列。因此，关键字也称为保留字， 每种编程语言都有自己的关键字，从使用的角度看，我们可以把Go语言的25个关键字分为如下三类：
+1. 用于程序声明 2. 用于程序实体声明和定义 3. 用于程序流程控制的关键字     类别 关键字     程序声明 import, package   实体声明和定义 var,const,type,struct,func,interface,map,chan   流程控制 if,else,switch,case,fallthrough,default,for,range,continue,break,go,select,defer,goto,return    具体用法见后面章节
+运算符 运算符就是用于执行特定计算或逻辑操作的符号。 Go语言中全部运算符、分隔符以及其他特殊符号列表：
+&#43; &amp; &#43;= &amp;= &amp;&amp; == != ( ) - | -= |= || &lt; &lt;= [ ] * ^ *= ^= &lt;- &gt; &gt;= { } / &lt;&lt; /= &lt;&lt;= &#43;&#43; = := , ; % &gt;&gt; %= &gt;&gt;= -- !">
+  <meta name="twitter:description" content="表达式  1. 关键字 2. 运算符 3. 初始化  关键字 关键字是指被编程语言保留而不让编程人员作为标志符使用的字符序列。因此，关键字也称为保留字， 每种编程语言都有自己的关键字，从使用的角度看，我们可以把Go语言的25个关键字分为如下三类：
+1. 用于程序声明 2. 用于程序实体声明和定义 3. 用于程序流程控制的关键字     类别 关键字     程序声明 import, package …">
+  <meta name="author" content="555iMili"/>
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/express/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mili&#39;s Storys" />
+
+  <meta name="generator" content="Hugo 0.32.4" />
+  <link rel="canonical" href="https://5imili.github.io/posts/golang/basic/express/" />
+  <link rel="alternate" href="https://5imili.github.io/index.xml" type="application/rss+xml" title="Mili&#39;s Storys">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://5imili.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/codeblock.css" />
+  <link rel="stylesheet" href="https://5imili.github.io/css/highlight.min.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://5imili.github.io">Mili&#39;s Storys</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Categories</a>
+              <div class="navlinks-children">
+                
+                  <a href="/categories/kubernetes">kubernetes</a>
+                
+                  <a href="/categories/cloud-native">Cloud Native</a>
+                
+                  <a href="/categories/microservices">Microservices</a>
+                
+                  <a href="/categories/devops">Devops</a>
+                
+                  <a href="/categories/github">Github</a>
+                
+                  <a href="/categories/serverless">Serverless</a>
+                
+                  <a href="/categories/code">Code</a>
+                
+                  <a href="/tags">Tags</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Programming</a>
+              <div class="navlinks-children">
+                
+                  <a href="/posts/golang">GoLang</a>
+                
+                  <a href="/posts/python">Python</a>
+                
+                  <a href="/posts/python">Java</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li class="navlinks-container">
+              <a class="navlinks-parent" href="javascript:void(0)">Projects</a>
+              <div class="navlinks-children">
+                
+                  <a href="/spark-on-k8s">Spark on kubernetes</a>
+                
+                  <a href="/awesome-cloud-native">Awesome Cloud Native</a>
+                
+                  <a href="/posts/cloudinary-go">Cloudinary go</a>
+                
+                  <a href="/posts/yarn-on-docker">Magpie</a>
+                
+                  <a href="/cheatsheets">Cheatsheets</a>
+                
+              </div>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  <div class="intro-header"></div>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="表达式">表达式</h1>
+
+<pre><code>  1. 关键字
+  2. 运算符
+  3. 初始化
+</code></pre>
+
+<h4 id="关键字">关键字</h4>
+
+<p>关键字是指被编程语言保留而不让编程人员作为标志符使用的字符序列。因此，关键字也称为保留字，
+每种编程语言都有自己的关键字，从使用的角度看，我们可以把Go语言的25个关键字分为如下三类：</p>
+
+<pre><code class="language-text">1. 用于程序声明  
+2. 用于程序实体声明和定义
+3. 用于程序流程控制的关键字
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">类别</th>
+<th align="center">关键字</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">程序声明</td>
+<td align="center">import, package</td>
+</tr>
+
+<tr>
+<td align="center">实体声明和定义</td>
+<td align="center">var,const,type,struct,func,interface,map,chan</td>
+</tr>
+
+<tr>
+<td align="center">流程控制</td>
+<td align="center">if,else,switch,case,fallthrough,default,for,range,continue,break,go,select,defer,goto,return</td>
+</tr>
+</tbody>
+</table>
+
+<p>具体用法见后面章节</p>
+
+<h4 id="运算符">运算符</h4>
+
+<p>运算符就是用于执行特定计算或逻辑操作的符号。
+Go语言中全部运算符、分隔符以及其他特殊符号列表：</p>
+
+<pre><code class="language-text">+    &amp;     +=    &amp;=     &amp;&amp;    ==    !=    (    )
+-    |     -=    |=     ||    &lt;     &lt;=    [    ]
+*    ^     *=    ^=     &lt;-    &gt;     &gt;=    {    }
+/    &lt;&lt;    /=    &lt;&lt;=    ++    =     :=    ,    ;
+%    &gt;&gt;    %=    &gt;&gt;=    --    !     ...   .    :
+     &amp;^    &amp;^=
+</code></pre>
+
+<p>运算符分类：</p>
+
+<pre><code>1. 算术运算符
+2. 关系运算符
+3. 逻辑运算符
+4. 位运算符
+5. 赋值运算符
+6. 其他运算符
+</code></pre>
+
+<ul>
+<li>算术运算符</li>
+</ul>
+
+<p>下面为Go语言的算术运算符，假定A值为10，B值为20</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">A+B</td>
+<td align="center">加</td>
+<td align="center">A + B 输出结果 30</td>
+</tr>
+
+<tr>
+<td align="center">A-B</td>
+<td align="center">减</td>
+<td align="center">A - B 输出结果 -10</td>
+</tr>
+
+<tr>
+<td align="center">A*B</td>
+<td align="center">乘</td>
+<td align="center">A * B 输出结果 200</td>
+</tr>
+
+<tr>
+<td align="center">A/B</td>
+<td align="center">除</td>
+<td align="center">B / A 输出结果 2</td>
+</tr>
+
+<tr>
+<td align="center">B%A</td>
+<td align="center">求余</td>
+<td align="center">B % A 输出结果 0</td>
+</tr>
+
+<tr>
+<td align="center">A++</td>
+<td align="center">自增</td>
+<td align="center">A++ 输出结果 11</td>
+</tr>
+
+<tr>
+<td align="center">A&ndash;</td>
+<td align="center">自减</td>
+<td align="center">A&ndash; 输出结果 9</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>关系运算符</li>
+</ul>
+
+<p>下面为Go语言的关系运算符，假定A值为10，B值为20</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">A==B</td>
+<td align="center">检查两个值是否相等，如果相等返回 True 否则返回 False</td>
+<td align="center">(A == B) 为 False</td>
+</tr>
+
+<tr>
+<td align="center">A!=B</td>
+<td align="center">检查两个值是否不相等，如果不相等返回 True 否则返回 False</td>
+<td align="center">(A != B) 为 True</td>
+</tr>
+
+<tr>
+<td align="center">A&gt;B</td>
+<td align="center">检查左边值是否大于右边值，如果是返回 True 否则返回 False</td>
+<td align="center">(A &gt; B) 为 False</td>
+</tr>
+
+<tr>
+<td align="center">A&lt;B</td>
+<td align="center">检查左边值是否小于右边值，如果是返回 True 否则返回 False</td>
+<td align="center">(A &lt; B) 为 True</td>
+</tr>
+
+<tr>
+<td align="center">A&gt;=B</td>
+<td align="center">检查左边值是否大于等于右边值，如果是返回 True 否则返回 False</td>
+<td align="center">(A &gt;= B) 为 False</td>
+</tr>
+
+<tr>
+<td align="center">A&lt;=B</td>
+<td align="center">检查左边值是否小于等于右边值，如果是返回 True 否则返回 False</td>
+<td align="center">(A &lt;= B) 为 True</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>逻辑运算符</li>
+</ul>
+
+<p>下表列出了所有Go语言的逻辑运算符。假定 A 值为 True，B 值为 False</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">A&amp;&amp;B</td>
+<td align="center">逻辑AND运算符.如果两边的操作数都是True，则条件True，否则为False</td>
+<td align="center">(A &amp;&amp; B) 为 False</td>
+</tr>
+
+<tr>
+<td align="center">A||B</td>
+<td align="center">逻辑OR运算符.如果两边的操作数有一个True，则条件True，否则为False</td>
+<td align="center">(A || B) 为 True</td>
+</tr>
+
+<tr>
+<td align="center">!(A &amp;&amp; B)</td>
+<td align="center">逻辑NOT运算符.如果条件为True，则逻辑NOT条件False，否则为True</td>
+<td align="center">!(A &amp;&amp; B) 为 True</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>位运算符</li>
+</ul>
+
+<p>下表列出了所有Go语言的位运算符。假定 A 值为 0101,B 值为 0011,C值为1,D值为8</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">A&amp;B</td>
+<td align="center">按位与运算，两边都为1结果就为1</td>
+<td align="center">0101 &amp; 0011 = 0001</td>
+</tr>
+
+<tr>
+<td align="center">A|B</td>
+<td align="center">按位或运算，两边至少有一个为1结果就为1</td>
+<td align="center">0101 | 0011 = 0111</td>
+</tr>
+
+<tr>
+<td align="center">A^B</td>
+<td align="center">按位亦或运算，两边只有一个为1结果就为1</td>
+<td align="center">0101 | 0011 = 0110</td>
+</tr>
+
+<tr>
+<td align="center">^A</td>
+<td align="center">按位取反运算</td>
+<td align="center">^0111 = 1000</td>
+</tr>
+
+<tr>
+<td align="center">A&amp;^B</td>
+<td align="center">按位清除运算</td>
+<td align="center">0101 &amp;^ 0110 = 0001</td>
+</tr>
+
+<tr>
+<td align="center">C&lt;&lt;2</td>
+<td align="center">位左移运算</td>
+<td align="center">1&lt;&lt;2 = 4</td>
+</tr>
+
+<tr>
+<td align="center">D&gt;&gt;2</td>
+<td align="center">位右移运算</td>
+<td align="center">8&gt;&gt;2 = 2</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>赋值运算符</li>
+</ul>
+
+<p>下表列出了所有Go语言的赋值运算符</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">=</td>
+<td align="center">简单的赋值运算符</td>
+<td align="center">C = A + B 将 A + B 表达式结果赋值给 C</td>
+</tr>
+
+<tr>
+<td align="center">+=</td>
+<td align="center">相加后再赋值</td>
+<td align="center">C += A 等于 C = C + A</td>
+</tr>
+
+<tr>
+<td align="center">-=</td>
+<td align="center">相减后再赋值</td>
+<td align="center">C -= A 等于 C = C - A</td>
+</tr>
+
+<tr>
+<td align="center">*=</td>
+<td align="center">相乘后再赋值</td>
+<td align="center">C *= A 等于 C = C * A</td>
+</tr>
+
+<tr>
+<td align="center">/=</td>
+<td align="center">相除后再赋值</td>
+<td align="center">C /= A 等于 C = C / A</td>
+</tr>
+
+<tr>
+<td align="center">%=</td>
+<td align="center">求余后再赋值</td>
+<td align="center">C %= A 等于 C = C % A</td>
+</tr>
+
+<tr>
+<td align="center">&lt;&lt;=</td>
+<td align="center">左移赋值</td>
+<td align="center">C &lt;&lt;= 2 等于 C = C &lt;&lt; 2</td>
+</tr>
+
+<tr>
+<td align="center">&gt;&gt;=</td>
+<td align="center">右移赋值</td>
+<td align="center">C &gt;&gt;= 2 等于 C = C &gt;&gt; 2</td>
+</tr>
+
+<tr>
+<td align="center">&amp;=</td>
+<td align="center">位逻辑与赋值</td>
+<td align="center">C &amp;= 2 等于 C = C &amp; 2</td>
+</tr>
+
+<tr>
+<td align="center">|=</td>
+<td align="center">位逻辑或赋值</td>
+<td align="center">C |= 2 等于 C = C |2</td>
+</tr>
+
+<tr>
+<td align="center">^=</td>
+<td align="center">位逻辑异或赋值</td>
+<td align="center">C ^= 2 等于 C = C ^ 2</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>其他运算符</li>
+</ul>
+
+<p>下表列出了Go语言的其他运算符</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">&amp;</td>
+<td align="center">取址运算符</td>
+<td align="center">&amp;a 将给出变量a的实际地址</td>
+</tr>
+
+<tr>
+<td align="center">*</td>
+<td align="center">指针运算符</td>
+<td align="center">*a 将给出指针变量a所指向的值</td>
+</tr>
+
+<tr>
+<td align="center">&lt;-</td>
+<td align="center">接收运算符</td>
+<td align="center">x,ok := &lt;-ch,表示从channel中接收数据</td>
+</tr>
+
+<tr>
+<td align="center">:=</td>
+<td align="center">短变量声明符</td>
+<td align="center">var x = 100可以写成 x:= 100</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>优先级</li>
+</ul>
+
+<p>当一个表达式中包含多个运算符时，就涉及到了运算符的运算优先级，在Go语言中，一元运算符拥有最高优先级，下表列出了Go语言的
+二元运算符优先级，从高到低：</p>
+
+<pre><code>优先级| 运算符  
+  5  | *   /   %   &lt;&lt;   &gt;&gt;   &amp;   &amp;^
+  4  | +   -   |   ^
+  3  | ==  !=   &lt;   &lt;=   &gt;   &gt;=
+  2  | &amp;&amp;
+  1  | ||
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">优先级</th>
+<th align="center">运算符</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">5</td>
+<td align="center">*   /   %   &lt;&lt;   &gt;&gt;   &amp;   &amp;^</td>
+</tr>
+
+<tr>
+<td align="center">4</td>
+<td align="center">+   -   |   ^</td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td align="center">==  !=   &lt;   &lt;=   &gt;   &gt;=</td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td align="center">&amp;&amp;</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">||</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code>注意：你可以通过使用括号来临时提升某个表达式的整体运算优先级
+</code></pre>
+
+<p>下面有几点需要注意的：</p>
+
+<ul>
+<li>位操作</li>
+</ul>
+
+<p>除了位操作外，操作数类型必须相同，如果其中一个是无显示类型声明的常量，那么该常量操作数就会
+做自动转型，比如：</p>
+
+<pre><code class="language-go">const v = 20
+var a byte = 10
+b := a + v  // v常量被自动转型为byte/uint8 类型
+
+const f float32 = 1.2
+d := f + v  // v常量被自动转型为float32 类型
+</code></pre>
+
+<p>位移右操作数必须是无符号数或可以转换的无显示类型常量，比如：</p>
+
+<pre><code class="language-go">b := 2
+x  := 1 &lt;&lt; b    //b 是有符号int类型变量，这样是无效的
+</code></pre>
+
+<p>如果是非常量位移表达式，那么会优先将无显示类型的常量左操作数转型，比如：</p>
+
+<pre><code class="language-go">a := 1.0 &lt;&lt; 3  //常量表达式
+c := 1.3 &lt;&lt; 3 //constant 1.3 truncated to integer
+
+var s uint = 3
+b := 1.0 &lt;&lt; s //invalid operation: 1 &lt;&lt; s (shift of type float64)
+var i int32 = 1.0 &lt;&lt; s //自动将1.0 转换为int32
+</code></pre>
+
+<ul>
+<li>自增/自减</li>
+</ul>
+
+<p>不能用于表达式，只能作为独立语句，比如：</p>
+
+<pre><code class="language-go">a := 1
+++a //syntax error: unexpected ++  不能前置
+if (a++) &gt; 1{ //syntax error: unexpected ++ 不能作为表达式
+}
+
+a++
+p := &amp;a
+\*p++  //\*p++相当于(*p)++
+</code></pre>
+
+<ul>
+<li>指针</li>
+</ul>
+
+<p>不能将指针与内存地址混位一体,内存地址是在内存中每个字节单元的唯一编号，而指针就相当于是用来保存地址的整型变量，自身也会占用内存空间。
+比如上例中的p := &amp;a</p>
+
+<pre><code class="language-go">a :=1 
+p := &amp;a
+fmt.Println(&amp;a,a)
+fmt.Println(&amp;p,p,*p)
+
+输出：
+0x1040e0f8 1
+0x1040a120 0x1040e0f8 1
+</code></pre>
+
+<p>并不是所有的对象都能进行取址操作，比如：</p>
+
+<pre><code class="language-go">m := map[string]string{&quot;hello&quot;:&quot;go&quot;}
+println(&amp;m[&quot;hello&quot;])    //cannot take the address of m[&quot;hello&quot;]
+</code></pre>
+
+<p>指针类型不能做加减法和类型转换，支持相等运算符</p>
+
+<pre><code class="language-go">a := 10
+p := &amp;a
+p++   //invalid operation: p++ (non-numeric type *int)
+p2 := &amp;a
+println(p == p2) //支持相等运算符
+</code></pre>
+
+<p>零长度对象(声明但未赋值)的对象地址是否相等和具体实现有关，Go编译器会根据其实现的不同，进行不同的优化，
+从正确性的角度看，用户是不用关心内存在哪里(堆栈)分配的，不过肯定不为nil，比如</p>
+
+<pre><code class="language-go">var a,b int //虽然长度为0,但是对象是合法存在的，就拥有合法内存地址，不会为nil
+println(&amp;a , &amp;b)
+println(&amp;a == &amp;b,&amp;a == nil)
+输出：
+0x10429f64 0x10429f60
+false false
+
+var a,b struct{}
+println(&amp;a , &amp;b)
+println(&amp;a == &amp;b,&amp;a == nil)
+输出：
+0x10429f65 0x10429f65
+true false
+</code></pre>
+
+<p>指针没有专门指向成员的&rdquo;-&gt;&ldquo;运算符， 统一使用&rdquo;.&ldquo;，比如:</p>
+
+<pre><code class="language-go">  a := struct{
+    x int
+  }{}
+  a.x = 10  //相当于a-&gt;x
+  p := &amp;a
+  p.x += 10   //相当于p-&gt;x
+  println(p.x)
+</code></pre>
+
+<h4 id="初始化">初始化</h4>
+
+<p>基本变量的初始化前面已经提到了字面量，在Go语言中，对复合类型变量(数组、切片、字典、结构体)
+的初始化是有一些语法限制的，但对基本变量的初始化没有这些限制，比如：</p>
+
+<pre><code class="language-text">1. 初始化表达式必须含有类型标签
+2. 左花括号不能另起一行，必须在类型尾部
+3. 多成员初始值必须用逗号&quot;,&quot;分隔
+4. 允许多行编写，但是每行必须以逗号&quot;,&quot;或右花括号结束
+</code></pre>
+
+<p>示例如下：</p>
+
+<pre><code class="language-go">type stu struct{
+    name string
+    age int
+}
+ b := stu{
+    &quot;zhang&quot;,
+	  20        //unexpected semicolon or newline, expecting comma or }，须以逗号或右花括号结束
+	}
+
+b := stu
+	{           //syntax error: unexpected }, expecting expression，左花括号不能另起一行
+		&quot;zhang&quot;,
+		20,
+	}
+
+var data stu = {&quot;wang&quot;,20} //syntax error: missing operand，初始化表达式必须含有类型标签
+</code></pre>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/flow/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://5imili.github.io/posts/golang/basic/data/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:frank@linux.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/5imili" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://5imili.github.io">555iMili</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://5imili.github.io">Mili&#39;s Storys</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.32.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/main.js"></script>
+<script src="https://5imili.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+<script src="https://5imili.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
