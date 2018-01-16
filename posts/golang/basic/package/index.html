@@ -5,22 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
-- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
-workspace/ ├── bin │ └── server ├── pkg │ └── linux_amd64 │ └── service.a └── src ├── server │ ├── main.go └── service └── utils.go  在工作空间里，bin和pkg目录主要是受go install/get的命令影响，它们会把 编译结果(可执行文件/静态库)安装到这两个目录下，以实现增量编译。
- 环境变量：  GOPATH：编译器等相关工具会按照GOPATH环境变量中设置的路径进行目标搜索，比如在 导入目标库时，排在GOPAH环境变量列表前面的路径比当前工作空间优先级高，go get将下载的第三方包保存到GOPAH环境变量列表中第一个工作空间内。 GOROOT：用于指定工具链以及标准库的存放位置。
- 导入包 在使用标注库和第三方包之前，首先需要使用import导入，参数是以src目录为 始的绝对路径。编译器会先从标准库路径开始搜索，然后对GOPATH环境变量列表中的 各个路径进行搜索，比如：  import &quot;path/filepath&quot; //实际路径为/root/data/go/src/path/filepath/  为了避免引入的包名称冲突，可以使用包别名进行区分，比如：">
-  <meta property="og:description" content="包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
-- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
-workspace/ ├── bin │ └── server ├── pkg │ └── linux_amd64 │ └── service.a └── src ├── server │ ├── main.go └── service └── utils.go  在工作空间里，bin和pkg目录主要是受go install/get的命令影响，它们会把 编译结果(可执行文件/静态库)安装到这两个目录下，以实现增量编译。
- 环境变量：  GOPATH：编译器等相关工具会按照GOPATH环境变量中设置的路径进行目标搜索，比如在 导入目标库时，排在GOPAH环境变量列表前面的路径比当前工作空间优先级高，go get将下载的第三方包保存到GOPAH环境变量列表中第一个工作空间内。 GOROOT：用于指定工具链以及标准库的存放位置。
- 导入包 在使用标注库和第三方包之前，首先需要使用import导入，参数是以src目录为 始的绝对路径。编译器会先从标准库路径开始搜索，然后对GOPATH环境变量列表中的 各个路径进行搜索，比如：  import &quot;path/filepath&quot; //实际路径为/root/data/go/src/path/filepath/  为了避免引入的包名称冲突，可以使用包别名进行区分，比如：">
-  <meta name="twitter:description" content="包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
-- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
-workspace/ …">
+  <title>包管理</title>
+  <meta property="og:title" content="包管理" />
+  <meta name="twitter:title" content="包管理" />
+  <meta name="description" content="1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理 工作空间 工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要">
+  <meta property="og:description" content="1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理 工作空间 工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要">
+  <meta name="twitter:description" content="1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理 工作空间 工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/package/" />
@@ -199,7 +189,25 @@ workspace/ …">
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>包管理</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -207,11 +215,7 @@ workspace/ …">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h1 id="包管理">包管理</h1>
-
-<pre><code>1. 工作空间
+        <pre><code>1. 工作空间
 2. 导入包
 3. 组织结构
 4. 依赖管理
@@ -499,12 +503,12 @@ func main(){
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/readme/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/reflect/" data-toggle="tooltip" data-placement="top" title="反射">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/method/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/func/" data-toggle="tooltip" data-placement="top" title="函数">Next Post &rarr;</a>
             </li>
           
         </ul>

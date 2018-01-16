@@ -5,23 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="反射 1. 类型 2. 值 3. 方法 4. 性能  类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头部也没有类型指针，通过其自身是无法在运行期 获取任何相关类型信息的，反射操作通过接口变量获取其自身类型外，还会保存实际 对象的类型数据。
-func TypeOf(i interface{}) Type func ValueOf(i interface{}) Value  上面两个反射入口函数，会将任何传入的对象转换为接口类型。
-type X32 int32 func main(){ var a X32 = 100 t := reflect.TypeOf(a) fmt.Println(t.Name(), t.Kind()) } 输出： X32 int32  需要注意的是Type和Kind的区别： Type表示对象的真实(静态)类型，Kind表示基础(底层)结构类型，所以在做类型 判断上需要明确需求，然后使用正确的方式。
-也可以使用反射来构造一些基础复合类型：
-func main(){ s := reflect.SliceOf(reflect.TypeOf(0)) m := reflect.MapOf(reflect.TypeOf(&quot;&quot;), reflect.TypeOf(0)) fmt.Println(s , m) } 输出： []int map[string]int  针对传入参数的类型需要加以注意，比如：
-type X32 int32 { var a X32 = 100 tx ,tp := reflect.">
-  <meta property="og:description" content="反射 1. 类型 2. 值 3. 方法 4. 性能  类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头部也没有类型指针，通过其自身是无法在运行期 获取任何相关类型信息的，反射操作通过接口变量获取其自身类型外，还会保存实际 对象的类型数据。
-func TypeOf(i interface{}) Type func ValueOf(i interface{}) Value  上面两个反射入口函数，会将任何传入的对象转换为接口类型。
-type X32 int32 func main(){ var a X32 = 100 t := reflect.TypeOf(a) fmt.Println(t.Name(), t.Kind()) } 输出： X32 int32  需要注意的是Type和Kind的区别： Type表示对象的真实(静态)类型，Kind表示基础(底层)结构类型，所以在做类型 判断上需要明确需求，然后使用正确的方式。
-也可以使用反射来构造一些基础复合类型：
-func main(){ s := reflect.SliceOf(reflect.TypeOf(0)) m := reflect.MapOf(reflect.TypeOf(&quot;&quot;), reflect.TypeOf(0)) fmt.Println(s , m) } 输出： []int map[string]int  针对传入参数的类型需要加以注意，比如：
-type X32 int32 { var a X32 = 100 tx ,tp := reflect.">
-  <meta name="twitter:description" content="反射 1. 类型 2. 值 3. 方法 4. 性能  类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头部也没有类型指针，通过其自身是无法在运行期 获取任何相关类型信息的，反射操作通过接口变量获取其自身类型外，还会保存实际 对象的类型数据。
-func TypeOf(i interface{}) Type func …">
+  <title>反射</title>
+  <meta property="og:title" content="反射" />
+  <meta name="twitter:title" content="反射" />
+  <meta name="description" content="1. 类型 2. 值 3. 方法 4. 性能 类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头">
+  <meta property="og:description" content="1. 类型 2. 值 3. 方法 4. 性能 类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头">
+  <meta name="twitter:description" content="1. 类型 2. 值 3. 方法 4. 性能 类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/reflect/" />
@@ -200,7 +189,25 @@ func TypeOf(i interface{}) Type func …">
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>反射</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -209,8 +216,6 @@ func TypeOf(i interface{}) Type func …">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         
-
-<h1 id="反射">反射</h1>
 
 <pre><code>1. 类型
 2. 值
@@ -672,12 +677,12 @@ BenchmarkRdo-2	10000000	       170 ns/op	       0 B/op	       0 allocs/op
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/type/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/grammer/" data-toggle="tooltip" data-placement="top" title="基本词法">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/readme/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/package/" data-toggle="tooltip" data-placement="top" title="包管理">Next Post &rarr;</a>
             </li>
           
         </ul>

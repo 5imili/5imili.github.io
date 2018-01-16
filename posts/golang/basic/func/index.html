@@ -5,19 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
-Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比如：
-func hello(){ //左花括号不能另起一行 println(&quot;hello&quot;) }  Go语言中定义和应用函数时，有如下几点需要注意的点：
- 函数无须前置声明 不支持命名嵌套定义，支持匿名嵌套 函数只能判断是否为nil，不支持其它比较操作 支持多返回值 支持命名返回值 支持返回局部变量指针 支持匿名函数和闭包  func hello() { //左括号不能另起一行 } func add(x,y int) (sum int){ //命名返回值 sum = x &#43; y return } func vals()(int,int){ //支持多返回值 return 2,3 } func a(){} func b(){} func add(x,y int) (*int){ //支持返回局部变量指针 sum := x &#43; y return &amp;sum } func main(){ println(a==b) //只能判断是否为nil，不支持其它比较操作 func hello() { //不支持命名嵌套定义 println(&quot;hello&quot;) } }  具备相同签名(参数和返回值)的函数才视为同一类型函数，比如：">
-  <meta property="og:description" content="函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
-Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比如：
-func hello(){ //左花括号不能另起一行 println(&quot;hello&quot;) }  Go语言中定义和应用函数时，有如下几点需要注意的点：
- 函数无须前置声明 不支持命名嵌套定义，支持匿名嵌套 函数只能判断是否为nil，不支持其它比较操作 支持多返回值 支持命名返回值 支持返回局部变量指针 支持匿名函数和闭包  func hello() { //左括号不能另起一行 } func add(x,y int) (sum int){ //命名返回值 sum = x &#43; y return } func vals()(int,int){ //支持多返回值 return 2,3 } func a(){} func b(){} func add(x,y int) (*int){ //支持返回局部变量指针 sum := x &#43; y return &amp;sum } func main(){ println(a==b) //只能判断是否为nil，不支持其它比较操作 func hello() { //不支持命名嵌套定义 println(&quot;hello&quot;) } }  具备相同签名(参数和返回值)的函数才视为同一类型函数，比如：">
-  <meta name="twitter:description" content="函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
-Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比 …">
+  <title>函数</title>
+  <meta property="og:title" content="函数" />
+  <meta name="twitter:title" content="函数" />
+  <meta name="description" content="1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理 定义 函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，">
+  <meta property="og:description" content="1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理 定义 函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，">
+  <meta name="twitter:description" content="1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理 定义 函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/func/" />
@@ -196,7 +189,25 @@ Go语言中使用关键词func来定义一个函数，并且左花括号不能�
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>函数</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -204,11 +215,7 @@ Go语言中使用关键词func来定义一个函数，并且左花括号不能�
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<h1 id="函数">函数</h1>
-
-<pre><code class="language-text">1. 定义
+        <pre><code class="language-text">1. 定义
 2. 参数
 3. 返回值
 4. 匿名函数
@@ -853,12 +860,12 @@ main.main()
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://5imili.github.io/posts/golang/basic/goroutine/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+              <a href="https://5imili.github.io/posts/golang/basic/package/" data-toggle="tooltip" data-placement="top" title="包管理">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/flow/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/readme/" data-toggle="tooltip" data-placement="top" title="Golang编程基础">Next Post &rarr;</a>
             </li>
           
         </ul>

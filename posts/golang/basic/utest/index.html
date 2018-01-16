@@ -5,18 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Mili&#39;s Storys</title>
-  <meta property="og:title" content="Mili&#39;s Storys" />
-  <meta name="twitter:title" content="Mili&#39;s Storys" />
-  <meta name="description" content="测试 1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控  单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否准确， 并且可以监控代码的质量。在任何时候都可以使用简单的命令验证全部功能，找出未完成的任务和因为中途代码修改导致的错误，它与性能测试以及 代码覆盖率等一起保障了代码总是在可控范围内。单元测试伴随在整个项目开发过程中，所以说单元测试代码同主工程一样重要。
-Go语言工具链和标准库提供了单元测试框架，给开发人员带来很大遍历，但也要按照如下需求编写测试代码，比如：
-- 测试代码要以*_test.go文件的形式放在当前包 - 测试函数要以*Test形式命名 - go test xxx_test.go 测试命令将忽略以&quot;\_&quot;和 &quot;.&quot;开头的测试文件 - go install/build 正常编译操作会忽略测试文件  import &quot;testing&quot; func sum(x,y int)int{ return x&#43;y } func TestSum(t *testing.T){ if sum(1,2) !=3 { t.FailNow() } } 测试： #go test -v //测试当前包和所有子包，用go test -v ./...  testing.T 提供了控制测试结果和行为的方法，常用的如下，比如：
-Fail: 失败后继续执行当前测试函数 FailNow: 失败后立即终止执行当前测试函数 SkipNow: 跳过执行当前测试函数 Log: 报告错误信息，仅当失败或-v时输出 Parallel: 与有同样设置的测试函数并行执行 Error: 报告错误信息后继续，相当于Log &#43; Fail Fatal: 报告错误信息后停止，相当于FailNow &#43; Log  可以利用t.">
-  <meta property="og:description" content="测试 1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控  单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否准确， 并且可以监控代码的质量。在任何时候都可以使用简单的命令验证全部功能，找出未完成的任务和因为中途代码修改导致的错误，它与性能测试以及 代码覆盖率等一起保障了代码总是在可控范围内。单元测试伴随在整个项目开发过程中，所以说单元测试代码同主工程一样重要。
-Go语言工具链和标准库提供了单元测试框架，给开发人员带来很大遍历，但也要按照如下需求编写测试代码，比如：
-- 测试代码要以*_test.go文件的形式放在当前包 - 测试函数要以*Test形式命名 - go test xxx_test.go 测试命令将忽略以&quot;\_&quot;和 &quot;.&quot;开头的测试文件 - go install/build 正常编译操作会忽略测试文件  import &quot;testing&quot; func sum(x,y int)int{ return x&#43;y } func TestSum(t *testing.T){ if sum(1,2) !=3 { t.FailNow() } } 测试： #go test -v //测试当前包和所有子包，用go test -v ./...  testing.T 提供了控制测试结果和行为的方法，常用的如下，比如：
-Fail: 失败后继续执行当前测试函数 FailNow: 失败后立即终止执行当前测试函数 SkipNow: 跳过执行当前测试函数 Log: 报告错误信息，仅当失败或-v时输出 Parallel: 与有同样设置的测试函数并行执行 Error: 报告错误信息后继续，相当于Log &#43; Fail Fatal: 报告错误信息后停止，相当于FailNow &#43; Log  可以利用t.">
-  <meta name="twitter:description" content="测试 1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控  单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否准确， 并且可以监控代码的质量。在任何时候都可以使用简单的命令验证全部功能，找出未完成的任务和因为中途代码修改导致的错误，它与性能测试以及 代码覆盖率等一起保障了代码总是在可控范围内。单元测试伴随在整个项目开发过程中，所以说单 …">
+  <title>测试</title>
+  <meta property="og:title" content="测试" />
+  <meta name="twitter:title" content="测试" />
+  <meta name="description" content="1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控 单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否">
+  <meta property="og:description" content="1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控 单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否">
+  <meta name="twitter:description" content="1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控 单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否">
   <meta name="author" content="555iMili"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="https://5imili.github.io/posts/golang/basic/utest/" />
@@ -195,7 +189,25 @@ Fail: 失败后继续执行当前测试函数 FailNow: 失败后立即终止执�
 
 
 
-  <div class="intro-header"></div>
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h1>测试</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
     
@@ -204,8 +216,6 @@ Fail: 失败后继续执行当前测试函数 FailNow: 失败后立即终止执�
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         
-
-<h1 id="测试">测试</h1>
 
 <pre><code>1. 单元测试
 2. 性能测试
@@ -676,9 +686,13 @@ web命令可以生成图片，更加直观分析性能
       
         <ul class="pager blog-pager">
           
+            <li class="previous">
+              <a href="https://5imili.github.io/posts/golang/basic/type/" data-toggle="tooltip" data-placement="top" title="类型">&larr; Previous Post</a>
+            </li>
+          
           
             <li class="next">
-              <a href="https://5imili.github.io/posts/golang/basic/type/" data-toggle="tooltip" data-placement="top" title="">Next Post &rarr;</a>
+              <a href="https://5imili.github.io/posts/golang/basic/flow/" data-toggle="tooltip" data-placement="top" title="流程控制">Next Post &rarr;</a>
             </li>
           
         </ul>

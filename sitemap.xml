@@ -3,6 +3,76 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://5imili.github.io/posts/golang/basic/readme/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/func/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/package/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/reflect/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/grammer/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/goroutine/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/interface/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/data/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/method/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/flow/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/utest/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/type/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/basic/express/</loc>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://5imili.github.io/posts/golang/</loc>
+    <lastmod>2018-01-16T22:27:04+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://5imili.github.io/about/</loc>
     <lastmod>2018-01-16T13:53:54+08:00</lastmod>
   </url>
@@ -10,58 +80,6 @@
   <url>
     <loc>https://5imili.github.io/posts/my-first-post/</loc>
     <lastmod>2018-01-16T11:07:41+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/data/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/express/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/flow/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/func/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/goroutine/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/grammer/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/interface/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/method/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/package/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/readme/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/reflect/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/type/</loc>
-  </url>
-  
-  <url>
-    <loc>https://5imili.github.io/posts/golang/basic/utest/</loc>
   </url>
   
   <url>
@@ -77,13 +95,13 @@
   
   <url>
     <loc>https://5imili.github.io/</loc>
-    <lastmod>2018-01-16T13:53:54+08:00</lastmod>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://5imili.github.io/posts/</loc>
-    <lastmod>2018-01-16T11:07:41+08:00</lastmod>
+    <lastmod>2018-01-16T23:20:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   

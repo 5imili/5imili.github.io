@@ -8,10 +8,136 @@
     <language>zh-cn</language>
     <managingEditor>frank@linux.com (555iMili)</managingEditor>
     <webMaster>frank@linux.com (555iMili)</webMaster>
-    <lastBuildDate>Tue, 16 Jan 2018 11:07:41 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jan 2018 23:20:26 +0800</lastBuildDate>
     
 	<atom:link href="https://5imili.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang编程基础</title>
+      <link>https://5imili.github.io/posts/golang/basic/readme/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/readme/</guid>
+      <description>词法 类型 表达式 流程控制 数据 函数 方法 接口 包管理 反射 测试 并发</description>
+    </item>
+    
+    <item>
+      <title>函数</title>
+      <link>https://5imili.github.io/posts/golang/basic/func/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/func/</guid>
+      <description>1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理 定义 函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，</description>
+    </item>
+    
+    <item>
+      <title>包管理</title>
+      <link>https://5imili.github.io/posts/golang/basic/package/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/package/</guid>
+      <description>1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理 工作空间 工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要</description>
+    </item>
+    
+    <item>
+      <title>反射</title>
+      <link>https://5imili.github.io/posts/golang/basic/reflect/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/reflect/</guid>
+      <description>1. 类型 2. 值 3. 方法 4. 性能 类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头</description>
+    </item>
+    
+    <item>
+      <title>基本词法</title>
+      <link>https://5imili.github.io/posts/golang/basic/grammer/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/grammer/</guid>
+      <description>在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法</description>
+    </item>
+    
+    <item>
+      <title>并发</title>
+      <link>https://5imili.github.io/posts/golang/basic/goroutine/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/goroutine/</guid>
+      <description>并发(Concurrency) VS 并行(Parallelism) 并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理</description>
+    </item>
+    
+    <item>
+      <title>接口</title>
+      <link>https://5imili.github.io/posts/golang/basic/interface/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/interface/</guid>
+      <description>1. 定义 2. 实现机制 3. 类型转换 接口(interface)定义 接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称</description>
+    </item>
+    
+    <item>
+      <title>数据</title>
+      <link>https://5imili.github.io/posts/golang/basic/data/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/data/</guid>
+      <description>1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构 字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构： string.go type</description>
+    </item>
+    
+    <item>
+      <title>方法</title>
+      <link>https://5imili.github.io/posts/golang/basic/method/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/method/</guid>
+      <description>1. 定义 2. 匿名字段 3. 方法集 4. 表达式 定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(re</description>
+    </item>
+    
+    <item>
+      <title>流程控制</title>
+      <link>https://5imili.github.io/posts/golang/basic/flow/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/flow/</guid>
+      <description>Go语言的流程控制主要分为三大类： 1. 条件判断 2. 循环控制 3. 无条件跳转 条件判断 Go语言的条件判断由if &amp;hellip; else if &amp;hellip; else 语句实现，条件表达式值必须是布尔</description>
+    </item>
+    
+    <item>
+      <title>测试</title>
+      <link>https://5imili.github.io/posts/golang/basic/utest/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/utest/</guid>
+      <description>1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控 单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否</description>
+    </item>
+    
+    <item>
+      <title>类型</title>
+      <link>https://5imili.github.io/posts/golang/basic/type/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/type/</guid>
+      <description>1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型 变量 Go语言有两种方式定义变量： var 关键字 := 短变量声明符 var关键字 var x int //自动</description>
+    </item>
+    
+    <item>
+      <title>表达式</title>
+      <link>https://5imili.github.io/posts/golang/basic/express/</link>
+      <pubDate>Tue, 16 Jan 2018 23:20:26 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/basic/express/</guid>
+      <description>1. 关键字 2. 运算符 3. 初始化 关键字 关键字是指被编程语言保留而不让编程人员作为标志符使用的字符序列。因此，关键字也称为保留字， 每种编程语言都有自己</description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://5imili.github.io/posts/golang/</link>
+      <pubDate>Tue, 16 Jan 2018 22:27:04 +0800</pubDate>
+      <author>frank@linux.com (555iMili)</author>
+      <guid>https://5imili.github.io/posts/golang/</guid>
+      <description>Summary 初识GoLang 基础 文件操作 Text文件 Json文件 Yaml文件 Toml文件 网络编程 tcp udp rpc 数据库操作 mysql redis mongo 数据结构和算法 顺序查找</description>
+    </item>
     
     <item>
       <title>米粒成长记</title>
@@ -20,166 +146,6 @@
       <author>frank@linux.com (555iMili)</author>
       <guid>https://5imili.github.io/posts/my-first-post/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/data/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/data/</guid>
-      <description>数据 1. 字符串 2. 数组 3. 切片 4. 字典 5. 结构  字符串 Go语言中的字符串是由一组不可变的字节(byte)序列组成，从源码文件中看出其本身是一个复合结构：
-string.go type stringStruct struct { str unsafe.Pointer len int }   字符串中的每个字节都是以UTF-8编码存储的Unicode字符，字符串的头部指针指向字节数组的开始，但是没有NULL或&amp;rsquo;\0&amp;rsquo;结尾标志。 表示方式很简单，用双引号(&amp;ldquo;&amp;rdquo;)或者反引号(``)，它们的区别是：
- 双引号之间的转义符会被转义，而反引号之间的转义符保持不变 反引号支持跨行编写，而双引号则不可以   { println(&amp;quot;hello\tgo&amp;quot;) //输出hello	go println(`hello\tgo`) //输出hello\tgo } { println( &amp;quot;hello go&amp;quot; ) //syntax error: unexpected semicolon or newline, expecting comma or ) println(`hello go`) } 输出： hello go  在前面类型的章节中描述过字符串的默认值是&amp;rdquo;&amp;ldquo;，而不是nil,比如：
-var s string println( s == &amp;quot;&amp;quot; ) //true println( s == nil ) //invalid operation: s == nil (mismatched types string and nil)  Go字符串支持 &amp;ldquo;+ , += , == , !</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/express/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/express/</guid>
-      <description>表达式  1. 关键字 2. 运算符 3. 初始化  关键字 关键字是指被编程语言保留而不让编程人员作为标志符使用的字符序列。因此，关键字也称为保留字， 每种编程语言都有自己的关键字，从使用的角度看，我们可以把Go语言的25个关键字分为如下三类：
-1. 用于程序声明 2. 用于程序实体声明和定义 3. 用于程序流程控制的关键字     类别 关键字     程序声明 import, package   实体声明和定义 var,const,type,struct,func,interface,map,chan   流程控制 if,else,switch,case,fallthrough,default,for,range,continue,break,go,select,defer,goto,return    具体用法见后面章节
-运算符 运算符就是用于执行特定计算或逻辑操作的符号。 Go语言中全部运算符、分隔符以及其他特殊符号列表：
-+ &amp;amp; += &amp;amp;= &amp;amp;&amp;amp; == != ( ) - | -= |= || &amp;lt; &amp;lt;= [ ] * ^ *= ^= &amp;lt;- &amp;gt; &amp;gt;= { } / &amp;lt;&amp;lt; /= &amp;lt;&amp;lt;= ++ = := , ; % &amp;gt;&amp;gt; %= &amp;gt;&amp;gt;= -- !</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/flow/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/flow/</guid>
-      <description>流程控制 Go语言的流程控制主要分为三大类：
-1. 条件判断 2. 循环控制 3. 无条件跳转  条件判断 Go语言的条件判断由if &amp;hellip; else if &amp;hellip; else 语句实现，条件表达式值必须是布尔类型，可省略圆括号，但是花括号不能省略且左花括号不能另起一行，比如：
-if 7%2 == 0 { fmt.Println(&amp;quot;7 is even&amp;quot;) } else { fmt.Println(&amp;quot;7 is odd&amp;quot;) } if 8%4 == 0 { //可以没有else只有if语句 fmt.Println(&amp;quot;8 is divisible by 4&amp;quot;) }  Go语言比较特别的是在条件判读语句中支持初始化语句,允许定义局部变量，但是这个变量的作用域仅限于该条件逻辑块内，比如：
-if num := 9; num &amp;lt; 0 { fmt.Println(num, &amp;quot;is negative&amp;quot;) } else if num &amp;lt; 10 { fmt.Println(num, &amp;quot;has 1 digit&amp;quot;) } else { fmt.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/func/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/func/</guid>
-      <description>函数 1. 定义 2. 参数 3. 返回值 4. 匿名函数 5. 延迟调用 6. 错误处理   定义  函数是结构化编程中最小的模块单元，日常开发过程中，将复杂的算法过程分解为若干个小任务，使程序的结构性更清晰，程序可读性提升，易于后期维护和让别人读懂你的代码。 另外可以把重复性的任务抽象成一个函数，可以更好的重用你的代码。
-Go语言中使用关键词func来定义一个函数，并且左花括号不能另起一行，比如：
-func hello(){ //左花括号不能另起一行 println(&amp;quot;hello&amp;quot;) }  Go语言中定义和应用函数时，有如下几点需要注意的点：
- 函数无须前置声明 不支持命名嵌套定义，支持匿名嵌套 函数只能判断是否为nil，不支持其它比较操作 支持多返回值 支持命名返回值 支持返回局部变量指针 支持匿名函数和闭包  func hello() { //左括号不能另起一行 } func add(x,y int) (sum int){ //命名返回值 sum = x + y return } func vals()(int,int){ //支持多返回值 return 2,3 } func a(){} func b(){} func add(x,y int) (*int){ //支持返回局部变量指针 sum := x + y return &amp;amp;sum } func main(){ println(a==b) //只能判断是否为nil，不支持其它比较操作 func hello() { //不支持命名嵌套定义 println(&amp;quot;hello&amp;quot;) } }  具备相同签名(参数和返回值)的函数才视为同一类型函数，比如：</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/goroutine/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/goroutine/</guid>
-      <description>并发  并发(Concurrency) VS 并行(Parallelism)  并发: 逻辑上将相互独立的执行过程综合到一起的编程技术,重点在于组合。 并行: 物理上同时执行(通常是相关的)计算任务的编程技术，重点在于执行。  两者意思不同，但却相关，并发的重点是组合，而并行则强调的是执行。 可以参照*Concurrency is not Parallelism*加深理解
-Go语言提供：
-并发执行(goroutines) 同步和消息传输(channels) 多路并发控制(select)  Go语言创建一个并发任务单元只需要在函数调用之前添加go关键字即可，每个任务单元会保存函数指针、调用参数，还会分配执行所需的 栈内存空间，相比系统默认MB级别的线程栈，goroutine自定义栈仅须2KB，所以能够创建上千万个并发任务，自定义栈采取的是按需分配 策略，在需要时进行扩容，最大能够达到GB的规模。 比如创建一个并发任务单元：
-package main func main(){ go println(&amp;quot;hello gopher!!&amp;quot;) go func(msg string) { fmt.Println(msg) }(&amp;quot;going&amp;quot;) }  使用go创建完并发任务之后，新建的任务会被放置在任务队列中，等待调度器安排合适的系统线程获取执行权，当前流程不会阻塞，也不会等待任务 的启动，并且不能保证运行时并发任务的执行次序。
-如何等待并发任务的结束？
-1. 采用通道阻塞机制，然后发出退出信号 2. 等待多个任务单元时，推荐使用sync.WaitGroup   channel wait  func main(){ done := make(chan bool) //创建一个无缓冲通道，用于 go func(s string){ println(&amp;quot;working&amp;quot;) time.Sleep(time.Second) //业务逻辑处理 println(s) println(&amp;quot;done&amp;quot;) close(done) //done-&amp;gt;true }(&amp;quot;hello gopher&amp;quot;) println(&amp;quot;wait.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/grammer/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/grammer/</guid>
-      <description>基本词法 在编程语言中，词法是代码的构成法则。也就是说，词法规定了我们敲入怎样的字符才能编写出编译器 能够识别的代码，所以要掌握一门语言，那么语言的词法是我们要学习的第一步，Go语言也不过如此。
- 源代码表示  Go语言的代码是由若干Unicode字符组成，Unicode编码规范是一种在计算机上使用的字符编码 方式，它为世界上存在的各种语言的每个字符都设定了统一且唯一的二进制编码。因此，它能够满足跨语言、 跨平台的转换和文本处理需求，关于Unicode更详细说明，参见官网 *Unicode*。 当前，你只需要记住一条规则：
-Go语言的源代码是由Unicode编码规范的UTF-8格式进行编码的。   注释  - 行注释: 用两斜杠&amp;quot;//&amp;quot;开始到这一行结束 - 块注释: 从&amp;quot;/*&amp;quot; 开始到 &amp;quot;*/&amp;quot;结束  Go语言的词法元素包括4类:
- 标志符 (identifier) 关键字 (keyword) 运算符 (operator)和分隔符 (delimiter) 字面量 (literal)  一般情况下，空格符、制表符、回车符和换行符都会被忽略，除非它们作为多个语言符号之间的分隔符的一部分。 另外，Go语言会自动为代码插入分号以进行语句分隔，所以不在特殊情况下不需要显示的插入分号;
-标志符 标志符就是对变量、常量、函数以及自定义类型进行命名。Go语言标志符的命名规范是由若干字母、下划线&amp;rdquo;_&amp;ldquo;和数字组成的字符序列，字符序列的第一个字符必须为字母，且首字母 标志符是区分大小写的。在使用标志符之前必须进行声明，一个声明就是将一个非空的标志符与常量、类型、变量、函数或代码包绑定在一起。在 同一个代码区块中，不允许重复声明同一个标志符，并且该标志符的作用域与所属代码区块的范围相同。
- 预定义标志符  Go语言中有一类特殊的标志符，被叫做预定义标志符。这类标志符是在Go语言的源代码中被声明的，具体声明如下：
-基本数据类型名： int、float、string... 接口类型名：error 常量名：true,false和iota 内建函数名：append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover   空标志符  Go语言有一个名为 &amp;ldquo;_&amp;rdquo; 的特殊标志符,叫(blank identifier)。通常作为忽略占位符使用，可以作表达式左值，但无法读取内容。 空标志符也常用来临时规避对未使用变量和导入包的错误检查，但需注意的是，它也属于预定义标志符。
- 限定标志符  在Go语言开发过程中，会经常访问其他代码包中的变量或类型，这时就需要用到限定标志符。 可以把代码包名称称作是限定标志符前缀，前缀和包中的标志符之间用英文的点(&amp;ldquo;.&amp;rdquo;)符号分隔。 要应用其它代码包中的标志符时，需要满足两个前提：
- 代码包必须被提前导入到该代码文件中 该标志符在代码包必须是可被导出的  怎么才算是标志符可被导出的呢？</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/interface/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/interface/</guid>
-      <description>接口 1. 定义 2. 实现机制 3. 类型转换   接口(interface)定义  接口是一组方法的集合，我们通过接口来定义对象的一组行为。在某些动态语言里，接口也被称作为(protocol)。 互相交互的双方，共同遵守事先规定的协议，使得交互双方在无须知道对方身份的情况下进行相互调用，而接口自身要实现的是做什么，而不关心 怎么做和谁来做，比如：
-type geometry interface { area() float64 perim() float64 } type circle struct { radius float64 } type rect struct { width, height float64 } func (r rect) perim() float64 { return 2 * r.width + 2*r.height } func (r rect) area() float64 { return r.width * r.height } func (c circle) perim() float64 { return 2 * math.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/method/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/method/</guid>
-      <description>方法 1. 定义 2. 匿名字段 3. 方法集 4. 表达式   定义 方法是与对象实例绑定的特殊函数，用于维护和展示对象的自身状态。 与函数的区别是方法有前置实例接收参数(receiver)，编译器根据 receiver来判断该方法属于哪个实例。receiver可以是基础类型，也可以是指针类型，这会关系到是否需要有 可以修改对象实例的能力。在调用方法时，可以使用对象实例值或指针，编译器会根据receiver类型自动在基础类型 和指针类型之间转换，比如：  type rect struct { width, height, area int } func (r *rect) pointer() { r.width += 2 r.area = r.width * r.height } func (r rect) value() { r.width += 4 r.area = r.width * r.height } func main() { r := rect{width: 10, height: 5} r.value() fmt.Println(r) r.pointer() fmt.Println(r) /* r := &amp;amp;rect{width: 10, height: 5} r.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/package/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/package/</guid>
-      <description>包管理 1. 工作空间 2. 导入包 3. 组织结构 4. 依赖管理   工作空间  工作空间(workspace)是一个由src,bin,pkg三个目录组成的目录，通常情况下需要把该路径加入到GOPATH环境变量中， 以便相关工具能够正常工作。
-- src：工程源代码存放路径 - bin：可执行文件的安装路径 - pkg：包安装路径，按照操作系统和平台进行隔离  比如：
-workspace/ ├── bin │ └── server ├── pkg │ └── linux_amd64 │ └── service.a └── src ├── server │ ├── main.go └── service └── utils.go  在工作空间里，bin和pkg目录主要是受go install/get的命令影响，它们会把 编译结果(可执行文件/静态库)安装到这两个目录下，以实现增量编译。
- 环境变量：  GOPATH：编译器等相关工具会按照GOPATH环境变量中设置的路径进行目标搜索，比如在 导入目标库时，排在GOPAH环境变量列表前面的路径比当前工作空间优先级高，go get将下载的第三方包保存到GOPAH环境变量列表中第一个工作空间内。 GOROOT：用于指定工具链以及标准库的存放位置。
- 导入包 在使用标注库和第三方包之前，首先需要使用import导入，参数是以src目录为 始的绝对路径。编译器会先从标准库路径开始搜索，然后对GOPATH环境变量列表中的 各个路径进行搜索，比如：  import &amp;quot;path/filepath&amp;quot; //实际路径为/root/data/go/src/path/filepath/  为了避免引入的包名称冲突，可以使用包别名进行区分，比如：</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/readme/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/readme/</guid>
-      <description> Golang编程基础  词法 类型 表达式 流程控制 数据 函数 方法 接口 包管理 反射 测试 并发  </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/reflect/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/reflect/</guid>
-      <description>反射 1. 类型 2. 值 3. 方法 4. 性能  类型 Go语言反射(reflect)是在程序时实现能够获取对象类型信息和内存结构的方法。 和C语言数据结构一样，Go对象头部也没有类型指针，通过其自身是无法在运行期 获取任何相关类型信息的，反射操作通过接口变量获取其自身类型外，还会保存实际 对象的类型数据。
-func TypeOf(i interface{}) Type func ValueOf(i interface{}) Value  上面两个反射入口函数，会将任何传入的对象转换为接口类型。
-type X32 int32 func main(){ var a X32 = 100 t := reflect.TypeOf(a) fmt.Println(t.Name(), t.Kind()) } 输出： X32 int32  需要注意的是Type和Kind的区别： Type表示对象的真实(静态)类型，Kind表示基础(底层)结构类型，所以在做类型 判断上需要明确需求，然后使用正确的方式。
-也可以使用反射来构造一些基础复合类型：
-func main(){ s := reflect.SliceOf(reflect.TypeOf(0)) m := reflect.MapOf(reflect.TypeOf(&amp;quot;&amp;quot;), reflect.TypeOf(0)) fmt.Println(s , m) } 输出： []int map[string]int  针对传入参数的类型需要加以注意，比如：
-type X32 int32 { var a X32 = 100 tx ,tp := reflect.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/type/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/type/</guid>
-      <description>类型 1. 变量 2. 命名 3. 常量 4. 基本类型 5. 引用类型 6. 类型转换 7. 自定义类型  变量 Go语言有两种方式定义变量：
-var 关键字 := 短变量声明符   var关键字  var x int //自动初始化为0 var y = false //自动推断为bool类型  和C语言不同，类型被放在变量名之后,并且在运行时，为了避免出现不可预测行为，内存分配器会初始化变量为二进制零值。 如果显示初始化变量的值，可以省略变量类型，由编译器推断。
-Go语言一次可以定义多个变量，并可以对其初始化成不同的类型，比如
-var x,y int //相同类型多个变量 var a, s = 10010, &amp;quot;hello go&amp;quot; //不同类型多个变量  按照Go语言的编码规范，建议以组的方式整理多行变量定义，比如:
-var ( x,y int a,s = 10010, &amp;quot;hello go&amp;quot; )   短变量声明符  在介绍词法的章节中已经看到过这种用法，比如:
-x := 10010 a , s := 10010, &amp;quot;hello go&amp;quot;  这种方式很简单，但日常开发中新手经常犯下的一个错误，比如:</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://5imili.github.io/posts/golang/basic/utest/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>frank@linux.com (555iMili)</author>
-      <guid>https://5imili.github.io/posts/golang/basic/utest/</guid>
-      <description>测试 1. 单元测试 2. 性能测试 3. 代码覆盖率 4. 性能监控  单元测试 单元测试是开发人员的一项基本工作，Go语言提供的单元测试机制不仅可以测试代码的逻辑算法是否准确， 并且可以监控代码的质量。在任何时候都可以使用简单的命令验证全部功能，找出未完成的任务和因为中途代码修改导致的错误，它与性能测试以及 代码覆盖率等一起保障了代码总是在可控范围内。单元测试伴随在整个项目开发过程中，所以说单元测试代码同主工程一样重要。
-Go语言工具链和标准库提供了单元测试框架，给开发人员带来很大遍历，但也要按照如下需求编写测试代码，比如：
-- 测试代码要以*_test.go文件的形式放在当前包 - 测试函数要以*Test形式命名 - go test xxx_test.go 测试命令将忽略以&amp;quot;\_&amp;quot;和 &amp;quot;.&amp;quot;开头的测试文件 - go install/build 正常编译操作会忽略测试文件  import &amp;quot;testing&amp;quot; func sum(x,y int)int{ return x+y } func TestSum(t *testing.T){ if sum(1,2) !=3 { t.FailNow() } } 测试： #go test -v //测试当前包和所有子包，用go test -v ./...  testing.T 提供了控制测试结果和行为的方法，常用的如下，比如：
-Fail: 失败后继续执行当前测试函数 FailNow: 失败后立即终止执行当前测试函数 SkipNow: 跳过执行当前测试函数 Log: 报告错误信息，仅当失败或-v时输出 Parallel: 与有同样设置的测试函数并行执行 Error: 报告错误信息后继续，相当于Log + Fail Fatal: 报告错误信息后停止，相当于FailNow + Log  可以利用t.</description>
     </item>
     
   </channel>
